@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IEspecialidadeBusiness;
-import br.com.medclin.common.AssertUtil;
+import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.model.Especialidade;
 import br.com.medclin.repository.EspecialidadeRepository;
 
@@ -20,10 +20,11 @@ public class EspecialidadeBusiness implements IEspecialidadeBusiness {
 	private EspecialidadeRepository especialidadeRep;
 
 	@Autowired
-	private AssertUtil assertUtil;
+	private AuditoriaUtil auditoriaUtil;
 
 	@Override
 	public Especialidade atualizarEspecialidade(final Especialidade especialidade) {
+		auditoriaUtil.setDadosAuditoriaAtualizacao(especialidade, "MOCK_MATRICULA - " + Math.random());
 		return especialidadeRep.saveAndFlush(especialidade);
 	}
 
@@ -39,7 +40,7 @@ public class EspecialidadeBusiness implements IEspecialidadeBusiness {
 
 	@Override
 	public Especialidade criarEspecialidade(final Especialidade especialidade) {
-		assertUtil.setDadosAuditoria(especialidade, "user" + Math.random());
+		auditoriaUtil.setDadosAuditoriaCriacao(especialidade, "MOCK_MATRICULA - " + Math.random());
 		return especialidadeRep.save(especialidade);
 	}
 
