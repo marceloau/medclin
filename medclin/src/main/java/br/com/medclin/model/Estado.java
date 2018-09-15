@@ -18,10 +18,10 @@ public class Estado {
 	private Byte codigoEstado;
 
 	@NotBlank
-	private String nomeCompletoEstado;
+	private String nomeEstado;
 
 	@NotBlank
-	private String nomeAbreviadoEstado;
+	private String siglaEstado;
 
 	private String flagAtivo;
 
@@ -41,20 +41,20 @@ public class Estado {
 		this.codigoEstado = codigoEstado;
 	}
 
-	public String getNomeCompletoEstado() {
-		return nomeCompletoEstado;
+	public String getNomeEstado() {
+		return nomeEstado;
 	}
 
-	public void setNomeCompletoEstado(String nomeCompletoEstado) {
-		this.nomeCompletoEstado = nomeCompletoEstado;
+	public void setNomeEstado(String nomeEstado) {
+		this.nomeEstado = nomeEstado;
 	}
 
-	public String getNomeAbreviadoEstado() {
-		return nomeAbreviadoEstado;
+	public String getSiglaEstado() {
+		return siglaEstado;
 	}
 
-	public void setNomeAbreviadoEstado(String nomeAbreviadoEstado) {
-		this.nomeAbreviadoEstado = nomeAbreviadoEstado;
+	public void setSiglaEstado(String siglaEstado) {
+		this.siglaEstado = siglaEstado;
 	}
 
 	public String getFlagAtivo() {
@@ -97,8 +97,8 @@ public class Estado {
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((nomeAbreviadoEstado == null) ? 0 : nomeAbreviadoEstado.hashCode());
-		result = prime * result + ((nomeCompletoEstado == null) ? 0 : nomeCompletoEstado.hashCode());
+		result = prime * result + ((siglaEstado == null) ? 0 : siglaEstado.hashCode());
+		result = prime * result + ((nomeEstado == null) ? 0 : nomeEstado.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		return result;
 	}
@@ -132,15 +132,15 @@ public class Estado {
 				return false;
 		} else if (!flagAtivo.equals(other.flagAtivo))
 			return false;
-		if (nomeAbreviadoEstado == null) {
-			if (other.nomeAbreviadoEstado != null)
+		if (siglaEstado == null) {
+			if (other.siglaEstado != null)
 				return false;
-		} else if (!nomeAbreviadoEstado.equals(other.nomeAbreviadoEstado))
+		} else if (!siglaEstado.equals(other.siglaEstado))
 			return false;
-		if (nomeCompletoEstado == null) {
-			if (other.nomeCompletoEstado != null)
+		if (nomeEstado == null) {
+			if (other.nomeEstado != null)
 				return false;
-		} else if (!nomeCompletoEstado.equals(other.nomeCompletoEstado))
+		} else if (!nomeEstado.equals(other.nomeEstado))
 			return false;
 		if (usuarioUltimaAlteracao == null) {
 			if (other.usuarioUltimaAlteracao != null)
