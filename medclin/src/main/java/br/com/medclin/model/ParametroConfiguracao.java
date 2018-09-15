@@ -42,149 +42,98 @@ public class ParametroConfiguracao {
 	@NotBlank
 	private String textoDescricaoParametro;
 
-	/** The usuario ultima alteracao. */
 	@NotBlank
 	private String usuarioUltimaAlteracao;
 
-	/** The data ultima alteracao. */
+	@NotBlank
+	private String flagAtivo;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAlteracao;
 
-	/**
-	 * Gets the codigo parametro.
-	 *
-	 * @return the codigo parametro
-	 */
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCriacao;
+
 	public Long getCodigoParametro() {
 		return codigoParametro;
 	}
 
-	/**
-	 * Sets the codigo parametro.
-	 *
-	 * @param codigoParametro the new codigo parametro
-	 */
 	public void setCodigoParametro(Long codigoParametro) {
 		this.codigoParametro = codigoParametro;
 	}
 
-	/**
-	 * Gets the nome parametro.
-	 *
-	 * @return the nome parametro
-	 */
 	public String getNomeParametro() {
 		return nomeParametro;
 	}
 
-	/**
-	 * Sets the nome parametro.
-	 *
-	 * @param nomeParametro the new nome parametro
-	 */
 	public void setNomeParametro(String nomeParametro) {
 		this.nomeParametro = nomeParametro;
 	}
 
-	/**
-	 * Gets the nome resumido parametro.
-	 *
-	 * @return the nome resumido parametro
-	 */
 	public String getNomeResumidoParametro() {
 		return nomeResumidoParametro;
 	}
 
-	/**
-	 * Sets the nome resumido parametro.
-	 *
-	 * @param nomeResumidoParametro the new nome resumido parametro
-	 */
 	public void setNomeResumidoParametro(String nomeResumidoParametro) {
 		this.nomeResumidoParametro = nomeResumidoParametro;
 	}
 
-	/**
-	 * Gets the texto conteudo parametro.
-	 *
-	 * @return the texto conteudo parametro
-	 */
 	public String getTextoConteudoParametro() {
 		return textoConteudoParametro;
 	}
 
-	/**
-	 * Sets the texto conteudo parametro.
-	 *
-	 * @param textoConteudoParametro the new texto conteudo parametro
-	 */
 	public void setTextoConteudoParametro(String textoConteudoParametro) {
 		this.textoConteudoParametro = textoConteudoParametro;
 	}
 
-	/**
-	 * Gets the texto descricao parametro.
-	 *
-	 * @return the texto descricao parametro
-	 */
 	public String getTextoDescricaoParametro() {
 		return textoDescricaoParametro;
 	}
 
-	/**
-	 * Sets the texto descricao parametro.
-	 *
-	 * @param textoDescricaoParametro the new texto descricao parametro
-	 */
 	public void setTextoDescricaoParametro(String textoDescricaoParametro) {
 		this.textoDescricaoParametro = textoDescricaoParametro;
 	}
 
-	/**
-	 * Gets the usuario ultima alteracao.
-	 *
-	 * @return the usuario ultima alteracao
-	 */
 	public String getUsuarioUltimaAlteracao() {
 		return usuarioUltimaAlteracao;
 	}
 
-	/**
-	 * Sets the usuario ultima alteracao.
-	 *
-	 * @param usuarioUltimaAlteracao the new usuario ultima alteracao
-	 */
 	public void setUsuarioUltimaAlteracao(String usuarioUltimaAlteracao) {
 		this.usuarioUltimaAlteracao = usuarioUltimaAlteracao;
 	}
 
-	/**
-	 * Gets the data ultima alteracao.
-	 *
-	 * @return the data ultima alteracao
-	 */
+	public String getFlagAtivo() {
+		return flagAtivo;
+	}
+
+	public void setFlagAtivo(String flagAtivo) {
+		this.flagAtivo = flagAtivo;
+	}
+
 	public Date getDataUltimaAlteracao() {
 		return dataUltimaAlteracao;
 	}
 
-	/**
-	 * Sets the data ultima alteracao.
-	 *
-	 * @param dataUltimaAlteracao the new data ultima alteracao
-	 */
 	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
 		this.dataUltimaAlteracao = dataUltimaAlteracao;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoParametro == null) ? 0 : codigoParametro.hashCode());
+		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
+		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
 		result = prime * result + ((nomeParametro == null) ? 0 : nomeParametro.hashCode());
 		result = prime * result + ((nomeResumidoParametro == null) ? 0 : nomeResumidoParametro.hashCode());
 		result = prime * result + ((textoConteudoParametro == null) ? 0 : textoConteudoParametro.hashCode());
@@ -193,9 +142,6 @@ public class ParametroConfiguracao {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -210,10 +156,20 @@ public class ParametroConfiguracao {
 				return false;
 		} else if (!codigoParametro.equals(other.codigoParametro))
 			return false;
+		if (dataCriacao == null) {
+			if (other.dataCriacao != null)
+				return false;
+		} else if (!dataCriacao.equals(other.dataCriacao))
+			return false;
 		if (dataUltimaAlteracao == null) {
 			if (other.dataUltimaAlteracao != null)
 				return false;
 		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
+			return false;
+		if (flagAtivo == null) {
+			if (other.flagAtivo != null)
+				return false;
+		} else if (!flagAtivo.equals(other.flagAtivo))
 			return false;
 		if (nomeParametro == null) {
 			if (other.nomeParametro != null)
@@ -243,5 +199,4 @@ public class ParametroConfiguracao {
 		return true;
 	}
 
-	
 }

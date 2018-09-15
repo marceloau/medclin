@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -19,17 +21,15 @@ public class Especialidade {
 	private String nomeEspecialidade;
 
 	private String descricaoEspecialidade;
-	@NotBlank
 
 	private String usuarioUltimaAlteracao;
-	@NotBlank
 
 	private String flagAtivo;
-	@NotBlank
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAlteracao;
-	@NotBlank
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
 	public Long getCodigoEspecialidade() {
@@ -56,14 +56,6 @@ public class Especialidade {
 		this.descricaoEspecialidade = descricaoEspecialidade;
 	}
 
-	public String getUsuarioUltimaAlteracao() {
-		return usuarioUltimaAlteracao;
-	}
-
-	public void setUsuarioUltimaAlteracao(String usuarioUltimaAlteracao) {
-		this.usuarioUltimaAlteracao = usuarioUltimaAlteracao;
-	}
-
 	public String getFlagAtivo() {
 		return flagAtivo;
 	}
@@ -78,6 +70,22 @@ public class Especialidade {
 
 	public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
 		this.dataUltimaAlteracao = dataUltimaAlteracao;
+	}
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public String getUsuarioUltimaAlteracao() {
+		return usuarioUltimaAlteracao;
+	}
+
+	public void setUsuarioUltimaAlteracao(String usuarioUltimaAlteracao) {
+		this.usuarioUltimaAlteracao = usuarioUltimaAlteracao;
 	}
 
 	@Override

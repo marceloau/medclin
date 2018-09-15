@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.com.medclin.repository;
 
 import org.springframework.data.domain.Page;
@@ -12,10 +15,10 @@ import br.com.medclin.model.Especialidade;
 public interface EspecialidadeRepository
 		extends JpaRepository<Especialidade, Long>, PagingAndSortingRepository<Especialidade, Long> {
 
+	@Query(value = "SELECT e FROM Especialidade e WHERE e.codigoEspecialidade = :codigoEspecialidade")
+	Iterable<Especialidade> buscarEspecialidadePorCodigo(@Param("codigoEspecialidade") final Long codigoEspecialidade);
+
 	@Query(value = "SELECT e FROM Especialidade e WHERE e.nomeEspecialidade LIKE %:nomeEspecialidade%")
 	Page<Especialidade> buscarEspecialidadePorNome(@Param("nomeEspecialidade") final String nomeEspecialidade,
 			final Pageable page);
-
-	@Query(value = "SELECT e FROM Especialidade e WHERE e.codigoEspecialidade LIKE %:codigoEspecialidade%")
-	Page<Especialidade> buscarEspecialidadePorCodigo(@Param("codigoEspecialidade") final Long codigoEspecialidade);
 }

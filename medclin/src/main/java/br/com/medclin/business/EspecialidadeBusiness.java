@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.com.medclin.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IEspecialidadeBusiness;
+import br.com.medclin.common.AssertUtil;
 import br.com.medclin.model.Especialidade;
 import br.com.medclin.repository.EspecialidadeRepository;
 
@@ -15,14 +19,12 @@ public class EspecialidadeBusiness implements IEspecialidadeBusiness {
 	@Autowired
 	private EspecialidadeRepository especialidadeRep;
 
+	@Autowired
+	private AssertUtil assertUtil;
+
 	@Override
 	public Especialidade atualizarEspecialidade(final Especialidade especialidade) {
 		return especialidadeRep.saveAndFlush(especialidade);
-	}
-
-	@Override
-	public Page<Especialidade> buscarEspecialidadePorNome(final PageRequest pageable, final String nomeEspecialidade) {
-		return especialidadeRep.buscarEspecialidadePorNome(nomeEspecialidade, pageable);
 	}
 
 	@Override
@@ -31,7 +33,13 @@ public class EspecialidadeBusiness implements IEspecialidadeBusiness {
 	}
 
 	@Override
+	public Page<Especialidade> buscarEspecialidadePorNome(final PageRequest pageable, final String nomeEspecialidade) {
+		return especialidadeRep.buscarEspecialidadePorNome(nomeEspecialidade, pageable);
+	}
+
+	@Override
 	public Especialidade criarEspecialidade(final Especialidade especialidade) {
+		assertUtil.setDadosAuditoria(especialidade, "user" + Math.random());
 		return especialidadeRep.save(especialidade);
 	}
 
