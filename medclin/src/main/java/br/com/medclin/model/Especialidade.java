@@ -15,16 +15,16 @@ public class Especialidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigoEspecialidade;
+	private Short codigoEspecialidade;
 
 	@NotBlank
 	private String nomeEspecialidade;
 
 	private String descricaoEspecialidade;
 
-	private String usuarioUltimaAlteracao;
-
 	private String flagAtivo;
+	
+	private String usuarioUltimaAlteracao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAlteracao;
@@ -32,11 +32,11 @@ public class Especialidade {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Long getCodigoEspecialidade() {
+	public Short getCodigoEspecialidade() {
 		return codigoEspecialidade;
 	}
 
-	public void setCodigoEspecialidade(Long codigoEspecialidade) {
+	public void setCodigoEspecialidade(Short codigoEspecialidade) {
 		this.codigoEspecialidade = codigoEspecialidade;
 	}
 
