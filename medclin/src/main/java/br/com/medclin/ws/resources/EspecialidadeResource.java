@@ -50,8 +50,8 @@ public class EspecialidadeResource {
 		return especialidadeFacade.criarEspecialidade(especialidade);
 	}
 
-	@DeleteMapping
-	public void deletarEspecialidade(@RequestBody final Long codigoEspecialidade) {
+	@DeleteMapping("/{codigoEspecialidade}")
+	public void deletarEspecialidade(@PathVariable final Long codigoEspecialidade) {
 		especialidadeFacade.deletarEspecialidade(codigoEspecialidade);
 	}
 
