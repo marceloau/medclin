@@ -22,7 +22,7 @@ public class EspecialidadeFacade {
 		return especialidadeBusiness.buscarEspecialidadePorNome(pageable, nomeEspecialidade);
 	}
 
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Long codigoEspecialidade) {
+	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Short codigoEspecialidade) {
 		return especialidadeBusiness.buscarEspecialidadePorCodigo(codigoEspecialidade);
 	}
 
@@ -30,7 +30,7 @@ public class EspecialidadeFacade {
 		return especialidadeBusiness.criarEspecialidade(especialidade);
 	}
 
-	public void deletarEspecialidade(final Long codigoEspecialidade) {
+	public void deletarEspecialidade(final Short codigoEspecialidade) {
 		especialidadeBusiness.deletarEspecialidade(codigoEspecialidade);
 	}
 

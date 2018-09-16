@@ -13,10 +13,10 @@ import org.springframework.data.repository.query.Param;
 import br.com.medclin.model.Especialidade;
 
 public interface EspecialidadeRepository
-		extends JpaRepository<Especialidade, Long>, PagingAndSortingRepository<Especialidade, Long> {
+		extends JpaRepository<Especialidade, Short>, PagingAndSortingRepository<Especialidade, Short> {
 
 	@Query(value = "SELECT e FROM Especialidade e WHERE e.codigoEspecialidade = :codigoEspecialidade")
-	Iterable<Especialidade> buscarEspecialidadePorCodigo(@Param("codigoEspecialidade") final Long codigoEspecialidade);
+	Iterable<Especialidade> buscarEspecialidadePorCodigo(@Param("codigoEspecialidade") final Short codigoEspecialidade);
 
 	@Query(value = "SELECT e FROM Especialidade e WHERE e.nomeEspecialidade LIKE %:nomeEspecialidade%")
 	Page<Especialidade> buscarEspecialidadePorNome(@Param("nomeEspecialidade") final String nomeEspecialidade,

@@ -41,7 +41,7 @@ public class EspecialidadeResource {
 	}
 
 	@GetMapping("/{codigoEspecialidade}")
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(@PathVariable final Long codigoEspecialidade) {
+	public Iterable<Especialidade> buscarEspecialidadePorCodigo(@PathVariable final Short codigoEspecialidade) {
 		return especialidadeFacade.buscarEspecialidadePorCodigo(codigoEspecialidade);
 	}
 
@@ -51,7 +51,7 @@ public class EspecialidadeResource {
 	}
 
 	@DeleteMapping("/{codigoEspecialidade}")
-	public void deletarEspecialidade(@PathVariable final Long codigoEspecialidade) {
+	public void deletarEspecialidade(@PathVariable final Short codigoEspecialidade) {
 		especialidadeFacade.deletarEspecialidade(codigoEspecialidade);
 	}
 

@@ -29,7 +29,7 @@ public class EspecialidadeBusiness implements IEspecialidadeBusiness {
 	}
 
 	@Override
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Long codigoEspecialidade) {
+	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Short codigoEspecialidade) {
 		return especialidadeRep.buscarEspecialidadePorCodigo(codigoEspecialidade);
 	}
 
@@ -45,7 +45,7 @@ public class EspecialidadeBusiness implements IEspecialidadeBusiness {
 	}
 
 	@Override
-	public void deletarEspecialidade(final Long codigoEspecialidade) {
+	public void deletarEspecialidade(final Short codigoEspecialidade) {
 		especialidadeRep.deleteById(codigoEspecialidade);
 	}
 

@@ -11,11 +11,11 @@ public interface IEspecialidadeBusiness {
 
 	public Page<Especialidade> buscarEspecialidadePorNome(final PageRequest pageable, final String nomeEspecialidade);
 
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Long codigoEspecialidade);
+	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Short codigoEspecialidade);
 
 	public Especialidade criarEspecialidade(final Especialidade especialidade);
 
-	public void deletarEspecialidade(final Long codigoEspecialidade);
+	public void deletarEspecialidade(final Short codigoEspecialidade);
 
 	public Page<Especialidade> listarEspecialidade(final PageRequest pageable);
 
