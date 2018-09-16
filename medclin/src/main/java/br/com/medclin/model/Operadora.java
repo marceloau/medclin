@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Operadora {
@@ -22,7 +24,8 @@ public class Operadora {
 
 	private String descricaoOperadora;
 
-	@NotBlank
+	@NotNull
+	@Min(value = 1, message = "Atenção, informe o valor do codigo Oficial")
 	private Integer codigoOficial;
 
 	private String flagAtivo;
