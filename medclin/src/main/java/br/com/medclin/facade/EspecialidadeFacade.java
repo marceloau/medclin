@@ -22,7 +22,7 @@ public class EspecialidadeFacade {
 		return especialidadeBusiness.buscarEspecialidadePorNome(pageable, nomeEspecialidade);
 	}
 
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Short codigoEspecialidade) {
+	public Especialidade buscarEspecialidadePorCodigo(final Short codigoEspecialidade) {
 		return especialidadeBusiness.buscarEspecialidadePorCodigo(codigoEspecialidade);
 	}
 

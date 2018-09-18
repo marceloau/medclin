@@ -11,7 +11,7 @@ public interface IEspecialidadeBusiness {
 
 	public Page<Especialidade> buscarEspecialidadePorNome(final PageRequest pageable, final String nomeEspecialidade);
 
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(final Short codigoEspecialidade);
+	public Especialidade buscarEspecialidadePorCodigo(final Short codigoEspecialidade);
 
 	public Especialidade criarEspecialidade(final Especialidade especialidade);
 

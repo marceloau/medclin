@@ -41,7 +41,7 @@ public class EspecialidadeResource {
 	}
 
 	@GetMapping("/{codigoEspecialidade}")
-	public Iterable<Especialidade> buscarEspecialidadePorCodigo(@PathVariable final Short codigoEspecialidade) {
+	public Especialidade buscarEspecialidadePorCodigo(@PathVariable final Short codigoEspecialidade) {
 		return especialidadeFacade.buscarEspecialidadePorCodigo(codigoEspecialidade);
 	}
 
