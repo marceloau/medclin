@@ -29,7 +29,7 @@ public class TipoPlanoSaudeBusiness implements ITipoPlanoSaudeBusiness {
 	}
 
 	@Override
-	public Iterable<TipoPlanoSaude> buscarTipoPlanoSaudePorCodigo(final Short codigoTipoPlanoSaude) {
+	public TipoPlanoSaude buscarTipoPlanoSaudePorCodigo(final Short codigoTipoPlanoSaude) {
 		return tipoPlanoSaudeRep.buscarTipoPlanoSaudePorCodigo(codigoTipoPlanoSaude);
 	}
 

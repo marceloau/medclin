@@ -29,7 +29,7 @@ public class TipoContatoBusiness implements ITipoContatoBusiness {
 	}
 
 	@Override
-	public Iterable<TipoContato> buscarTipoContatoPorCodigo(final Short codigoTipoContato) {
+	public TipoContato buscarTipoContatoPorCodigo(final Short codigoTipoContato) {
 		return tipoContatoRep.buscarTipoContatoPorCodigo(codigoTipoContato);
 	}
 

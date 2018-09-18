@@ -16,7 +16,7 @@ public interface OperadoraRepository
 		extends JpaRepository<Operadora, Short>, PagingAndSortingRepository<Operadora, Short> {
 
 	@Query(value = "SELECT o FROM Operadora o WHERE o.codigoOperadora = :codigoOperadora")
-	Iterable<Operadora> buscarOperadoraPorCodigo(@Param("codigoOperadora") final Short codigoOperadora);
+	Operadora buscarOperadoraPorCodigo(@Param("codigoOperadora") final Short codigoOperadora);
 	
 	@Query(value = "SELECT o FROM Operadora o WHERE o.codigoOficial = :codigoOficial")
 	Iterable<Operadora> buscarOperadoraPorCodigoOficial(@Param("codigoOficial") final Integer codigoOficial);

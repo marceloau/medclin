@@ -41,7 +41,7 @@ public class TipoPlanoSaudeResource {
 	}
 
 	@GetMapping("/{codigoTipoPlanoSaude}")
-	public Iterable<TipoPlanoSaude> buscarTipoPlanoSaudePorCodigo(@PathVariable final Short codigoTipoPlanoSaude) {
+	public TipoPlanoSaude buscarTipoPlanoSaudePorCodigo(@PathVariable final Short codigoTipoPlanoSaude) {
 		return tipoPlanoSaudeFacade.buscarTipoPlanoSaudePorCodigo(codigoTipoPlanoSaude);
 	}
 

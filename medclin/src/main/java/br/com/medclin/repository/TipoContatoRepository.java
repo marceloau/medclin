@@ -16,7 +16,7 @@ public interface TipoContatoRepository
 		extends JpaRepository<TipoContato, Short>, PagingAndSortingRepository<TipoContato, Short> {
 
 	@Query(value = "SELECT tC FROM TipoContato tC WHERE tC.codigoTipoContato = :codigoTipoContato")
-	Iterable<TipoContato> buscarTipoContatoPorCodigo(@Param("codigoTipoContato") final Short codigoTipoContato);
+	TipoContato buscarTipoContatoPorCodigo(@Param("codigoTipoContato") final Short codigoTipoContato);
 
 	@Query(value = "SELECT tC FROM TipoContato tC WHERE tC.nomeTipoContato LIKE %:nomeTipoContato%")
 	Page<TipoContato> buscarTipoContatoPorNome(@Param("nomeTipoContato") final String nomeTipoContato,

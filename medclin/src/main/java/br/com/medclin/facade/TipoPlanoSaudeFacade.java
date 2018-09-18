@@ -23,7 +23,7 @@ public class TipoPlanoSaudeFacade {
 		return tipoPlanoSaudeBusiness.buscarTipoPlanoSaudePorNome(pageable, nomeTipoPlanoSaude);
 	}
 
-	public Iterable<TipoPlanoSaude> buscarTipoPlanoSaudePorCodigo(final Short codigoTipoPlanoSaude) {
+	public TipoPlanoSaude buscarTipoPlanoSaudePorCodigo(final Short codigoTipoPlanoSaude) {
 		return tipoPlanoSaudeBusiness.buscarTipoPlanoSaudePorCodigo(codigoTipoPlanoSaude);
 	}
 

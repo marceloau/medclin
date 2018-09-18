@@ -22,7 +22,7 @@ public class OperadoraFacade {
 		return operadoraBusiness.buscarOperadoraPorNome(pageable, nomeOperadora);
 	}
 
-	public Iterable<Operadora> buscarOperadoraPorCodigo(final Short codigoOperadora) {
+	public Operadora buscarOperadoraPorCodigo(final Short codigoOperadora) {
 		return operadoraBusiness.buscarOperadoraPorCodigo(codigoOperadora);
 	}
 

@@ -11,7 +11,7 @@ public interface IOperadoraBusiness {
 
 	public Page<Operadora> buscarOperadoraPorNome(final PageRequest pageable, final String nomeOperadora);
 
-	public Iterable<Operadora> buscarOperadoraPorCodigo(final Short codigoOperadora);
+	public Operadora buscarOperadoraPorCodigo(final Short codigoOperadora);
 
 	public Iterable<Operadora> buscarOperadoraPorCodigoOficial(final Integer codigoOficial);
 

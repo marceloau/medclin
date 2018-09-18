@@ -16,7 +16,7 @@ public interface TipoPlanoSaudeRepository
 		extends JpaRepository<TipoPlanoSaude, Short>, PagingAndSortingRepository<TipoPlanoSaude, Short> {
 
 	@Query(value = "SELECT tPS FROM TipoPlanoSaude tPS WHERE tPS.codigoTipoPlano = :codigoTipoPlano")
-	Iterable<TipoPlanoSaude> buscarTipoPlanoSaudePorCodigo(@Param("codigoTipoPlano") final Short codigoTipoPlano);
+	TipoPlanoSaude buscarTipoPlanoSaudePorCodigo(@Param("codigoTipoPlano") final Short codigoTipoPlano);
 
 	@Query(value = "SELECT tPS FROM TipoPlanoSaude tPS WHERE tPS.nomeTipoPlano LIKE %:nomeTipoPlano%")
 	Page<TipoPlanoSaude> buscarTipoPlanoSaudePorNome(@Param("nomeTipoPlano") final String nomeTipoPlano,

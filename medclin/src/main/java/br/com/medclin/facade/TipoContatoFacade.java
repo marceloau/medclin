@@ -22,7 +22,7 @@ public class TipoContatoFacade {
 		return tipoContatoBusiness.buscarTipoContatoPorNome(pageable, nomeTipoContato);
 	}
 
-	public Iterable<TipoContato> buscarTipoContatoPorCodigo(final Short codigoTipoContato) {
+	public TipoContato buscarTipoContatoPorCodigo(final Short codigoTipoContato) {
 		return tipoContatoBusiness.buscarTipoContatoPorCodigo(codigoTipoContato);
 	}
 

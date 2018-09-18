@@ -12,7 +12,7 @@ public interface ITipoPlanoSaudeBusiness {
 	public Page<TipoPlanoSaude> buscarTipoPlanoSaudePorNome(final PageRequest pageable,
 			final String nomeTipoPlanoSaude);
 
-	public Iterable<TipoPlanoSaude> buscarTipoPlanoSaudePorCodigo(final Short codigoTipoPlanoSaude);
+	public TipoPlanoSaude buscarTipoPlanoSaudePorCodigo(final Short codigoTipoPlanoSaude);
 
 	public TipoPlanoSaude criarTipoPlanoSaude(final TipoPlanoSaude tipoPlanoSaude);
 

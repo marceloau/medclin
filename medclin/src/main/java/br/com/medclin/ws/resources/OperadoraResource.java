@@ -40,7 +40,7 @@ public class OperadoraResource {
 	}
 
 	@GetMapping("/{codigoOperadora}")
-	public Iterable<Operadora> buscarOperadoraPorCodigo(@PathVariable final Short codigoOperadora) {
+	public Operadora buscarOperadoraPorCodigo(@PathVariable final Short codigoOperadora) {
 		return operadoraFacade.buscarOperadoraPorCodigo(codigoOperadora);
 	}
 

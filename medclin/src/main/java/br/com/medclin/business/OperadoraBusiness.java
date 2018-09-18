@@ -29,7 +29,7 @@ public class OperadoraBusiness implements IOperadoraBusiness {
 	}
 
 	@Override
-	public Iterable<Operadora> buscarOperadoraPorCodigo(final Short codigoOperadora) {
+	public Operadora buscarOperadoraPorCodigo(final Short codigoOperadora) {
 		return operadoraRep.buscarOperadoraPorCodigo(codigoOperadora);
 	}
 

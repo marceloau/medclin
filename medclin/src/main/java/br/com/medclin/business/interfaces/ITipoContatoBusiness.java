@@ -11,7 +11,7 @@ public interface ITipoContatoBusiness {
 
 	public Page<TipoContato> buscarTipoContatoPorNome(final PageRequest pageable, final String nomeTipoContato);
 
-	public Iterable<TipoContato> buscarTipoContatoPorCodigo(final Short codigoTipoContato);
+	public TipoContato buscarTipoContatoPorCodigo(final Short codigoTipoContato);
 
 	public TipoContato criarTipoContato(final TipoContato tipoContato);
 

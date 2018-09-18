@@ -41,7 +41,7 @@ public class TipoContatoResource {
 	}
 
 	@GetMapping("/{codigoTipoContato}")
-	public Iterable<TipoContato> buscarTipoContatoPorCodigo(@PathVariable final Short codigoTipoContato) {
+	public TipoContato buscarTipoContatoPorCodigo(@PathVariable final Short codigoTipoContato) {
 		return tipoContatoFacade.buscarTipoContatoPorCodigo(codigoTipoContato);
 	}
 
