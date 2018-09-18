@@ -17,7 +17,7 @@ public class Especialidade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Short codigoEspecialidade;
 
-	@NotBlank
+	@NotBlank(message = "Nome da especialidade é obrigatório.")
 	private String nomeEspecialidade;
 
 	private String descricaoEspecialidade;

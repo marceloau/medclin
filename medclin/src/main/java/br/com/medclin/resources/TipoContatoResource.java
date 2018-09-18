@@ -1,7 +1,7 @@
 /*
  * 
  */
-package br.com.medclin.ws.resources;
+package br.com.medclin.resources;
 
 import javax.validation.Valid;
 
