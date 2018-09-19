@@ -3,6 +3,8 @@
  */
 package br.com.medclin.repository;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +23,8 @@ public interface EspecialidadeRepository
 	@Query(value = "SELECT e FROM Especialidade e WHERE e.nomeEspecialidade LIKE %:nomeEspecialidade%")
 	Page<Especialidade> buscarEspecialidadePorNome(@Param("nomeEspecialidade") final String nomeEspecialidade,
 			final Pageable page);
+
+	@Query(value = "SELECT e.dataCriacao FROM Especialidade e WHERE e.codigoEspecialidade = :codigoEspecialidade")
+	Date buscarDataCriacaoPorCodigo(@Param("codigoEspecialidade") final Short codigoEspecialidade);
+
 }

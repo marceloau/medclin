@@ -3,6 +3,8 @@
  */
 package br.com.medclin.repository;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,11 +19,13 @@ public interface OperadoraRepository
 
 	@Query(value = "SELECT o FROM Operadora o WHERE o.codigoOperadora = :codigoOperadora")
 	Operadora buscarOperadoraPorCodigo(@Param("codigoOperadora") final Short codigoOperadora);
-	
+
 	@Query(value = "SELECT o FROM Operadora o WHERE o.codigoOficial = :codigoOficial")
 	Iterable<Operadora> buscarOperadoraPorCodigoOficial(@Param("codigoOficial") final Integer codigoOficial);
 
 	@Query(value = "SELECT o FROM Operadora o WHERE o.nomeOperadora LIKE %:nomeOperadora%")
-	Page<Operadora> buscarOperadoraPorNome(@Param("nomeOperadora") final String nomeOperadora,
-			final Pageable page);
+	Page<Operadora> buscarOperadoraPorNome(@Param("nomeOperadora") final String nomeOperadora, final Pageable page);
+
+	@Query(value = "SELECT o.dataCriacao FROM Operadora o WHERE o.codigoOperadora = :codigoOperadora")
+	Date buscarDataCriacaoPorCodigo(@Param("codigoOperadora") final Short codigoOperadora);
 }

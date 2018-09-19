@@ -3,6 +3,8 @@
  */
 package br.com.medclin.repository;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +23,7 @@ public interface TipoPlanoSaudeRepository
 	@Query(value = "SELECT tPS FROM TipoPlanoSaude tPS WHERE tPS.nomeTipoPlano LIKE %:nomeTipoPlano%")
 	Page<TipoPlanoSaude> buscarTipoPlanoSaudePorNome(@Param("nomeTipoPlano") final String nomeTipoPlano,
 			final Pageable page);
+
+	@Query(value = "SELECT tPS.dataCriacao FROM TipoPlanoSaude tPS WHERE tPS.codigoTipoPlano = :codigoTipoPlano")
+	Date buscarDataCriacaoPorCodigo(@Param("codigoTipoPlano") final Short codigoTipoPlano);
 }
