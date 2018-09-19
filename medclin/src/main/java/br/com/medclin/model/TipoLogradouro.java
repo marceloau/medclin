@@ -2,6 +2,7 @@ package br.com.medclin.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class TipoLogradouro {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo_tipo_logradouro")
 	private Byte codigoTipoLogradouro;
 
 	@NotBlank

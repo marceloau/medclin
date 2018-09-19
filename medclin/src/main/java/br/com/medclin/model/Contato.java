@@ -4,26 +4,31 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Estado {
+public class Contato {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo_estado")
-	private Byte codigoEstado;
+	@Column(name = "codigo_contato")
+	private Integer codigoContato;
 
-	@NotBlank
-	private String nomeEstado;
+	@NotBlank(message = "O texto contato é obrigatório.")
+	private String textoContato;
 
-	@NotBlank
-	private String siglaEstado;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_tipo_contato"), name = "codigo_tipo_contato", nullable = false)
+	private TipoContato tipoContato;
 
 	private String flagAtivo;
 
@@ -35,28 +40,28 @@ public class Estado {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Byte getCodigoEstado() {
-		return codigoEstado;
+	public Integer getCodigoContato() {
+		return codigoContato;
 	}
 
-	public void setCodigoEstado(Byte codigoEstado) {
-		this.codigoEstado = codigoEstado;
+	public void setCodigoContato(Integer codigoContato) {
+		this.codigoContato = codigoContato;
 	}
 
-	public String getNomeEstado() {
-		return nomeEstado;
+	public String getTextoContato() {
+		return textoContato;
 	}
 
-	public void setNomeEstado(String nomeEstado) {
-		this.nomeEstado = nomeEstado;
+	public void setTextoContato(String textoContato) {
+		this.textoContato = textoContato;
 	}
 
-	public String getSiglaEstado() {
-		return siglaEstado;
+	public TipoContato getTipoContato() {
+		return tipoContato;
 	}
 
-	public void setSiglaEstado(String siglaEstado) {
-		this.siglaEstado = siglaEstado;
+	public void setTipoContato(TipoContato tipoContato) {
+		this.tipoContato = tipoContato;
 	}
 
 	public String getFlagAtivo() {
@@ -95,12 +100,12 @@ public class Estado {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoEstado == null) ? 0 : codigoEstado.hashCode());
+		result = prime * result + ((codigoContato == null) ? 0 : codigoContato.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((nomeEstado == null) ? 0 : nomeEstado.hashCode());
-		result = prime * result + ((siglaEstado == null) ? 0 : siglaEstado.hashCode());
+		result = prime * result + ((textoContato == null) ? 0 : textoContato.hashCode());
+		result = prime * result + ((tipoContato == null) ? 0 : tipoContato.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		return result;
 	}
@@ -113,11 +118,11 @@ public class Estado {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estado other = (Estado) obj;
-		if (codigoEstado == null) {
-			if (other.codigoEstado != null)
+		Contato other = (Contato) obj;
+		if (codigoContato == null) {
+			if (other.codigoContato != null)
 				return false;
-		} else if (!codigoEstado.equals(other.codigoEstado))
+		} else if (!codigoContato.equals(other.codigoContato))
 			return false;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
@@ -134,15 +139,15 @@ public class Estado {
 				return false;
 		} else if (!flagAtivo.equals(other.flagAtivo))
 			return false;
-		if (nomeEstado == null) {
-			if (other.nomeEstado != null)
+		if (textoContato == null) {
+			if (other.textoContato != null)
 				return false;
-		} else if (!nomeEstado.equals(other.nomeEstado))
+		} else if (!textoContato.equals(other.textoContato))
 			return false;
-		if (siglaEstado == null) {
-			if (other.siglaEstado != null)
+		if (tipoContato == null) {
+			if (other.tipoContato != null)
 				return false;
-		} else if (!siglaEstado.equals(other.siglaEstado))
+		} else if (!tipoContato.equals(other.tipoContato))
 			return false;
 		if (usuarioUltimaAlteracao == null) {
 			if (other.usuarioUltimaAlteracao != null)

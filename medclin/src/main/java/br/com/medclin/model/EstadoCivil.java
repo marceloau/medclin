@@ -2,6 +2,7 @@ package br.com.medclin.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class EstadoCivil {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo_estado_civil")
 	private Byte codigoEstadoCivil;
 
 	@NotBlank
