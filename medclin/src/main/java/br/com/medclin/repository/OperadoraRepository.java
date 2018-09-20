@@ -21,7 +21,7 @@ public interface OperadoraRepository
 	Operadora buscarOperadoraPorCodigo(@Param("codigoOperadora") final Short codigoOperadora);
 
 	@Query(value = "SELECT o FROM Operadora o WHERE o.codigoOficial = :codigoOficial")
-	Iterable<Operadora> buscarOperadoraPorCodigoOficial(@Param("codigoOficial") final Integer codigoOficial);
+	Page<Operadora> buscarOperadoraPorCodigoOficial(@Param("codigoOficial") final Integer codigoOficial);
 
 	@Query(value = "SELECT o FROM Operadora o WHERE o.nomeOperadora LIKE %:nomeOperadora%")
 	Page<Operadora> buscarOperadoraPorNome(@Param("nomeOperadora") final String nomeOperadora, final Pageable page);

@@ -13,7 +13,7 @@ public interface IOperadoraBusiness {
 
 	public Operadora buscarOperadoraPorCodigo(final Short codigoOperadora);
 
-	public Iterable<Operadora> buscarOperadoraPorCodigoOficial(final Integer codigoOficial);
+	public Page<Operadora> buscarOperadoraPorCodigoOficial(final Integer codigoOficial);
 
 	public Operadora criarOperadora(final Operadora operadora);
 
