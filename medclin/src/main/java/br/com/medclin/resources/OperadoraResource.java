@@ -45,7 +45,7 @@ public class OperadoraResource {
 	}
 
 	@GetMapping("/codigoOficial={codigoOficial}")
-	public Page<Operadora> buscarOperadoraPorCodigoOficial(@PathVariable final Integer codigoOficial) {
+	public Operadora buscarOperadoraPorCodigoOficial(@PathVariable final Integer codigoOficial) {
 		return operadoraFacade.buscarOperadoraPorCodigoOficial(codigoOficial);
 	}
 

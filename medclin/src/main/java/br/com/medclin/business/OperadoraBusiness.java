@@ -55,7 +55,7 @@ public class OperadoraBusiness implements IOperadoraBusiness {
 	}
 
 	@Override
-	public Page<Operadora> buscarOperadoraPorCodigoOficial(final Integer codigoOficial) {
+	public Operadora buscarOperadoraPorCodigoOficial(final Integer codigoOficial) {
 		return operadoraRep.buscarOperadoraPorCodigoOficial(codigoOficial);
 	}
 

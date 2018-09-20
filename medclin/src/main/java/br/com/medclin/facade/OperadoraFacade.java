@@ -26,7 +26,7 @@ public class OperadoraFacade {
 		return operadoraBusiness.buscarOperadoraPorCodigo(codigoOperadora);
 	}
 
-	public Page<Operadora> buscarOperadoraPorCodigoOficial(final Integer codigoOficial) {
+	public Operadora buscarOperadoraPorCodigoOficial(final Integer codigoOficial) {
 		return operadoraBusiness.buscarOperadoraPorCodigoOficial(codigoOficial);
 	}
 
