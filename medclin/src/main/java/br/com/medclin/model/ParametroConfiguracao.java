@@ -3,6 +3,7 @@
  */
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,7 +20,9 @@ import javax.validation.constraints.NotBlank;
  * @author henrique araujo
  */
 @Entity
-public class ParametroConfiguracao {
+public class ParametroConfiguracao implements Serializable {
+
+	private static final long SerialVersionUID = 1L;
 
 	/** The codigo parametro. */
 	@Id

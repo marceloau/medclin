@@ -1,7 +1,9 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +15,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Operadora {
+public class Operadora implements Serializable {
+
+	private static final long SerialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo_operadora")
 	private Short codigoOperadora;
 
 	@NotBlank

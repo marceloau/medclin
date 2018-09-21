@@ -1,34 +1,35 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Contato {
+public class ContatoPessoa implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo_contato")
-	private Integer codigoContato;
+	private static final long SerialVersionUID = 1L;
+
+	@EmbeddedId
+	private ContatoPessoaPK contatoPessoaPK;
 
 	@NotBlank(message = "O texto contato é obrigatório.")
 	private String textoContato;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_tipo_contato"), name = "codigo_tipo_contato", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_tipo_contato")
 	private TipoContato tipoContato;
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa", referencedColumnName = "codigo_pessoa", insertable = false, updatable = false)
+	private Pessoa pessoa;
 
 	private String flagAtivo;
 
@@ -40,12 +41,12 @@ public class Contato {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Integer getCodigoContato() {
-		return codigoContato;
+	public ContatoPessoaPK getContatoPessoaPK() {
+		return contatoPessoaPK;
 	}
 
-	public void setCodigoContato(Integer codigoContato) {
-		this.codigoContato = codigoContato;
+	public void setContatoPessoaPK(ContatoPessoaPK contatoPessoaPK) {
+		this.contatoPessoaPK = contatoPessoaPK;
 	}
 
 	public String getTextoContato() {
@@ -62,6 +63,14 @@ public class Contato {
 
 	public void setTipoContato(TipoContato tipoContato) {
 		this.tipoContato = tipoContato;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public String getFlagAtivo() {
@@ -100,10 +109,11 @@ public class Contato {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoContato == null) ? 0 : codigoContato.hashCode());
+		result = prime * result + ((contatoPessoaPK == null) ? 0 : contatoPessoaPK.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
+		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		result = prime * result + ((textoContato == null) ? 0 : textoContato.hashCode());
 		result = prime * result + ((tipoContato == null) ? 0 : tipoContato.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
@@ -118,11 +128,11 @@ public class Contato {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contato other = (Contato) obj;
-		if (codigoContato == null) {
-			if (other.codigoContato != null)
+		ContatoPessoa other = (ContatoPessoa) obj;
+		if (contatoPessoaPK == null) {
+			if (other.contatoPessoaPK != null)
 				return false;
-		} else if (!codigoContato.equals(other.codigoContato))
+		} else if (!contatoPessoaPK.equals(other.contatoPessoaPK))
 			return false;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
@@ -138,6 +148,11 @@ public class Contato {
 			if (other.flagAtivo != null)
 				return false;
 		} else if (!flagAtivo.equals(other.flagAtivo))
+			return false;
+		if (pessoa == null) {
+			if (other.pessoa != null)
+				return false;
+		} else if (!pessoa.equals(other.pessoa))
 			return false;
 		if (textoContato == null) {
 			if (other.textoContato != null)

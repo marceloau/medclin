@@ -1,5 +1,6 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +13,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class TipoLogradouro {
+public class TipoLogradouro implements Serializable {
+
+	private static final long SerialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

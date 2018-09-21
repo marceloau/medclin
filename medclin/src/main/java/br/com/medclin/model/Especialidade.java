@@ -1,5 +1,6 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,7 +12,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Especialidade {
+public class Especialidade implements Serializable {
+
+	private static final long SerialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +26,7 @@ public class Especialidade {
 	private String descricaoEspecialidade;
 
 	private String flagAtivo;
-	
+
 	private String usuarioUltimaAlteracao;
 
 	@Temporal(TemporalType.TIMESTAMP)

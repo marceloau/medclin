@@ -1,23 +1,26 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Pessoa {
+public class Pessoa implements Serializable {
+
+	private static final long SerialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,17 +46,17 @@ public class Pessoa {
 
 	private String informacaoAdcional;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_estado_civil"), name = "codigo_estado_civil", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_estado_civil")
 	private EstadoCivil estadoCivil;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_endereco"), name = "codigo_endereco")
-	private List<Endereco> enderecos;
+	@OneToMany(mappedBy = "pessoa")
+	@OrderColumn(name = "codigo_endereco_pessoa", insertable = false, updatable = false)
+	private List<EnderecoPessoa> enderecos;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_contato"), name = "codigo_contato")
-	private List<Contato> contatos;
+	@OneToMany(mappedBy = "pessoa")
+	@OrderColumn(name = "codigo_contato_pessoa", insertable = false, updatable = false)
+	private List<ContatoPessoa> contatos;
 
 	private String flagAtivo;
 
@@ -153,19 +156,19 @@ public class Pessoa {
 		this.estadoCivil = estadoCivil;
 	}
 
-	public List<Endereco> getEnderecos() {
+	public List<EnderecoPessoa> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
+	public void setEnderecos(List<EnderecoPessoa> enderecos) {
 		this.enderecos = enderecos;
 	}
 
-	public List<Contato> getContatos() {
+	public List<ContatoPessoa> getContatos() {
 		return contatos;
 	}
 
-	public void setContatos(List<Contato> contatos) {
+	public void setContatos(List<ContatoPessoa> contatos) {
 		this.contatos = contatos;
 	}
 

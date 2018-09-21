@@ -1,26 +1,23 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Endereco {
+public class EnderecoPessoa implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo_endereco")
-	private Integer codigoEndereco;
+	private static final long SerialVersionUID = 1L;
+
+	@EmbeddedId
+	private EnderecoPessoaPK enderecoPessoaPK;
 
 	private String nomeBairro;
 
@@ -34,12 +31,16 @@ public class Endereco {
 
 	private String complemento;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_tipo_logradouro"), name = "codigo_tipo_logradouro", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa", referencedColumnName = "codigo_pessoa", insertable = false, updatable = false)
+	private Pessoa pessoa;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_tipo_logradouro")
 	private TipoLogradouro tipoLogradouro;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(foreignKey = @ForeignKey(name = "codigo_estado"), name = "codigo_estado", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_estado")
 	private Estado estado;
 
 	private String flagAtivo;
@@ -52,12 +53,12 @@ public class Endereco {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Integer getCodigoEndereco() {
-		return codigoEndereco;
+	public EnderecoPessoaPK getEnderecoPessoaPK() {
+		return enderecoPessoaPK;
 	}
 
-	public void setCodigoEndereco(Integer codigoEndereco) {
-		this.codigoEndereco = codigoEndereco;
+	public void setEnderecoPessoaPK(EnderecoPessoaPK enderecoPessoaPK) {
+		this.enderecoPessoaPK = enderecoPessoaPK;
 	}
 
 	public String getNomeBairro() {
@@ -106,6 +107,14 @@ public class Endereco {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public TipoLogradouro getTipoLogradouro() {
@@ -160,10 +169,10 @@ public class Endereco {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoEndereco == null) ? 0 : codigoEndereco.hashCode());
 		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
+		result = prime * result + ((enderecoPessoaPK == null) ? 0 : enderecoPessoaPK.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
 		result = prime * result + ((nomeBairro == null) ? 0 : nomeBairro.hashCode());
@@ -171,6 +180,7 @@ public class Endereco {
 		result = prime * result + ((nomeLogradouro == null) ? 0 : nomeLogradouro.hashCode());
 		result = prime * result + ((numeroCep == null) ? 0 : numeroCep.hashCode());
 		result = prime * result + ((numeroLogradouro == null) ? 0 : numeroLogradouro.hashCode());
+		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		result = prime * result + ((tipoLogradouro == null) ? 0 : tipoLogradouro.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		return result;
@@ -184,12 +194,7 @@ public class Endereco {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
-		if (codigoEndereco == null) {
-			if (other.codigoEndereco != null)
-				return false;
-		} else if (!codigoEndereco.equals(other.codigoEndereco))
-			return false;
+		EnderecoPessoa other = (EnderecoPessoa) obj;
 		if (complemento == null) {
 			if (other.complemento != null)
 				return false;
@@ -204,6 +209,11 @@ public class Endereco {
 			if (other.dataUltimaAlteracao != null)
 				return false;
 		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
+			return false;
+		if (enderecoPessoaPK == null) {
+			if (other.enderecoPessoaPK != null)
+				return false;
+		} else if (!enderecoPessoaPK.equals(other.enderecoPessoaPK))
 			return false;
 		if (estado == null) {
 			if (other.estado != null)
@@ -239,6 +249,11 @@ public class Endereco {
 			if (other.numeroLogradouro != null)
 				return false;
 		} else if (!numeroLogradouro.equals(other.numeroLogradouro))
+			return false;
+		if (pessoa == null) {
+			if (other.pessoa != null)
+				return false;
+		} else if (!pessoa.equals(other.pessoa))
 			return false;
 		if (tipoLogradouro == null) {
 			if (other.tipoLogradouro != null)
