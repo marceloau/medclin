@@ -3,6 +3,7 @@ package br.com.medclin.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,13 +16,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class PlanoSaude implements Serializable {
+public class PlanoSaudePaciente implements Serializable {
 
 	private static final long SerialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigoPlanoSaude;
+	@EmbeddedId
+	private PlanoSaudePacientePK planoSaudePacientePK;
 
 	private String numeroCartao;
 
@@ -38,6 +38,10 @@ public class PlanoSaude implements Serializable {
 	@JoinColumn(name = "codigo_tipo_plano")
 	private TipoPlanoSaude tipoPlanoSaude;
 
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa", referencedColumnName = "codigo_pessoa", insertable = false, updatable = false)
+	private Paciente paciente;
+
 	private String flagAtivo;
 
 	private String usuarioUltimaAlteracao;
@@ -48,12 +52,12 @@ public class PlanoSaude implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Long getCodigoPlanoSaude() {
-		return codigoPlanoSaude;
+	public PlanoSaudePacientePK getPlanoSaudePacientePK() {
+		return planoSaudePacientePK;
 	}
 
-	public void setCodigoPlanoSaude(Long codigoPlanoSaude) {
-		this.codigoPlanoSaude = codigoPlanoSaude;
+	public void setPlanoSaudePacientePK(PlanoSaudePacientePK planoSaudePacientePK) {
+		this.planoSaudePacientePK = planoSaudePacientePK;
 	}
 
 	public String getNumeroCartao() {
@@ -96,6 +100,14 @@ public class PlanoSaude implements Serializable {
 		this.tipoPlanoSaude = tipoPlanoSaude;
 	}
 
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
 	public String getFlagAtivo() {
 		return flagAtivo;
 	}
@@ -132,13 +144,14 @@ public class PlanoSaude implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoPlanoSaude == null) ? 0 : codigoPlanoSaude.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
 		result = prime * result + ((nomeTitular == null) ? 0 : nomeTitular.hashCode());
 		result = prime * result + ((numeroCartao == null) ? 0 : numeroCartao.hashCode());
 		result = prime * result + ((operadora == null) ? 0 : operadora.hashCode());
+		result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
+		result = prime * result + ((planoSaudePacientePK == null) ? 0 : planoSaudePacientePK.hashCode());
 		result = prime * result + ((tipoPlanoSaude == null) ? 0 : tipoPlanoSaude.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		result = prime * result + ((validadeCartao == null) ? 0 : validadeCartao.hashCode());
@@ -153,12 +166,7 @@ public class PlanoSaude implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PlanoSaude other = (PlanoSaude) obj;
-		if (codigoPlanoSaude == null) {
-			if (other.codigoPlanoSaude != null)
-				return false;
-		} else if (!codigoPlanoSaude.equals(other.codigoPlanoSaude))
-			return false;
+		PlanoSaudePaciente other = (PlanoSaudePaciente) obj;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
 				return false;
@@ -188,6 +196,16 @@ public class PlanoSaude implements Serializable {
 			if (other.operadora != null)
 				return false;
 		} else if (!operadora.equals(other.operadora))
+			return false;
+		if (paciente == null) {
+			if (other.paciente != null)
+				return false;
+		} else if (!paciente.equals(other.paciente))
+			return false;
+		if (planoSaudePacientePK == null) {
+			if (other.planoSaudePacientePK != null)
+				return false;
+		} else if (!planoSaudePacientePK.equals(other.planoSaudePacientePK))
 			return false;
 		if (tipoPlanoSaude == null) {
 			if (other.tipoPlanoSaude != null)
