@@ -1,9 +1,15 @@
 package br.com.medclin.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 
+import br.com.medclin.model.ContatoPessoa;
+import br.com.medclin.model.ContatoPessoaPK;
 import br.com.medclin.model.EstadoCivil;
 import br.com.medclin.model.Paciente;
+import br.com.medclin.model.TipoContato;
 
 @Configuration
 public class CloneUtil {
@@ -14,7 +20,7 @@ public class CloneUtil {
 			pacienteClone = new Paciente();
 
 			pacienteClone.setCodigoPessoa(paciente.getCodigoPessoa());
-			pacienteClone.setContatos(null);
+			pacienteClone.setContatos(cloneListaContatoPessoa(paciente.getContatos()));
 			pacienteClone.setDataCriacao(paciente.getDataCriacao());
 			pacienteClone.setDataNascimento(paciente.getDataNascimento());
 			pacienteClone.setDataUltimaAlteracao(paciente.getDataUltimaAlteracao());
@@ -55,5 +61,57 @@ public class CloneUtil {
 		}
 
 		return estadoCivilClone;
+	}
+
+	public ContatoPessoa cloneContatoPessoa(final ContatoPessoa contatoPessoa) {
+		ContatoPessoa contatoPessoaClone = null;
+		ContatoPessoaPK contatoPessoaPKClone = null;
+		if (contatoPessoa != null) {
+			contatoPessoaClone = new ContatoPessoa();
+			contatoPessoaPKClone = new ContatoPessoaPK();
+			contatoPessoaPKClone.setCodigoContatoPessoa(contatoPessoa.getContatoPessoaPK().getCodigoContatoPessoa());
+			contatoPessoaPKClone.setCodigoPessoa(contatoPessoa.getContatoPessoaPK().getCodigoPessoa());
+			contatoPessoaClone.setContatoPessoaPK(contatoPessoaPKClone);
+			contatoPessoaClone.setDataCriacao(contatoPessoa.getDataCriacao());
+			contatoPessoaClone.setDataUltimaAlteracao(contatoPessoa.getDataUltimaAlteracao());
+			contatoPessoaClone.setFlagAtivo(contatoPessoa.getFlagAtivo());
+			contatoPessoaClone.setTextoContato(contatoPessoa.getTextoContato());
+			contatoPessoaClone.setTipoContato(cloneTipoContato(contatoPessoa.getTipoContato()));
+			contatoPessoaClone.setUsuarioUltimaAlteracao(contatoPessoa.getUsuarioUltimaAlteracao());
+		}
+
+		return contatoPessoaClone;
+	}
+
+	public TipoContato cloneTipoContato(final TipoContato tipoContato) {
+		TipoContato tipoContatoClone = null;
+		if (tipoContato != null) {
+			tipoContatoClone = new TipoContato();
+			tipoContatoClone.setCodigoTipoContato(tipoContato.getCodigoTipoContato());
+			tipoContatoClone.setDataCriacao(tipoContato.getDataCriacao());
+			tipoContatoClone.setDataUltimaAlteracao(tipoContato.getDataUltimaAlteracao());
+			tipoContatoClone.setDescricaoTipoContato(tipoContato.getDescricaoTipoContato());
+			tipoContatoClone.setFlagAtivo(tipoContato.getFlagAtivo());
+			tipoContatoClone.setNomeTipoContato(tipoContato.getNomeTipoContato());
+			tipoContatoClone.setUsuarioUltimaAlteracao(tipoContato.getUsuarioUltimaAlteracao());
+
+		}
+
+		return tipoContatoClone;
+	}
+
+	public List<ContatoPessoa> cloneListaContatoPessoa(final List<ContatoPessoa> listaContatoPessoa) {
+		List<ContatoPessoa> listaContatoPessoaClone = null;
+		if (listaContatoPessoa != null && !listaContatoPessoa.isEmpty()) {
+			ArrayList<Object> listaNula = new ArrayList<>();
+			listaNula.add(null);
+			listaContatoPessoa.removeAll(listaNula);// remove objetos nulos retornados pela consulta.
+
+			listaContatoPessoaClone = new ArrayList<>();
+			for (ContatoPessoa contatoPessoa : listaContatoPessoa) {
+				listaContatoPessoaClone.add(cloneContatoPessoa(contatoPessoa));
+			}
+		}
+		return listaContatoPessoaClone;
 	}
 }
