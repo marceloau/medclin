@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IPacienteBusiness;
 import br.com.medclin.common.AuditoriaUtil;
+import br.com.medclin.common.CloneUtil;
 import br.com.medclin.model.Paciente;
 import br.com.medclin.repository.PacienteRepository;
 
@@ -22,6 +23,9 @@ public class PacienteBusiness implements IPacienteBusiness {
 	@Autowired
 	private AuditoriaUtil auditoriaUtil;
 
+	@Autowired
+	private CloneUtil cloneUtil;
+
 	@Override
 	public Paciente atualizarPaciente(final Paciente paciente) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(paciente, "MOCK_MATRICULA - " + Math.random());
@@ -30,7 +34,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 
 	@Override
 	public Paciente buscarPacientePorCodigo(final Long codigoPaciente) {
-		return pacienteRep.buscarPacientePorCodigo(codigoPaciente);
+		return cloneUtil.clonePaciente(pacienteRep.buscarPacientePorCodigo(codigoPaciente));
 	}
 
 	@Override
