@@ -6,4 +6,6 @@ public interface ITipoLogradouroBusiness {
 
 	public Iterable<TipoLogradouro> listarTipoLogradouro();
 
+	public TipoLogradouro buscarTipoLogradouroPorCodigo(final Byte codigoTipoLogradouro);
+
 }

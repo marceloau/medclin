@@ -16,4 +16,8 @@ public class TipoLogradouroFacade {
 		return tipoLogradouroBusiness.listarTipoLogradouro();
 	}
 
+	public TipoLogradouro buscarTipoLogradouroPorCodigo(final Byte codigoTipoLogradouro) {
+		return tipoLogradouroBusiness.buscarTipoLogradouroPorCodigo(codigoTipoLogradouro);
+	}
+
 }

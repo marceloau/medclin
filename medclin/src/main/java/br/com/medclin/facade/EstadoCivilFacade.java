@@ -16,4 +16,7 @@ public class EstadoCivilFacade {
 		return estadoCivilBusiness.listarEstadoCivil();
 	}
 
+	public EstadoCivil buscarEstadoCivilPorCodigo(final Byte codigoEstadoCivil) {
+		return estadoCivilBusiness.buscarEstadoCivilPorCodigo(codigoEstadoCivil);
+	}
 }

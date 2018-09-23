@@ -16,4 +16,7 @@ public class EstadoFacade {
 		return estadoBusiness.listarEstado();
 	}
 
+	public Estado buscarEstadoPorCodigo(final Byte codigoEstado) {
+		return estadoBusiness.buscarEstadoPorCodigo(codigoEstado);
+	}
 }

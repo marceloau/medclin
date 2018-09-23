@@ -2,6 +2,7 @@ package br.com.medclin.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,10 @@ public class TipoLogradouroResource {
 	@GetMapping(produces = "application/json")
 	public @ResponseBody Iterable<TipoLogradouro> listarTipoLogradouro() {
 		return tipoLogradouroFacade.listarTipoLogradouro();
+	}
+
+	@GetMapping("/{codigoTipoLogradouro}")
+	public TipoLogradouro buscarTipoLogradouroPorCodigo(@PathVariable final Byte codigoTipoLogradouro) {
+		return tipoLogradouroFacade.buscarTipoLogradouroPorCodigo(codigoTipoLogradouro);
 	}
 }

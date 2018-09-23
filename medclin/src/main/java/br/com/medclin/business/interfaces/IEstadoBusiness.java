@@ -6,4 +6,6 @@ public interface IEstadoBusiness {
 
 	public Iterable<Estado> listarEstado();
 
+	public Estado buscarEstadoPorCodigo(final Byte codigoEstado);
+
 }

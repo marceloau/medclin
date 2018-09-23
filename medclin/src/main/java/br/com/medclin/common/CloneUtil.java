@@ -7,9 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.medclin.model.ContatoPessoa;
 import br.com.medclin.model.ContatoPessoaPK;
+import br.com.medclin.model.Estado;
 import br.com.medclin.model.EstadoCivil;
 import br.com.medclin.model.Paciente;
 import br.com.medclin.model.TipoContato;
+import br.com.medclin.model.TipoLogradouro;
 
 @Configuration
 public class CloneUtil {
@@ -114,4 +116,36 @@ public class CloneUtil {
 		}
 		return listaContatoPessoaClone;
 	}
+
+	public Estado cloneEstado(final Estado estado) {
+		Estado estadoClone = null;
+		if (estado != null) {
+			estadoClone = new Estado();
+			estadoClone.setCodigoEstado(estado.getCodigoEstado());
+			estadoClone.setDataCriacao(estado.getDataCriacao());
+			estadoClone.setDataUltimaAlteracao(estado.getDataUltimaAlteracao());
+			estadoClone.setFlagAtivo(estado.getFlagAtivo());
+			estadoClone.setNomeEstado(estado.getNomeEstado());
+			estadoClone.setSiglaEstado(estado.getSiglaEstado());
+			estadoClone.setUsuarioUltimaAlteracao(estado.getUsuarioUltimaAlteracao());
+
+		}
+		return estadoClone;
+	}
+
+	public TipoLogradouro clonetipoLogradouro(final TipoLogradouro tipoLogradouro) {
+		TipoLogradouro tipoLogradouroClone = null;
+		if (tipoLogradouro != null) {
+			tipoLogradouroClone = new TipoLogradouro();
+			tipoLogradouroClone.setCodigoTipoLogradouro(tipoLogradouro.getCodigoTipoLogradouro());
+			tipoLogradouroClone.setDataCriacao(tipoLogradouro.getDataCriacao());
+			tipoLogradouroClone.setDataUltimaAlteracao(tipoLogradouro.getDataUltimaAlteracao());
+			tipoLogradouroClone.setFlagAtivo(tipoLogradouro.getFlagAtivo());
+			tipoLogradouroClone.setNomeTipoLogradouro(tipoLogradouro.getNomeTipoLogradouro());
+			tipoLogradouroClone.setUsuarioUltimaAlteracao(tipoLogradouro.getUsuarioUltimaAlteracao());
+
+		}
+		return tipoLogradouroClone;
+	}
+
 }
