@@ -22,7 +22,7 @@ public class TipoPlanoSaude implements Serializable {
 	@Column(name = "codigo_tipo_plano")
 	private Short codigoTipoPlano;
 
-	@NotBlank
+	@NotBlank(message = "O nome do tipo plano é obrigatório.")
 	private String nomeTipoPlano;
 
 	private String descricaoTipoPlano;
