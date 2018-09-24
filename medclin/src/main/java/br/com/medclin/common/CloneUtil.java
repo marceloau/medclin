@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import br.com.medclin.model.ContatoPessoa;
 import br.com.medclin.model.ContatoPessoaPK;
@@ -57,6 +58,22 @@ public class CloneUtil {
 		}
 
 		return pacienteClone;
+	}
+
+	public Page<Paciente> cloneListaPaciente(final Page<Paciente> listaPaciente) {
+		List<Paciente> listaPacienteClone = null;
+		PageImpl<Paciente> listaRetorno = null;
+		if (AssertUtil.isNotNull(listaPaciente) && AssertUtil.isNotEmptyList(listaPaciente.getContent())) {
+
+			listaPacienteClone = new ArrayList<>();
+			for (Paciente paciente : listaPaciente.getContent()) {
+				listaPacienteClone.add(clonePaciente(paciente));
+			}
+			listaRetorno = new PageImpl<>(listaPacienteClone, listaPaciente.getPageable(),
+					listaPaciente.getTotalElements());
+		}
+
+		return listaRetorno;
 	}
 
 	public EstadoCivil cloneEstadoCivil(final EstadoCivil estadoCivil) {

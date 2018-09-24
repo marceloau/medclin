@@ -52,7 +52,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 
 	@Override
 	public Page<Paciente> buscarPacientePorNome(final PageRequest pageable, final String nomePaciente) {
-		return pacienteRep.buscarPacientePorNome(nomePaciente, pageable);
+		return cloneUtil.cloneListaPaciente(pacienteRep.buscarPacientePorNome(nomePaciente, pageable));
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 
 	@Override
 	public Page<Paciente> listarPaciente(final PageRequest pageable) {
-		return pacienteRep.findAll(pageable);
+		return cloneUtil.cloneListaPaciente(pacienteRep.findAll(pageable));
 	}
 
 	private void setCodigoContatoPessoa(final Paciente paciente) {
