@@ -72,6 +72,7 @@ public class CloneUtil {
 			listaRetorno = new PageImpl<>(listaPacienteClone, listaPaciente.getPageable(),
 					listaPaciente.getTotalElements());
 		}
+
 		return listaRetorno;
 	}
 
