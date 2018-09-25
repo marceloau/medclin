@@ -42,6 +42,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 	@Override
 	public Paciente atualizarPaciente(final Paciente paciente) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(paciente, "MOCK_MATRICULA - " + Math.random());
+		
 		return cloneUtil.clonePaciente(pacienteRep.saveAndFlush(paciente));
 	}
 
