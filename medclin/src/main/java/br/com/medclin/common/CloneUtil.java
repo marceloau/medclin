@@ -288,7 +288,7 @@ public class CloneUtil {
 			medicoClone.setEnderecos(cloneListaEnderecoPessoa(medico.getEnderecos()));
 			medicoClone.setEstadoCivil(cloneEstadoCivil(medico.getEstadoCivil()));
 			medicoClone.setFlagAtivo(medico.getFlagAtivo());
-			medicoClone.setInformacaoAdcional(medico.getInformacaoAdcional());
+			medicoClone.setInformacaoAdicional(medico.getInformacaoAdicional());
 			medicoClone.setNacionalidade(medico.getNacionalidade());
 			medicoClone.setNaturalidade(medico.getNaturalidade());
 			medicoClone.setNomePessoa(medico.getNomePessoa());
@@ -337,7 +337,7 @@ public class CloneUtil {
 			pacienteClone.setEnderecos(cloneListaEnderecoPessoa(paciente.getEnderecos()));
 			pacienteClone.setEstadoCivil(cloneEstadoCivil(paciente.getEstadoCivil()));
 			pacienteClone.setFlagAtivo(paciente.getFlagAtivo());
-			pacienteClone.setInformacaoAdcional(paciente.getInformacaoAdcional());
+			pacienteClone.setInformacaoAdicional(paciente.getInformacaoAdicional());
 			pacienteClone
 					.setListaPlanoSaudePaciente(cloneListaPlanoSaudePaciente(paciente.getListaPlanoSaudePaciente()));
 			pacienteClone.setNacionalidade(paciente.getNacionalidade());
