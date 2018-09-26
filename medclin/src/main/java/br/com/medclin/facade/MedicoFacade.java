@@ -1,5 +1,7 @@
 package br.com.medclin.facade;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
@@ -22,7 +24,7 @@ public class MedicoFacade {
 		return medicoBusiness.buscarMedicoPorNome(pageable, nomeMedico);
 	}
 
-	public Medico buscarMedicoPorCodigo(final Long codigoMedico) {
+	public Medico buscarMedicoPorCodigo(final BigInteger codigoMedico) {
 		return medicoBusiness.buscarMedicoPorCodigo(codigoMedico);
 	}
 
@@ -30,7 +32,7 @@ public class MedicoFacade {
 		return medicoBusiness.criarMedico(medico);
 	}
 
-	public void deletarMedico(final Long codigoMedico) {
+	public void deletarMedico(final BigInteger codigoMedico) {
 		medicoBusiness.deletarMedico(codigoMedico);
 	}
 

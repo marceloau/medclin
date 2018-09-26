@@ -1,5 +1,7 @@
 package br.com.medclin.business.interfaces;
 
+import java.math.BigInteger;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -11,11 +13,11 @@ public interface IPacienteBusiness {
 
 	public Page<Paciente> buscarPacientePorNome(final PageRequest pageable, final String nomePaciente);
 
-	public Paciente buscarPacientePorCodigo(final Long codigoPaciente);
+	public Paciente buscarPacientePorCodigo(final BigInteger codigoPaciente);
 
 	public Paciente criarPaciente(final Paciente paciente);
 
-	public void deletarPaciente(final Long codigoPaciente);
+	public void deletarPaciente(final BigInteger codigoPaciente);
 
 	public Page<Paciente> listarPaciente(final PageRequest pageable);
 

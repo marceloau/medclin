@@ -3,6 +3,8 @@
  */
 package br.com.medclin.business;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
@@ -46,7 +48,7 @@ public class MedicoBusiness implements IMedicoBusiness {
 	}
 
 	@Override
-	public Medico buscarMedicoPorCodigo(final Long codigoMedico) {
+	public Medico buscarMedicoPorCodigo(final BigInteger codigoMedico) {
 		return cloneUtil.cloneMedico(medicoRep.buscarMedicoPorCodigo(codigoMedico));
 	}
 
@@ -68,7 +70,7 @@ public class MedicoBusiness implements IMedicoBusiness {
 	}
 
 	@Override
-	public void deletarMedico(final Long codigoMedico) {
+	public void deletarMedico(final BigInteger codigoMedico) {
 		medicoRep.deleteById(codigoMedico);
 	}
 

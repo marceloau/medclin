@@ -1,6 +1,7 @@
 package br.com.medclin.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,16 +12,16 @@ public class ContatoPessoaPK implements Serializable {
 	private static final long SerialVersionUID = 1L;
 
 	@Column(name = "codigo_pessoa")
-	private Long codigoPessoa;
+	private BigInteger codigoPessoa;
 
 	@Column(name = "codigo_contato_pessoa")
 	private Integer codigoContatoPessoa;
 
-	public Long getCodigoPessoa() {
+	public BigInteger getCodigoPessoa() {
 		return codigoPessoa;
 	}
 
-	public void setCodigoPessoa(Long codigoPessoa) {
+	public void setCodigoPessoa(BigInteger codigoPessoa) {
 		this.codigoPessoa = codigoPessoa;
 	}
 

@@ -1,6 +1,7 @@
 package br.com.medclin.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_pessoa")
-	private Long codigoPessoa;
+	private BigInteger codigoPessoa;
 
 	private String nomePessoa;
 
@@ -71,11 +72,11 @@ public class Pessoa implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Long getCodigoPessoa() {
+	public BigInteger getCodigoPessoa() {
 		return codigoPessoa;
 	}
 
-	public void setCodigoPessoa(Long codigoPessoa) {
+	public void setCodigoPessoa(BigInteger codigoPessoa) {
 		this.codigoPessoa = codigoPessoa;
 	}
 
