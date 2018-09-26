@@ -86,7 +86,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 				contatoPessoaPK.setCodigoContatoPessoa(nexId);
 				contatoPessoaPK.setCodigoPessoa(paciente.getCodigoPessoa());
 				contato.setContatoPessoaPK(contatoPessoaPK);
-				nexId += nexId;
+				nexId = nexId + 1;
 			}
 		}
 		contatoPessoaRep.saveAll(paciente.getContatos());
@@ -101,7 +101,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 				enderecoPessoaPK.setCodigoEnderecoPessoa(nexId);
 				enderecoPessoaPK.setCodigoPessoa(paciente.getCodigoPessoa());
 				endereco.setEnderecoPessoaPK(enderecoPessoaPK);
-				nexId += nexId;
+				nexId = nexId + 1;
 			}
 		}
 		enderecoPessoaRep.saveAll(paciente.getEnderecos());
