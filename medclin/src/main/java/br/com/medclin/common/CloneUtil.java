@@ -346,7 +346,7 @@ public class CloneUtil {
 			pacienteClone.setNomePai(paciente.getNomePai());
 			pacienteClone.setNomePessoa(paciente.getNomePessoa());
 			pacienteClone.setNomeProfissao(paciente.getNomeProfissao());
-			pacienteClone.setNumeroCartaoSus(paciente.getNumeroCartaoSus());
+			pacienteClone.setNumeroCartaoSUS(paciente.getNumeroCartaoSUS());
 			pacienteClone.setNumeroCpf(paciente.getNumeroCpf());
 			pacienteClone.setNumeroRg(paciente.getNumeroRg());
 			pacienteClone.setOrgamEmissor(paciente.getOrgamEmissor());
