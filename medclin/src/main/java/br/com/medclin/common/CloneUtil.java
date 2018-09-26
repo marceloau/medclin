@@ -28,7 +28,7 @@ public class CloneUtil {
 
 	public Paciente clonePaciente(final Paciente paciente) {
 		Paciente pacienteClone = null;
-		if (paciente != null) {
+		if (AssertUtil.isNotNull(paciente)) {
 			pacienteClone = new Paciente();
 
 			pacienteClone.setCodigoPessoa(paciente.getCodigoPessoa());
@@ -78,7 +78,7 @@ public class CloneUtil {
 
 	public EstadoCivil cloneEstadoCivil(final EstadoCivil estadoCivil) {
 		EstadoCivil estadoCivilClone = null;
-		if (estadoCivil != null) {
+		if (AssertUtil.isNotNull(estadoCivil)) {
 			estadoCivilClone = new EstadoCivil();
 
 			estadoCivilClone.setCodigoEstadoCivil(estadoCivil.getCodigoEstadoCivil());
@@ -95,7 +95,7 @@ public class CloneUtil {
 	public ContatoPessoa cloneContatoPessoa(final ContatoPessoa contatoPessoa) {
 		ContatoPessoa contatoPessoaClone = null;
 		ContatoPessoaPK contatoPessoaPKClone = null;
-		if (contatoPessoa != null) {
+		if (AssertUtil.isNotNull(contatoPessoa)) {
 			contatoPessoaClone = new ContatoPessoa();
 			contatoPessoaPKClone = new ContatoPessoaPK();
 			contatoPessoaPKClone.setCodigoContatoPessoa(contatoPessoa.getContatoPessoaPK().getCodigoContatoPessoa());
@@ -114,7 +114,7 @@ public class CloneUtil {
 
 	public TipoContato cloneTipoContato(final TipoContato tipoContato) {
 		TipoContato tipoContatoClone = null;
-		if (tipoContato != null) {
+		if (AssertUtil.isNotNull(tipoContato)) {
 			tipoContatoClone = new TipoContato();
 			tipoContatoClone.setCodigoTipoContato(tipoContato.getCodigoTipoContato());
 			tipoContatoClone.setDataCriacao(tipoContato.getDataCriacao());
@@ -133,7 +133,7 @@ public class CloneUtil {
 		List<ContatoPessoa> listaContatoPessoaClone = null;
 		if (listaContatoPessoa != null && !listaContatoPessoa.isEmpty()) {
 			listaNula.add(null);
-			listaContatoPessoa.removeAll(listaNula);// remove objetos nulos retornados pela consulta.
+			listaContatoPessoa.removeAll(listaNula);
 
 			listaContatoPessoaClone = new ArrayList<>();
 			for (ContatoPessoa contatoPessoa : listaContatoPessoa) {
@@ -145,7 +145,7 @@ public class CloneUtil {
 
 	public Estado cloneEstado(final Estado estado) {
 		Estado estadoClone = null;
-		if (estado != null) {
+		if (AssertUtil.isNotNull(estado)) {
 			estadoClone = new Estado();
 			estadoClone.setCodigoEstado(estado.getCodigoEstado());
 			estadoClone.setDataCriacao(estado.getDataCriacao());
@@ -161,7 +161,7 @@ public class CloneUtil {
 
 	public TipoLogradouro clonetipoLogradouro(final TipoLogradouro tipoLogradouro) {
 		TipoLogradouro tipoLogradouroClone = null;
-		if (tipoLogradouro != null) {
+		if (AssertUtil.isNotNull(tipoLogradouro)) {
 			tipoLogradouroClone = new TipoLogradouro();
 			tipoLogradouroClone.setCodigoTipoLogradouro(tipoLogradouro.getCodigoTipoLogradouro());
 			tipoLogradouroClone.setDataCriacao(tipoLogradouro.getDataCriacao());
@@ -204,7 +204,7 @@ public class CloneUtil {
 		List<EnderecoPessoa> listaEnderecoPessoaClone = null;
 		if (AssertUtil.isNotEmptyList(listaEnderecoPessoa)) {
 			listaNula.add(null);
-			listaEnderecoPessoa.removeAll(listaNula);// remove objetos nulos retornados pela consulta.
+			listaEnderecoPessoa.removeAll(listaNula);
 
 			listaEnderecoPessoaClone = new ArrayList<>();
 			for (EnderecoPessoa enderecoPessoa : listaEnderecoPessoa) {
@@ -242,7 +242,7 @@ public class CloneUtil {
 		List<PlanoSaudePaciente> listaPlanoSaudePacienteClone = null;
 		if (AssertUtil.isNotEmptyList(listaPlanoSaudePaciente)) {
 			listaNula.add(null);
-			listaPlanoSaudePaciente.removeAll(listaNula);// remove objetos nulos retornados pela consulta.
+			listaPlanoSaudePaciente.removeAll(listaNula);
 
 			listaPlanoSaudePacienteClone = new ArrayList<>();
 			for (PlanoSaudePaciente planoSaudePaciente : listaPlanoSaudePaciente) {
