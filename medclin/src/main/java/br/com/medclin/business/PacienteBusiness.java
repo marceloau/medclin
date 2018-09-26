@@ -3,6 +3,8 @@
  */
 package br.com.medclin.business;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
@@ -49,7 +51,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 	}
 
 	@Override
-	public Paciente buscarPacientePorCodigo(final Long codigoPaciente) {
+	public Paciente buscarPacientePorCodigo(final BigInteger codigoPaciente) {
 		return cloneUtil.clonePaciente(pacienteRep.buscarPacientePorCodigo(codigoPaciente));
 	}
 
@@ -71,7 +73,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 	}
 
 	@Override
-	public void deletarPaciente(final Long codigoPaciente) {
+	public void deletarPaciente(final BigInteger codigoPaciente) {
 		pacienteRep.deleteById(codigoPaciente);
 	}
 
@@ -89,7 +91,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 				contatoPessoaPK.setCodigoContatoPessoa(nexId);
 				contatoPessoaPK.setCodigoPessoa(paciente.getCodigoPessoa());
 				contato.setContatoPessoaPK(contatoPessoaPK);
-				nexId += nexId;
+				nexId = nexId + 1;
 			}
 		}
 		contatoPessoaRep.saveAll(paciente.getContatos());
@@ -104,7 +106,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 				enderecoPessoaPK.setCodigoEnderecoPessoa(nexId);
 				enderecoPessoaPK.setCodigoPessoa(paciente.getCodigoPessoa());
 				endereco.setEnderecoPessoaPK(enderecoPessoaPK);
-				nexId += nexId;
+				nexId = nexId + 1;
 			}
 		}
 		enderecoPessoaRep.saveAll(paciente.getEnderecos());

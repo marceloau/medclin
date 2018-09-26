@@ -3,6 +3,7 @@ package br.com.medclin.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Especialidade implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codigo_especialidade")
 	private Short codigoEspecialidade;
 
 	@NotBlank(message = "Nome da especialidade é obrigatório.")

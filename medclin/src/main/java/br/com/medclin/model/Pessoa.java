@@ -1,6 +1,7 @@
 package br.com.medclin.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_pessoa")
-	private Long codigoPessoa;
+	private BigInteger codigoPessoa;
 
 	private String nomePessoa;
 
@@ -47,7 +48,7 @@ public class Pessoa implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataNascimento;
 
-	private String informacaoAdcional;
+	private String informacaoAdicional;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_estado_civil")
@@ -71,11 +72,11 @@ public class Pessoa implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Long getCodigoPessoa() {
+	public BigInteger getCodigoPessoa() {
 		return codigoPessoa;
 	}
 
-	public void setCodigoPessoa(Long codigoPessoa) {
+	public void setCodigoPessoa(BigInteger codigoPessoa) {
 		this.codigoPessoa = codigoPessoa;
 	}
 
@@ -143,12 +144,12 @@ public class Pessoa implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getInformacaoAdcional() {
-		return informacaoAdcional;
+	public String getInformacaoAdicional() {
+		return informacaoAdicional;
 	}
 
-	public void setInformacaoAdcional(String informacaoAdcional) {
-		this.informacaoAdcional = informacaoAdcional;
+	public void setInformacaoAdicional(String informacaoAdicional) {
+		this.informacaoAdicional = informacaoAdicional;
 	}
 
 	public EstadoCivil getEstadoCivil() {
@@ -219,7 +220,7 @@ public class Pessoa implements Serializable {
 		result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
 		result = prime * result + ((estadoCivil == null) ? 0 : estadoCivil.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((informacaoAdcional == null) ? 0 : informacaoAdcional.hashCode());
+		result = prime * result + ((informacaoAdicional == null) ? 0 : informacaoAdicional.hashCode());
 		result = prime * result + ((nacionalidade == null) ? 0 : nacionalidade.hashCode());
 		result = prime * result + ((naturalidade == null) ? 0 : naturalidade.hashCode());
 		result = prime * result + ((nomePessoa == null) ? 0 : nomePessoa.hashCode());
@@ -280,10 +281,10 @@ public class Pessoa implements Serializable {
 				return false;
 		} else if (!flagAtivo.equals(other.flagAtivo))
 			return false;
-		if (informacaoAdcional == null) {
-			if (other.informacaoAdcional != null)
+		if (informacaoAdicional == null) {
+			if (other.informacaoAdicional != null)
 				return false;
-		} else if (!informacaoAdcional.equals(other.informacaoAdcional))
+		} else if (!informacaoAdicional.equals(other.informacaoAdicional))
 			return false;
 		if (nacionalidade == null) {
 			if (other.nacionalidade != null)

@@ -3,6 +3,8 @@
  */
 package br.com.medclin.resources;
 
+import java.math.BigInteger;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class PacienteResource {
 	}
 
 	@GetMapping("/{codigoPaciente}")
-	public Paciente buscarPacientePorCodigo(@PathVariable final Long codigoPaciente) {
+	public Paciente buscarPacientePorCodigo(@PathVariable final BigInteger codigoPaciente) {
 		return pacienteFacade.buscarPacientePorCodigo(codigoPaciente);
 	}
 
@@ -52,7 +54,7 @@ public class PacienteResource {
 	}
 
 	@DeleteMapping("/{codigoPaciente}")
-	public void deletarPaciente(@PathVariable final Long codigoPaciente) {
+	public void deletarPaciente(@PathVariable final BigInteger codigoPaciente) {
 		pacienteFacade.deletarPaciente(codigoPaciente);
 	}
 

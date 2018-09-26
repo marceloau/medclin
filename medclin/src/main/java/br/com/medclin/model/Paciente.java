@@ -11,7 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "codigo_pessoa")
 public class Paciente extends Pessoa {
 
-	private String numeroCartaoSus;
+	private String numeroCartaoSUS;
 
 	private String nomeProfissao;
 
@@ -23,12 +23,12 @@ public class Paciente extends Pessoa {
 	@OrderColumn(name = "codigo_plano_saude_paciente", insertable = false, updatable = false)
 	private List<PlanoSaudePaciente> listaPlanoSaudePaciente;
 
-	public String getNumeroCartaoSus() {
-		return numeroCartaoSus;
+	public String getNumeroCartaoSUS() {
+		return numeroCartaoSUS;
 	}
 
-	public void setNumeroCartaoSus(String numeroCartaoSus) {
-		this.numeroCartaoSus = numeroCartaoSus;
+	public void setNumeroCartaoSUS(String numeroCartaoSUS) {
+		this.numeroCartaoSUS = numeroCartaoSUS;
 	}
 
 	public String getNomeProfissao() {
@@ -71,7 +71,7 @@ public class Paciente extends Pessoa {
 		result = prime * result + ((nomeMae == null) ? 0 : nomeMae.hashCode());
 		result = prime * result + ((nomePai == null) ? 0 : nomePai.hashCode());
 		result = prime * result + ((nomeProfissao == null) ? 0 : nomeProfissao.hashCode());
-		result = prime * result + ((numeroCartaoSus == null) ? 0 : numeroCartaoSus.hashCode());
+		result = prime * result + ((numeroCartaoSUS == null) ? 0 : numeroCartaoSUS.hashCode());
 		return result;
 	}
 
@@ -104,10 +104,10 @@ public class Paciente extends Pessoa {
 				return false;
 		} else if (!nomeProfissao.equals(other.nomeProfissao))
 			return false;
-		if (numeroCartaoSus == null) {
-			if (other.numeroCartaoSus != null)
+		if (numeroCartaoSUS == null) {
+			if (other.numeroCartaoSUS != null)
 				return false;
-		} else if (!numeroCartaoSus.equals(other.numeroCartaoSus))
+		} else if (!numeroCartaoSUS.equals(other.numeroCartaoSUS))
 			return false;
 		return true;
 	}
