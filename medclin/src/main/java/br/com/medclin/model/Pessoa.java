@@ -17,18 +17,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@SequenceGenerator(name = "PESSOA_SEQ", sequenceName = "PESSOA_SEQ", allocationSize = 1)
 public class Pessoa implements Serializable {
 
 	private static final long SerialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codigo_pessoa")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQ")
+	@Column(name = "codigo_pessoa", nullable = false, updatable=false, precision=22, scale=0)
 	private BigInteger codigoPessoa;
 
 	private String nomePessoa;

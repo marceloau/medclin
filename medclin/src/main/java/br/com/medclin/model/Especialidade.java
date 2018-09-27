@@ -8,17 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@SequenceGenerator(name = "ESPECIALIDADE_SEQ", sequenceName = "ESPECIALIDADE_SEQ", allocationSize = 1)
 public class Especialidade implements Serializable {
 
 	private static final long SerialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ESPECIALIDADE_SEQ")
 	@Column(name = "codigo_especialidade")
 	private Short codigoEspecialidade;
 

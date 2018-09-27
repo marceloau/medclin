@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
@@ -15,12 +16,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@SequenceGenerator(name = "OPERADORA_SEQ", sequenceName = "OPERADORA_SEQ", allocationSize = 1)
 public class Operadora implements Serializable {
 
 	private static final long SerialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OPERADORA_SEQ")
 	@Column(name = "codigo_operadora")
 	private Short codigoOperadora;
 
