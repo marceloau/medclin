@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.medclin.facade.PacienteFacade;
 import br.com.medclin.model.Paciente;
+import br.com.medclin.model.ebo.PacienteEBO;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -37,10 +38,14 @@ public class PacienteResource {
 		return pacienteFacade.atualizarPaciente(Paciente);
 	}
 
-	@GetMapping("/{page}/{size}/{nomePaciente}")
-	public Page<Paciente> buscarPacientePorNome(@PathVariable final Integer page, @PathVariable final Integer size,
-			@PathVariable final String nomePaciente) {
-		return pacienteFacade.buscarPacientePorNome(PageRequest.of(page.intValue(), size.intValue()), nomePaciente);
+	@PostMapping("/buscarPaciente/{page}/{size}")
+	public Page<Paciente> buscarPaciente(@PathVariable final Integer page, @PathVariable final Integer size,
+			@RequestBody @Valid final PacienteEBO pacienteEBO) {
+		return pacienteFacade.buscarPaciente(PageRequest.of(page.intValue(), size.intValue()),
+				pacienteEBO.getNomePaciente(), pacienteEBO.getNomeMae(), pacienteEBO.getNumeroRg(),
+				pacienteEBO.getNumeroCpf(), pacienteEBO.getNumeroCartaoSUS(), pacienteEBO.getCodigoTipoPlano(),
+				pacienteEBO.getTextoContato());
+
 	}
 
 	@GetMapping("/{codigoPaciente}")

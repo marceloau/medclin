@@ -56,8 +56,11 @@ public class PacienteBusiness implements IPacienteBusiness {
 	}
 
 	@Override
-	public Page<Paciente> buscarPacientePorNome(final PageRequest pageable, final String nomePaciente) {
-		return cloneUtil.cloneListaPaciente(pacienteRep.buscarPacientePorNome(nomePaciente, pageable));
+	public Page<Paciente> buscarPaciente(final PageRequest pageable, final String nomePaciente, final String nomeMae,
+			final String numeroRg, final String numeroCpf, final String numeroCartaoSUS, final Short codigoTipoPlano,
+			final String textoContato) {
+		return cloneUtil.cloneListaPaciente(pacienteRep.buscarPaciente(pageable, nomePaciente, nomeMae, numeroRg,
+				numeroCpf, numeroCartaoSUS, codigoTipoPlano, textoContato));
 	}
 
 	@Override

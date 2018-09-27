@@ -11,7 +11,9 @@ public interface IPacienteBusiness {
 
 	public Paciente atualizarPaciente(final Paciente paciente);
 
-	public Page<Paciente> buscarPacientePorNome(final PageRequest pageable, final String nomePaciente);
+	public Page<Paciente> buscarPaciente(final PageRequest pageable, final String nomePaciente, final String nomeMae,
+			final String numeroRg, final String numeroCpf, final String numeroCartaoSUS, final Short codigoTipoPlano,
+			final String textoContato);
 
 	public Paciente buscarPacientePorCodigo(final BigInteger codigoPaciente);
 

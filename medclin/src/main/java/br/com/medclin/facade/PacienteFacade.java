@@ -20,8 +20,11 @@ public class PacienteFacade {
 		return pacienteBusiness.atualizarPaciente(paciente);
 	}
 
-	public Page<Paciente> buscarPacientePorNome(final PageRequest pageable, final String nomePaciente) {
-		return pacienteBusiness.buscarPacientePorNome(pageable, nomePaciente);
+	public Page<Paciente> buscarPaciente(final PageRequest pageable, final String nomePaciente, final String nomeMae,
+			final String numeroRg, final String numeroCpf, final String numeroCartaoSUS, final Short codigoTipoPlano,
+			final String textoContato) {
+		return pacienteBusiness.buscarPaciente(pageable, nomePaciente, nomeMae, numeroRg, numeroCpf, numeroCartaoSUS,
+				codigoTipoPlano, textoContato);
 	}
 
 	public Paciente buscarPacientePorCodigo(final BigInteger codigoPaciente) {
