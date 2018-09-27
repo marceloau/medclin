@@ -33,7 +33,7 @@ public interface PacienteRepository
 			+ " OR p.numeroCpf LIKE :numeroCpf"
 			+ " OR p.numeroCartaoSUS LIKE :numeroCartaoSUS"
 			+ " OR tP.codigoTipoPlano LIKE :codigoTipoPlano"
-			+ " OR c.textoContato LIKE :%textoContato%)"
+			+ " OR c.textoContato LIKE %:textoContato%)"
 			+ "	ORDER BY p1.codigoPessoa ASC")
 	Page<Paciente> buscarPaciente(final Pageable page, @Param("nomePaciente") final String nomePaciente,
 			@Param("nomeMae") final String nomeMae, @Param("numeroRg") final String numeroRg,
