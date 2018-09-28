@@ -6,7 +6,6 @@ package br.com.medclin.resources;
 import java.math.BigInteger;
 
 import javax.validation.Valid;
-import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
