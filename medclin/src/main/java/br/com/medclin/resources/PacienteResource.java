@@ -6,6 +6,7 @@ package br.com.medclin.resources;
 import java.math.BigInteger;
 
 import javax.validation.Valid;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,12 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.medclin.facade.PacienteFacade;
 import br.com.medclin.model.Paciente;
-import br.com.medclin.model.ebo.PacienteEBO;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -38,14 +39,17 @@ public class PacienteResource {
 		return pacienteFacade.atualizarPaciente(Paciente);
 	}
 
-	@PostMapping("/buscarPaciente/{page}/{size}")
+	@GetMapping("/buscarPaciente/{page}/{size}")
 	public Page<Paciente> buscarPaciente(@PathVariable final Integer page, @PathVariable final Integer size,
-			@RequestBody @Valid final PacienteEBO pacienteEBO) {
-		return pacienteFacade.buscarPaciente(PageRequest.of(page.intValue(), size.intValue()),
-				pacienteEBO.getNomePaciente(), pacienteEBO.getNomeMae(), pacienteEBO.getNumeroRg(),
-				pacienteEBO.getNumeroCpf(), pacienteEBO.getNumeroCartaoSUS(), pacienteEBO.getCodigoTipoPlano(),
-				pacienteEBO.getTextoContato());
+			@RequestParam(required = false) String nomePaciente, @RequestParam(required = false) final String nomeMae,
+			@RequestParam(required = false) final String numeroRg,
+			@RequestParam(required = false) final String numeroCpf,
+			@RequestParam(required = false) final String numeroCartaoSUS,
+			@RequestParam(required = false) final Short codigoTipoPlano,
+			@RequestParam(required = false) final String textoContato) {
 
+		return pacienteFacade.buscarPaciente(PageRequest.of(page.intValue(), size.intValue()), nomePaciente, nomeMae,
+				numeroRg, numeroCpf, numeroCartaoSUS, codigoTipoPlano, textoContato);
 	}
 
 	@GetMapping("/{codigoPaciente}")
