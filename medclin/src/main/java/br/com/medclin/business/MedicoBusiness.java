@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IContatoPessoaBusiness;
 import br.com.medclin.business.interfaces.IEnderecoPessoaBusiness;
+import br.com.medclin.business.interfaces.IEspecialidadeMedicoBusiness;
 import br.com.medclin.business.interfaces.IMedicoBusiness;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
@@ -31,6 +32,9 @@ public class MedicoBusiness implements IMedicoBusiness {
 	private IEnderecoPessoaBusiness enderecoPessoaBusiness;
 
 	@Autowired
+	private IEspecialidadeMedicoBusiness especialidadeMedicoBusiness;
+
+	@Autowired
 	private AuditoriaUtil auditoriaUtil;
 
 	@Autowired
@@ -41,6 +45,7 @@ public class MedicoBusiness implements IMedicoBusiness {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(medico, "MOCK_MATRICULA - " + Math.random());
 		contatoPessoaBusiness.atualizarListaContatoPessoa(medico.getContatos());
 		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(medico.getEnderecos());
+		especialidadeMedicoBusiness.atualizarListaEspecialidadeMedico(medico.getListaEspecialidadeMedico());
 		return cloneUtil.cloneMedico(medicoRep.saveAndFlush(medico));
 	}
 
@@ -60,9 +65,10 @@ public class MedicoBusiness implements IMedicoBusiness {
 
 		auditoriaUtil.setDadosAuditoriaCriacao(medico, "MOCK_MATRICULA - " + Math.random());
 		medicoRetorno = medicoRep.save(medico);
-
 		contatoPessoaBusiness.criarListaContatoPessoa(medico.getContatos(), medico.getCodigoPessoa());
 		enderecoPessoaBusiness.criarListaEnderecoPessoa(medico.getEnderecos(), medico.getCodigoPessoa());
+		especialidadeMedicoBusiness.criarListaEspecialidadeMedico(medico.getListaEspecialidadeMedico(),
+				medico.getCodigoPessoa());
 		return medicoRetorno;
 	}
 
