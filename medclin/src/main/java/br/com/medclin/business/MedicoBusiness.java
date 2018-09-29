@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import br.com.medclin.business.interfaces.IAgendaMedicoBusiness;
 import br.com.medclin.business.interfaces.IContatoPessoaBusiness;
 import br.com.medclin.business.interfaces.IEnderecoPessoaBusiness;
 import br.com.medclin.business.interfaces.IEspecialidadeMedicoBusiness;
@@ -35,6 +36,9 @@ public class MedicoBusiness implements IMedicoBusiness {
 	private IEspecialidadeMedicoBusiness especialidadeMedicoBusiness;
 
 	@Autowired
+	private IAgendaMedicoBusiness agendaMedicoBusiness;
+
+	@Autowired
 	private AuditoriaUtil auditoriaUtil;
 
 	@Autowired
@@ -46,6 +50,7 @@ public class MedicoBusiness implements IMedicoBusiness {
 		contatoPessoaBusiness.atualizarListaContatoPessoa(medico.getContatos());
 		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(medico.getEnderecos());
 		especialidadeMedicoBusiness.atualizarListaEspecialidadeMedico(medico.getListaEspecialidadeMedico());
+		agendaMedicoBusiness.atualizarListaAgendaMedico(medico.getListaAgendaMedico());
 		return cloneUtil.cloneMedico(medicoRep.saveAndFlush(medico));
 	}
 
@@ -69,6 +74,7 @@ public class MedicoBusiness implements IMedicoBusiness {
 		enderecoPessoaBusiness.criarListaEnderecoPessoa(medico.getEnderecos(), medico.getCodigoPessoa());
 		especialidadeMedicoBusiness.criarListaEspecialidadeMedico(medico.getListaEspecialidadeMedico(),
 				medico.getCodigoPessoa());
+		agendaMedicoBusiness.criarListaAgendaMedico(medico.getListaAgendaMedico(), medico.getCodigoPessoa());
 		return medicoRetorno;
 	}
 
