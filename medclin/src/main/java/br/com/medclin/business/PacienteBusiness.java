@@ -10,17 +10,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import br.com.medclin.business.interfaces.IContatoPessoaBusiness;
+import br.com.medclin.business.interfaces.IEnderecoPessoaBusiness;
 import br.com.medclin.business.interfaces.IPacienteBusiness;
-import br.com.medclin.common.AssertUtil;
+import br.com.medclin.business.interfaces.IPlanoSaudePacienteBusiness;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
-import br.com.medclin.model.ContatoPessoa;
-import br.com.medclin.model.ContatoPessoaPK;
-import br.com.medclin.model.EnderecoPessoa;
-import br.com.medclin.model.EnderecoPessoaPK;
+import br.com.medclin.dao.PacienteDAO;
 import br.com.medclin.model.Paciente;
-import br.com.medclin.repository.ContatoPessoaRepository;
-import br.com.medclin.repository.EnderecoPessoaRepository;
 import br.com.medclin.repository.PacienteRepository;
 
 @Configuration
@@ -30,10 +27,16 @@ public class PacienteBusiness implements IPacienteBusiness {
 	private PacienteRepository pacienteRep;
 
 	@Autowired
-	private ContatoPessoaRepository contatoPessoaRep;
+	private PacienteDAO pacienteDao;
 
 	@Autowired
-	private EnderecoPessoaRepository enderecoPessoaRep;
+	private IContatoPessoaBusiness contatoPessoaBusiness;
+
+	@Autowired
+	private IEnderecoPessoaBusiness enderecoPessoaBusiness;
+
+	@Autowired
+	private IPlanoSaudePacienteBusiness planoSaudePacienteBusiness;
 
 	@Autowired
 	private AuditoriaUtil auditoriaUtil;
@@ -45,8 +48,9 @@ public class PacienteBusiness implements IPacienteBusiness {
 	public Paciente atualizarPaciente(final Paciente paciente) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(paciente, "MOCK_MATRICULA - " + Math.random());
 		final Paciente pacienteRetorno = pacienteRep.saveAndFlush(paciente);
-		setCodigoContatoPessoa(paciente);
-		setCodigoEnderecoPessoa(paciente);
+		contatoPessoaBusiness.atualizarListaContatoPessoa(paciente.getContatos());
+		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(paciente.getEnderecos());
+		planoSaudePacienteBusiness.atualizarListaPlanoSaudePaciente(paciente.getListaPlanoSaudePaciente());
 		return cloneUtil.clonePaciente(pacienteRetorno);
 	}
 
@@ -59,7 +63,7 @@ public class PacienteBusiness implements IPacienteBusiness {
 	public Page<Paciente> buscarPaciente(final PageRequest pageable, final String nomePaciente, final String nomeMae,
 			final String numeroRg, final String numeroCpf, final String numeroCartaoSUS, final Short codigoTipoPlano,
 			final String textoContato) {
-		return cloneUtil.cloneListaPaciente(pacienteRep.buscarPaciente(pageable, nomePaciente, nomeMae, numeroRg,
+		return cloneUtil.cloneListaPaciente(pacienteDao.buscarPaciente(pageable, nomePaciente, nomeMae, numeroRg,
 				numeroCpf, numeroCartaoSUS, codigoTipoPlano, textoContato));
 	}
 
@@ -69,10 +73,11 @@ public class PacienteBusiness implements IPacienteBusiness {
 
 		auditoriaUtil.setDadosAuditoriaCriacao(paciente, "MOCK_MATRICULA - " + Math.random());
 		pacienteRetorno = pacienteRep.save(paciente);
-
-		setCodigoContatoPessoa(pacienteRetorno);
-		setCodigoEnderecoPessoa(pacienteRetorno);
-		return pacienteRetorno;
+		contatoPessoaBusiness.criarListaContatoPessoa(paciente.getContatos(), paciente.getCodigoPessoa());
+		enderecoPessoaBusiness.criarListaEnderecoPessoa(paciente.getEnderecos(), paciente.getCodigoPessoa());
+		planoSaudePacienteBusiness.criarListaPlanoSaudePaciente(paciente.getListaPlanoSaudePaciente(),
+				paciente.getCodigoPessoa());
+		return cloneUtil.clonePaciente(pacienteRetorno);
 	}
 
 	@Override
@@ -83,35 +88,5 @@ public class PacienteBusiness implements IPacienteBusiness {
 	@Override
 	public Page<Paciente> listarPaciente(final PageRequest pageable) {
 		return cloneUtil.cloneListaPaciente(pacienteRep.findAll(pageable));
-	}
-
-	private void setCodigoContatoPessoa(final Paciente paciente) {
-		Integer nexId = 1;
-		ContatoPessoaPK contatoPessoaPK = null;
-		if (AssertUtil.isNotNull(paciente) && AssertUtil.isNotEmptyList(paciente.getContatos())) {
-			for (ContatoPessoa contato : paciente.getContatos()) {
-				contatoPessoaPK = new ContatoPessoaPK();
-				contatoPessoaPK.setCodigoContatoPessoa(nexId);
-				contatoPessoaPK.setCodigoPessoa(paciente.getCodigoPessoa());
-				contato.setContatoPessoaPK(contatoPessoaPK);
-				nexId = nexId + 1;
-			}
-		}
-		contatoPessoaRep.saveAll(paciente.getContatos());
-	}
-
-	private void setCodigoEnderecoPessoa(final Paciente paciente) {
-		Integer nexId = 1;
-		EnderecoPessoaPK enderecoPessoaPK = null;
-		if (AssertUtil.isNotNull(paciente) && AssertUtil.isNotEmptyList(paciente.getEnderecos())) {
-			for (EnderecoPessoa endereco : paciente.getEnderecos()) {
-				enderecoPessoaPK = new EnderecoPessoaPK();
-				enderecoPessoaPK.setCodigoEnderecoPessoa(nexId);
-				enderecoPessoaPK.setCodigoPessoa(paciente.getCodigoPessoa());
-				endereco.setEnderecoPessoaPK(enderecoPessoaPK);
-				nexId = nexId + 1;
-			}
-		}
-		enderecoPessoaRep.saveAll(paciente.getEnderecos());
 	}
 }

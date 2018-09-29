@@ -11,7 +11,7 @@ public class EnderecoPessoaPK implements Serializable {
 
 	private static final long SerialVersionUID = 1L;
 
-	@Column(name = "codigo_pessoa")
+	@Column(name = "codigo_pessoa", nullable = false, updatable = false, precision = 22, scale = 0)
 	private BigInteger codigoPessoa;
 
 	@Column(name = "codigo_endereco_pessoa")

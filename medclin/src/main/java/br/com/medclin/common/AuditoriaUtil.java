@@ -5,12 +5,14 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import br.com.medclin.model.ContatoPessoa;
 import br.com.medclin.model.Especialidade;
 import br.com.medclin.model.Medico;
 import br.com.medclin.model.Operadora;
 import br.com.medclin.model.Paciente;
 import br.com.medclin.model.TipoContato;
 import br.com.medclin.model.TipoPlanoSaude;
+import br.com.medclin.repository.ContatoPessoaRepository;
 import br.com.medclin.repository.EspecialidadeRepository;
 import br.com.medclin.repository.MedicoRepository;
 import br.com.medclin.repository.OperadoraRepository;
@@ -38,6 +40,9 @@ public class AuditoriaUtil {
 
 	@Autowired
 	private MedicoRepository medicoRep;
+
+	@Autowired
+	private ContatoPessoaRepository contatoPessoaRep;
 
 	private final String FLAG_SIM = "S";
 
@@ -72,6 +77,11 @@ public class AuditoriaUtil {
 			((Medico) entidade).setFlagAtivo(FLAG_SIM);
 			((Medico) entidade).setUsuarioUltimaAlteracao(matricula);
 			((Medico) entidade).setDataCriacao(new Date());
+		} else if (entidade instanceof ContatoPessoa) {
+			((ContatoPessoa) entidade).setDataUltimaAlteracao(new Date());
+			((ContatoPessoa) entidade).setFlagAtivo(FLAG_SIM);
+			((ContatoPessoa) entidade).setUsuarioUltimaAlteracao(matricula);
+			((ContatoPessoa) entidade).setDataCriacao(new Date());
 		}
 	}
 
@@ -106,6 +116,11 @@ public class AuditoriaUtil {
 			((Medico) entidade)
 					.setDataCriacao(medicoRep.buscarDataCriacaoPorCodigo(((Medico) entidade).getCodigoPessoa()));
 			((Medico) entidade).setUsuarioUltimaAlteracao(matricula);
+		} else if (entidade instanceof ContatoPessoa) {
+			((ContatoPessoa) entidade).setDataUltimaAlteracao(new Date());
+			((ContatoPessoa) entidade).setDataCriacao(
+					contatoPessoaRep.buscarDataCriacaoPorCodigo(((ContatoPessoa) entidade).getContatoPessoaPK()));
+			((ContatoPessoa) entidade).setUsuarioUltimaAlteracao(matricula);
 		}
 	}
 
