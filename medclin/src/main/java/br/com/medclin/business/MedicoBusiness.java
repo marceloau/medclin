@@ -10,17 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import br.com.medclin.business.interfaces.IContatoPessoaBusiness;
+import br.com.medclin.business.interfaces.IEnderecoPessoaBusiness;
 import br.com.medclin.business.interfaces.IMedicoBusiness;
-import br.com.medclin.common.AssertUtil;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
-import br.com.medclin.model.ContatoPessoa;
-import br.com.medclin.model.ContatoPessoaPK;
-import br.com.medclin.model.EnderecoPessoa;
-import br.com.medclin.model.EnderecoPessoaPK;
 import br.com.medclin.model.Medico;
-import br.com.medclin.repository.ContatoPessoaRepository;
-import br.com.medclin.repository.EnderecoPessoaRepository;
 import br.com.medclin.repository.MedicoRepository;
 
 @Configuration
@@ -30,10 +25,10 @@ public class MedicoBusiness implements IMedicoBusiness {
 	private MedicoRepository medicoRep;
 
 	@Autowired
-	private ContatoPessoaRepository contatoPessoaRep;
+	private IContatoPessoaBusiness contatoPessoaBusiness;
 
 	@Autowired
-	private EnderecoPessoaRepository enderecoPessoaRep;
+	private IEnderecoPessoaBusiness enderecoPessoaBusiness;
 
 	@Autowired
 	private AuditoriaUtil auditoriaUtil;
@@ -44,6 +39,8 @@ public class MedicoBusiness implements IMedicoBusiness {
 	@Override
 	public Medico atualizarMedico(final Medico medico) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(medico, "MOCK_MATRICULA - " + Math.random());
+		contatoPessoaBusiness.atualizarListaContatoPessoa(medico.getContatos());
+		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(medico.getEnderecos());
 		return cloneUtil.cloneMedico(medicoRep.saveAndFlush(medico));
 	}
 
@@ -64,8 +61,8 @@ public class MedicoBusiness implements IMedicoBusiness {
 		auditoriaUtil.setDadosAuditoriaCriacao(medico, "MOCK_MATRICULA - " + Math.random());
 		medicoRetorno = medicoRep.save(medico);
 
-		setCodigoContatoPessoa(medicoRetorno);
-		setCodigoEnderecoPessoa(medicoRetorno);
+		contatoPessoaBusiness.criarListaContatoPessoa(medico.getContatos(), medico.getCodigoPessoa());
+		enderecoPessoaBusiness.criarListaEnderecoPessoa(medico.getEnderecos(), medico.getCodigoPessoa());
 		return medicoRetorno;
 	}
 
@@ -79,33 +76,4 @@ public class MedicoBusiness implements IMedicoBusiness {
 		return cloneUtil.cloneListaMedico(medicoRep.findAll(pageable));
 	}
 
-	private void setCodigoContatoPessoa(final Medico medico) {
-		Integer nexId = 1;
-		ContatoPessoaPK contatoPessoaPK = null;
-		if (AssertUtil.isNotNull(medico) && AssertUtil.isNotEmptyList(medico.getContatos())) {
-			for (ContatoPessoa contato : medico.getContatos()) {
-				contatoPessoaPK = new ContatoPessoaPK();
-				contatoPessoaPK.setCodigoContatoPessoa(nexId);
-				contatoPessoaPK.setCodigoPessoa(medico.getCodigoPessoa());
-				contato.setContatoPessoaPK(contatoPessoaPK);
-				nexId = nexId + 1;
-			}
-		}
-		contatoPessoaRep.saveAll(medico.getContatos());
-	}
-
-	private void setCodigoEnderecoPessoa(final Medico medico) {
-		Integer nexId = 1;
-		EnderecoPessoaPK enderecoPessoaPK = null;
-		if (AssertUtil.isNotNull(medico) && AssertUtil.isNotEmptyList(medico.getEnderecos())) {
-			for (EnderecoPessoa endereco : medico.getEnderecos()) {
-				enderecoPessoaPK = new EnderecoPessoaPK();
-				enderecoPessoaPK.setCodigoEnderecoPessoa(nexId);
-				enderecoPessoaPK.setCodigoPessoa(medico.getCodigoPessoa());
-				endereco.setEnderecoPessoaPK(enderecoPessoaPK);
-				nexId = nexId + 1;
-			}
-		}
-		enderecoPessoaRep.saveAll(medico.getEnderecos());
-	}
 }
