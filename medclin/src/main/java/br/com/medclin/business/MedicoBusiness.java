@@ -47,8 +47,8 @@ public class MedicoBusiness implements IMedicoBusiness {
 	@Override
 	public Medico atualizarMedico(final Medico medico) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(medico, "MOCK_MATRICULA - " + Math.random());
-		contatoPessoaBusiness.atualizarListaContatoPessoa(medico.getContatos());
-		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(medico.getEnderecos());
+		contatoPessoaBusiness.atualizarListaContatoPessoa(medico.getContatos(), medico.getCodigoPessoa());
+		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(medico.getEnderecos(), medico.getCodigoPessoa());
 		especialidadeMedicoBusiness.atualizarListaEspecialidadeMedico(medico.getListaEspecialidadeMedico());
 		agendaMedicoBusiness.atualizarListaAgendaMedico(medico.getListaAgendaMedico());
 		return cloneUtil.cloneMedico(medicoRep.saveAndFlush(medico));

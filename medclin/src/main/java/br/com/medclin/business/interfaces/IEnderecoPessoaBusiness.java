@@ -9,6 +9,6 @@ public interface IEnderecoPessoaBusiness {
 
 	public void criarListaEnderecoPessoa(final List<EnderecoPessoa> listaEnderecoPessoa, final BigInteger codigoPessoa);
 
-	public void atualizarListaEnderecoPessoa(final List<EnderecoPessoa> listaEnderecoPessoa);
+	public void atualizarListaEnderecoPessoa(final List<EnderecoPessoa> listaEnderecoPessoa, final BigInteger codigoPessoa);
 
 }

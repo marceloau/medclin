@@ -48,9 +48,9 @@ public class PacienteBusiness implements IPacienteBusiness {
 	public Paciente atualizarPaciente(final Paciente paciente) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(paciente, "MOCK_MATRICULA - " + Math.random());
 		final Paciente pacienteRetorno = pacienteRep.saveAndFlush(paciente);
-		contatoPessoaBusiness.atualizarListaContatoPessoa(paciente.getContatos());
-		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(paciente.getEnderecos());
-		planoSaudePacienteBusiness.atualizarListaPlanoSaudePaciente(paciente.getListaPlanoSaudePaciente());
+		contatoPessoaBusiness.atualizarListaContatoPessoa(paciente.getContatos(), paciente.getCodigoPessoa());
+		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(paciente.getEnderecos(), paciente.getCodigoPessoa());
+		planoSaudePacienteBusiness.atualizarListaPlanoSaudePaciente(paciente.getListaPlanoSaudePaciente(), paciente.getCodigoPessoa());
 		return cloneUtil.clonePaciente(pacienteRetorno);
 	}
 

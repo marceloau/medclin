@@ -9,6 +9,6 @@ public interface IContatoPessoaBusiness {
 
 	public void criarListaContatoPessoa(final List<ContatoPessoa> listaContatoPessoa, final BigInteger codigoPessoa);
 
-	public void atualizarListaContatoPessoa(final List<ContatoPessoa> listaContatoPessoa);
+	public void atualizarListaContatoPessoa(final List<ContatoPessoa> listaContatoPessoa, final BigInteger codigoPessoa);
 
 }

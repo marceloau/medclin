@@ -28,22 +28,30 @@ public class PlanoSaudePacienteBusiness implements IPlanoSaudePacienteBusiness {
 		Integer nexId = 1;
 		PlanoSaudePacientePK planoSaudePacientePK = null;
 		if (AssertUtil.isNotEmptyList(listaPlanoSaudePaciente)) {
-			for (PlanoSaudePaciente contato : listaPlanoSaudePaciente) {
+			for (PlanoSaudePaciente planoSaudePaciente : listaPlanoSaudePaciente) {
 				planoSaudePacientePK = new PlanoSaudePacientePK();
 				planoSaudePacientePK.setCodigoPlanoSaudePaciente(Long.valueOf(nexId));
 				planoSaudePacientePK.setCodigoPessoa(codigoPessoa);
-				contato.setPlanoSaudePacientePK(planoSaudePacientePK);
+				planoSaudePaciente.setPlanoSaudePacientePK(planoSaudePacientePK);
 				nexId = nexId + 1;
-				auditoriaUtil.setDadosAuditoriaCriacao(contato, "MOCK_MATRICULA - " + Math.random());
-				contatoPessoaRep.save(contato);
+				auditoriaUtil.setDadosAuditoriaCriacao(planoSaudePaciente, "MOCK_MATRICULA - " + Math.random());
+				contatoPessoaRep.save(planoSaudePaciente);
 			}
 		}
 	}
 
-	@Override
-	public void atualizarListaPlanoSaudePaciente(List<PlanoSaudePaciente> listaPlanoSaudePaciente) {
+	public void atualizarListaPlanoSaudePaciente(final List<PlanoSaudePaciente> listaPlanoSaudePaciente, final BigInteger codigoPessoa) {
 		if (AssertUtil.isNotEmptyList(listaPlanoSaudePaciente)) {
+			Integer nexId = 1;
+			PlanoSaudePacientePK planoSaudePacientePK = null;
 			for (PlanoSaudePaciente planoSaude : listaPlanoSaudePaciente) {
+				if(planoSaude.getPlanoSaudePacientePK() == null) {
+					planoSaudePacientePK = new PlanoSaudePacientePK();
+					planoSaudePacientePK.setCodigoPlanoSaudePaciente(Long.valueOf(nexId));
+					planoSaudePacientePK.setCodigoPessoa(codigoPessoa);
+					planoSaude.setPlanoSaudePacientePK(planoSaudePacientePK);
+					nexId = nexId + 1;					
+				}
 				auditoriaUtil.setDadosAuditoriaAtualizacao(planoSaude, "MOCK_MATRICULA - " + Math.random());
 				contatoPessoaRep.saveAndFlush(planoSaude);
 			}

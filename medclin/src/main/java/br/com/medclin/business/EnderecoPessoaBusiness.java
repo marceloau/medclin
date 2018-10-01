@@ -28,22 +28,31 @@ public class EnderecoPessoaBusiness implements IEnderecoPessoaBusiness {
 		Integer nexId = 1;
 		EnderecoPessoaPK enderecoPessoaPK = null;
 		if (AssertUtil.isNotEmptyList(listaEnderecoPessoa)) {
-			for (EnderecoPessoa contato : listaEnderecoPessoa) {
+			for (EnderecoPessoa endereco : listaEnderecoPessoa) {
 				enderecoPessoaPK = new EnderecoPessoaPK();
 				enderecoPessoaPK.setCodigoEnderecoPessoa(nexId);
 				enderecoPessoaPK.setCodigoPessoa(codigoPessoa);
-				contato.setEnderecoPessoaPK(enderecoPessoaPK);
+				endereco.setEnderecoPessoaPK(enderecoPessoaPK);
 				nexId = nexId + 1;
-				auditoriaUtil.setDadosAuditoriaCriacao(contato, "MOCK_MATRICULA - " + Math.random());
-				contatoPessoaRep.save(contato);
+				auditoriaUtil.setDadosAuditoriaCriacao(endereco, "MOCK_MATRICULA - " + Math.random());
+				contatoPessoaRep.save(endereco);
 			}
 		}
 	}
 
 	@Override
-	public void atualizarListaEnderecoPessoa(List<EnderecoPessoa> listaEnderecoPessoa) {
+	public void atualizarListaEnderecoPessoa(final List<EnderecoPessoa> listaEnderecoPessoa, final BigInteger codigoPessoa) {
 		if (AssertUtil.isNotEmptyList(listaEnderecoPessoa)) {
+			Integer nexId = 1;
+			EnderecoPessoaPK enderecoPessoaPK = null;
 			for (EnderecoPessoa endereco : listaEnderecoPessoa) {
+				if(endereco.getEnderecoPessoaPK() == null) {
+					enderecoPessoaPK = new EnderecoPessoaPK();
+					enderecoPessoaPK.setCodigoEnderecoPessoa(nexId);
+					enderecoPessoaPK.setCodigoPessoa(codigoPessoa);
+					endereco.setEnderecoPessoaPK(enderecoPessoaPK);
+					nexId = nexId + 1;
+				}
 				auditoriaUtil.setDadosAuditoriaAtualizacao(endereco, "MOCK_MATRICULA - " + Math.random());
 				contatoPessoaRep.saveAndFlush(endereco);
 			}

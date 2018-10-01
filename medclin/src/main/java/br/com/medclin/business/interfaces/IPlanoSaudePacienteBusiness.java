@@ -10,6 +10,7 @@ public interface IPlanoSaudePacienteBusiness {
 	public void criarListaPlanoSaudePaciente(final List<PlanoSaudePaciente> listaPlanoSaudePaciente,
 			final BigInteger codigoPessoa);
 
-	public void atualizarListaPlanoSaudePaciente(final List<PlanoSaudePaciente> listaPlanoSaudePaciente);
+	public void atualizarListaPlanoSaudePaciente(final List<PlanoSaudePaciente> listaPlanoSaudePaciente,
+			final BigInteger codigoPessoa);
 
 }

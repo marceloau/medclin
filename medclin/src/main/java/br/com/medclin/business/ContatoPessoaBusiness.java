@@ -40,9 +40,18 @@ public class ContatoPessoaBusiness implements IContatoPessoaBusiness {
 	}
 
 	@Override
-	public void atualizarListaContatoPessoa(List<ContatoPessoa> listaContatoPessoa) {
+	public void atualizarListaContatoPessoa(final List<ContatoPessoa> listaContatoPessoa, final BigInteger codigoPessoa) {
 		if (AssertUtil.isNotEmptyList(listaContatoPessoa)) {
+			Integer nexId = 1;
+			ContatoPessoaPK contatoPessoaPK = null;
 			for (ContatoPessoa contato : listaContatoPessoa) {
+				if(contato.getContatoPessoaPK() == null) {
+					contatoPessoaPK = new ContatoPessoaPK();
+					contatoPessoaPK.setCodigoContatoPessoa(nexId);
+					contatoPessoaPK.setCodigoPessoa(codigoPessoa);
+					contato.setContatoPessoaPK(contatoPessoaPK);
+					nexId = nexId + 1;
+				}
 				auditoriaUtil.setDadosAuditoriaAtualizacao(contato, "MOCK_MATRICULA - " + Math.random());
 				contatoPessoaRep.saveAndFlush(contato);
 			}
