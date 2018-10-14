@@ -50,7 +50,7 @@ public class MedicoBusiness implements IMedicoBusiness {
 		contatoPessoaBusiness.atualizarListaContatoPessoa(medico.getContatos(), medico.getCodigoPessoa());
 		enderecoPessoaBusiness.atualizarListaEnderecoPessoa(medico.getEnderecos(), medico.getCodigoPessoa());
 		especialidadeMedicoBusiness.atualizarListaEspecialidadeMedico(medico.getListaEspecialidadeMedico());
-		agendaMedicoBusiness.atualizarListaAgendaMedico(medico.getListaAgendaMedico());
+		agendaMedicoBusiness.atualizarListaAgendaMedico(medico.getListaAgendaMedico(), medico.getCodigoPessoa());
 		return cloneUtil.cloneMedico(medicoRep.saveAndFlush(medico));
 	}
 

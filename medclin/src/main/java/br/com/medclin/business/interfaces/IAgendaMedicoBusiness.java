@@ -9,6 +9,6 @@ public interface IAgendaMedicoBusiness {
 
 	public void criarListaAgendaMedico(final List<AgendaMedico> listaAgendaMedico, final BigInteger codigoPessoa);
 
-	public void atualizarListaAgendaMedico(final List<AgendaMedico> listaAgendaMedico);
+	public void atualizarListaAgendaMedico(final List<AgendaMedico> listaAgendaMedico, final BigInteger codigoPessoa);
 
 }

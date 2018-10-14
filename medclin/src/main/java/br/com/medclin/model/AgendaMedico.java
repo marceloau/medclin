@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class AgendaMedico implements Serializable {
 
@@ -21,9 +23,11 @@ public class AgendaMedico implements Serializable {
 	private Integer diaSemana;
 
 	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz")
 	private Date horaInicioAtendimento;
 
 	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz")
 	private Date horaFinalAtendimento;
 
 	private String observacao;

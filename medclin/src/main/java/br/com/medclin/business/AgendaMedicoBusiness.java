@@ -40,11 +40,21 @@ public class AgendaMedicoBusiness implements IAgendaMedicoBusiness {
 	}
 
 	@Override
-	public void atualizarListaAgendaMedico(List<AgendaMedico> listaAgendaMedico) {
+	public void atualizarListaAgendaMedico(List<AgendaMedico> listaAgendaMedico, final BigInteger codigoPessoa) {
+		Integer nexId = 1;
+		AgendaMedicoPK agendaMedicoPK = null;
 		if (AssertUtil.isNotEmptyList(listaAgendaMedico)) {
-			for (AgendaMedico contato : listaAgendaMedico) {
-				auditoriaUtil.setDadosAuditoriaAtualizacao(contato, "MOCK_MATRICULA - " + Math.random());
-				agendaMedicoRep.saveAndFlush(contato);
+			for (AgendaMedico agendaMedico : listaAgendaMedico) {
+				if (agendaMedico.getAgendaMedicoPK() == null 
+						|| agendaMedico.getAgendaMedicoPK().getCodigoAgendaMedico() == null) {
+					agendaMedicoPK = new AgendaMedicoPK();
+					agendaMedicoPK.setCodigoAgendaMedico(nexId.shortValue());
+					agendaMedicoPK.setCodigoPessoa(codigoPessoa);
+					agendaMedico.setAgendaMedicoPK(agendaMedicoPK);
+					nexId = nexId + 1;
+				}
+				auditoriaUtil.setDadosAuditoriaAtualizacao(agendaMedico, "MOCK_MATRICULA - " + Math.random());
+				agendaMedicoRep.saveAndFlush(agendaMedico);
 			}
 		}
 	}

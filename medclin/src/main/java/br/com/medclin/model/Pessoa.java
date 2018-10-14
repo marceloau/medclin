@@ -21,6 +21,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "PESSOA_SEQ", sequenceName = "PESSOA_SEQ", allocationSize = 1)
@@ -48,6 +50,7 @@ public class Pessoa implements Serializable {
 	private String sexo;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz")
 	private Date dataNascimento;
 
 	private String informacaoAdicional;
