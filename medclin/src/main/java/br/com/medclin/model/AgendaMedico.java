@@ -18,8 +18,7 @@ public class AgendaMedico implements Serializable {
 	@EmbeddedId
 	private AgendaMedicoPK agendaMedicoPK;
 
-	@Temporal(TemporalType.DATE)
-	private Date dataAtendimento;
+	private Integer diaSemana;
 
 	@Temporal(TemporalType.TIME)
 	private Date horaInicioAtendimento;
@@ -51,12 +50,12 @@ public class AgendaMedico implements Serializable {
 		this.agendaMedicoPK = agendaMedicoPK;
 	}
 
-	public Date getDataAtendimento() {
-		return dataAtendimento;
+	public Integer getDiaSemana() {
+		return diaSemana;
 	}
 
-	public void setDataAtendimento(Date dataAtendimento) {
-		this.dataAtendimento = dataAtendimento;
+	public void setDiaSemana(Integer diaSemana) {
+		this.diaSemana = diaSemana;
 	}
 
 	public Date getHoraInicioAtendimento() {
@@ -128,9 +127,9 @@ public class AgendaMedico implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((agendaMedicoPK == null) ? 0 : agendaMedicoPK.hashCode());
-		result = prime * result + ((dataAtendimento == null) ? 0 : dataAtendimento.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
+		result = prime * result + ((diaSemana == null) ? 0 : diaSemana.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
 		result = prime * result + ((horaFinalAtendimento == null) ? 0 : horaFinalAtendimento.hashCode());
 		result = prime * result + ((horaInicioAtendimento == null) ? 0 : horaInicioAtendimento.hashCode());
@@ -154,11 +153,6 @@ public class AgendaMedico implements Serializable {
 				return false;
 		} else if (!agendaMedicoPK.equals(other.agendaMedicoPK))
 			return false;
-		if (dataAtendimento == null) {
-			if (other.dataAtendimento != null)
-				return false;
-		} else if (!dataAtendimento.equals(other.dataAtendimento))
-			return false;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
 				return false;
@@ -168,6 +162,11 @@ public class AgendaMedico implements Serializable {
 			if (other.dataUltimaAlteracao != null)
 				return false;
 		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
+			return false;
+		if (diaSemana == null) {
+			if (other.diaSemana != null)
+				return false;
+		} else if (!diaSemana.equals(other.diaSemana))
 			return false;
 		if (flagAtivo == null) {
 			if (other.flagAtivo != null)

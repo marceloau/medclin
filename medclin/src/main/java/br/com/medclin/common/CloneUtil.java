@@ -44,7 +44,7 @@ public class CloneUtil {
 			agendaMedicoPK.setCodigoAgendaMedico(agendaMedico.getAgendaMedicoPK().getCodigoAgendaMedico());
 			agendaMedicoPK.setCodigoPessoa(agendaMedico.getAgendaMedicoPK().getCodigoPessoa());
 			agendaMedicoClone.setAgendaMedicoPK(agendaMedicoPK);
-			agendaMedicoClone.setDataAtendimento(agendaMedico.getDataAtendimento());
+			agendaMedicoClone.setDiaSemana(agendaMedico.getDiaSemana());
 			agendaMedicoClone.setHoraInicioAtendimento(agendaMedico.getHoraInicioAtendimento());
 			agendaMedicoClone.setHoraFinalAtendimento(agendaMedico.getHoraFinalAtendimento());
 			agendaMedicoClone.setObservacao(agendaMedico.getObservacao());
