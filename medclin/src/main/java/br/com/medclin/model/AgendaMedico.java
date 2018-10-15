@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -23,11 +25,11 @@ public class AgendaMedico implements Serializable {
 	private Integer diaSemana;
 
 	@Temporal(TemporalType.TIME)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz", timezone="GMT-03:00")
 	private Date horaInicioAtendimento;
 
 	@Temporal(TemporalType.TIME)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz", timezone="GMT-03:00")
 	private Date horaFinalAtendimento;
 
 	private String observacao;

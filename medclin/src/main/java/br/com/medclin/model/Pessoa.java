@@ -50,7 +50,7 @@ public class Pessoa implements Serializable {
 	private String sexo;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz", timezone="GMT-03:00")
 	private Date dataNascimento;
 
 	private String informacaoAdicional;

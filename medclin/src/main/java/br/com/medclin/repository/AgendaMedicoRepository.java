@@ -3,6 +3,7 @@
  */
 package br.com.medclin.repository;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,5 +17,8 @@ public interface AgendaMedicoRepository extends JpaRepository<AgendaMedico, Agen
 
 	@Query(value = "SELECT a.dataCriacao FROM AgendaMedico a WHERE " + "a.agendaMedicoPK = :agendaMedicoPK ")
 	Date buscarDataCriacaoPorCodigo(@Param("agendaMedicoPK") final AgendaMedicoPK agendaMedicoPK);
+	
+	@Query(value = "SELECT MAX(a.agendaMedicoPK.codigoAgendaMedico) FROM AgendaMedico a WHERE " + "a.agendaMedicoPK.codigoPessoa = :codigoPessoa ")
+	Short getMaxCodigoAgendaMedico(@Param("codigoPessoa") final BigInteger codigoPessoa);
 
 }
