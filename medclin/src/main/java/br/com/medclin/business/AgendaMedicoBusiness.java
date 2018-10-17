@@ -21,7 +21,7 @@ public class AgendaMedicoBusiness implements IAgendaMedicoBusiness {
 
 	@Autowired
 	private AuditoriaUtil auditoriaUtil;
-	
+
 	@Override
 	public void criarListaAgendaMedico(final List<AgendaMedico> listaAgendaMedico, final BigInteger codigoPessoa) {
 		Integer nexId = 1;
@@ -41,21 +41,16 @@ public class AgendaMedicoBusiness implements IAgendaMedicoBusiness {
 
 	@Override
 	public void atualizarListaAgendaMedico(List<AgendaMedico> listaAgendaMedico, final BigInteger codigoPessoa) {
-		Integer nextId;
-		AgendaMedicoPK agendaMedicoPK = null;
 		if (AssertUtil.isNotEmptyList(listaAgendaMedico)) {
+			Integer nexId = 1;
+			AgendaMedicoPK agendaMedicoPK = null;
 			for (AgendaMedico agendaMedico : listaAgendaMedico) {
-				if (agendaMedico.getAgendaMedicoPK() == null 
-						|| agendaMedico.getAgendaMedicoPK().getCodigoAgendaMedico() == null) {
+				if (agendaMedico.getAgendaMedicoPK() == null) {
 					agendaMedicoPK = new AgendaMedicoPK();
-					try {
-						nextId = agendaMedicoRep.getMaxCodigoAgendaMedico(codigoPessoa) + 1;
-					}catch(Exception ex) {
-						nextId = 1;
-					}
-					agendaMedicoPK.setCodigoAgendaMedico(nextId.shortValue());
+					agendaMedicoPK.setCodigoAgendaMedico(nexId.shortValue());
 					agendaMedicoPK.setCodigoPessoa(codigoPessoa);
 					agendaMedico.setAgendaMedicoPK(agendaMedicoPK);
+					nexId = nexId + 1;
 				}
 				auditoriaUtil.setDadosAuditoriaAtualizacao(agendaMedico, "MOCK_MATRICULA - " + Math.random());
 				agendaMedicoRep.saveAndFlush(agendaMedico);
