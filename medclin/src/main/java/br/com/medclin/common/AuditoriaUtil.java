@@ -7,12 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.medclin.model.ContatoPessoa;
 import br.com.medclin.model.Especialidade;
+import br.com.medclin.model.EspecialidadeMedico;
 import br.com.medclin.model.Medico;
 import br.com.medclin.model.Operadora;
 import br.com.medclin.model.Paciente;
 import br.com.medclin.model.TipoContato;
 import br.com.medclin.model.TipoPlanoSaude;
 import br.com.medclin.repository.ContatoPessoaRepository;
+import br.com.medclin.repository.EspecialidadeMedicoRepository;
 import br.com.medclin.repository.EspecialidadeRepository;
 import br.com.medclin.repository.MedicoRepository;
 import br.com.medclin.repository.OperadoraRepository;
@@ -25,6 +27,9 @@ public class AuditoriaUtil {
 
 	@Autowired
 	private EspecialidadeRepository especialidadeRep;
+
+	@Autowired
+	private EspecialidadeMedicoRepository especialidadeMedicoRep;
 
 	@Autowired
 	private TipoContatoRepository tipoContatoRep;
@@ -82,6 +87,11 @@ public class AuditoriaUtil {
 			((ContatoPessoa) entidade).setFlagAtivo(FLAG_SIM);
 			((ContatoPessoa) entidade).setUsuarioUltimaAlteracao(matricula);
 			((ContatoPessoa) entidade).setDataCriacao(new Date());
+		} else if (entidade instanceof EspecialidadeMedico) {
+			((EspecialidadeMedico) entidade).setDataUltimaAlteracao(new Date());
+			((EspecialidadeMedico) entidade).setFlagAtivo(FLAG_SIM);
+			((EspecialidadeMedico) entidade).setUsuarioUltimaAlteracao(matricula);
+			((EspecialidadeMedico) entidade).setDataCriacao(new Date());
 		}
 	}
 
@@ -121,6 +131,11 @@ public class AuditoriaUtil {
 			((ContatoPessoa) entidade).setDataCriacao(
 					contatoPessoaRep.buscarDataCriacaoPorCodigo(((ContatoPessoa) entidade).getContatoPessoaPK()));
 			((ContatoPessoa) entidade).setUsuarioUltimaAlteracao(matricula);
+		} else if (entidade instanceof EspecialidadeMedico) {
+			((EspecialidadeMedico) entidade).setDataUltimaAlteracao(new Date());
+			((EspecialidadeMedico) entidade).setDataCriacao(especialidadeMedicoRep
+					.buscarDataCriacaoPorCodigo(((EspecialidadeMedico) entidade).getEspecialidadeMedicoPK()));
+			((EspecialidadeMedico) entidade).setUsuarioUltimaAlteracao(matricula);
 		}
 	}
 
