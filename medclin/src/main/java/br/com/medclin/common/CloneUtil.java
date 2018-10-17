@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageImpl;
 
 import br.com.medclin.model.AgendaMedico;
 import br.com.medclin.model.AgendaMedicoPK;
+import br.com.medclin.model.Consulta;
 import br.com.medclin.model.ContatoPessoa;
 import br.com.medclin.model.ContatoPessoaPK;
 import br.com.medclin.model.EnderecoPessoa;
@@ -117,6 +118,27 @@ public class CloneUtil {
 		}
 
 		return especialidadeClone;
+	}
+
+	public Consulta cloneConsulta(final Consulta consulta) {
+		Consulta consultaClone = null;
+		if (AssertUtil.isNotNull(consulta)) {
+			consultaClone = new Consulta();
+			consultaClone.setCodigoConsulta(consulta.getCodigoConsulta());
+			consultaClone.setCodigoStatusConsulta(consulta.getCodigoStatusConsulta());
+			consultaClone.setDataAtendimento(consulta.getDataAtendimento());
+			consultaClone.setDataConsulta(consulta.getDataConsulta());
+			consultaClone.setFlagConfirmada(consulta.getFlagConfirmada());
+			consultaClone.setFlagPrimeiraConsulta(consulta.getFlagPrimeiraConsulta());
+			consultaClone.setDataCriacao(consulta.getDataCriacao());
+			consultaClone.setDataUltimaAlteracao(consulta.getDataUltimaAlteracao());
+			consultaClone.setFlagAtivo(consulta.getFlagAtivo());
+			consultaClone.setUsuarioUltimaAlteracao(consulta.getUsuarioUltimaAlteracao());
+			consultaClone.setMedico(cloneMedico(consulta.getMedico()));
+			consultaClone.setPaciente(clonePaciente(consulta.getPaciente()));
+		}
+
+		return consultaClone;
 	}
 
 	public EspecialidadeMedico cloneEspecialidadeMedico(final EspecialidadeMedico especialidadeMedico) {
@@ -239,6 +261,22 @@ public class CloneUtil {
 				listaMedicoClone.add(cloneMedico(medico));
 			}
 			listaRetorno = new PageImpl<>(listaMedicoClone, listaMedico.getPageable(), listaMedico.getTotalElements());
+		}
+
+		return listaRetorno;
+	}
+	
+	public Page<Consulta> cloneListaConsulta(final Page<Consulta> listaConsulta) {
+		List<Consulta> listaConsultaClone = null;
+		PageImpl<Consulta> listaRetorno = null;
+		if (AssertUtil.isNotNull(listaConsulta) && AssertUtil.isNotEmptyList(listaConsulta.getContent())) {
+
+			listaConsultaClone = new ArrayList<>();
+			for (Consulta consulta : listaConsulta.getContent()) {
+				listaConsultaClone.add(cloneConsulta(consulta));
+			}
+			listaRetorno = new PageImpl<>(listaConsultaClone, listaConsulta.getPageable(),
+					listaConsulta.getTotalElements());
 		}
 
 		return listaRetorno;
