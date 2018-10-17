@@ -375,6 +375,7 @@ public class CloneUtil {
 			planoSaudePacienteClone.setNomeTitular(planoSaudePaciente.getNomeTitular());
 			planoSaudePacienteClone.setUsuarioUltimaAlteracao(planoSaudePaciente.getUsuarioUltimaAlteracao());
 			planoSaudePacienteClone.setValidadeCartao(planoSaudePaciente.getValidadeCartao());
+			planoSaudePacienteClone.setNumeroCartao(planoSaudePaciente.getNumeroCartao());
 			planoSaudePacienteClone.setOperadora(cloneOperadora(planoSaudePaciente.getOperadora()));
 			planoSaudePacienteClone.setTipoPlanoSaude(cloneTipoPlanoSaude(planoSaudePaciente.getTipoPlanoSaude()));
 		}
