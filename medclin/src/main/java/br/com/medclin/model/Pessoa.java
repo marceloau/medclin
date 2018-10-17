@@ -20,6 +20,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -32,7 +33,7 @@ public class Pessoa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQ")
-	@Column(name = "codigo_pessoa", nullable = false, updatable=false, precision=22, scale=0)
+	@Column(name = "codigo_pessoa", nullable = false, updatable = false, precision = 22, scale = 0)
 	private BigInteger codigoPessoa;
 
 	private String nomePessoa;
@@ -50,13 +51,14 @@ public class Pessoa implements Serializable {
 	private String sexo;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss zzzz", timezone="GMT-03:00")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataNascimento;
 
 	private String informacaoAdicional;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_estado_civil")
+	@NotNull(message = "O estado civil é obrigatório.")
 	private EstadoCivil estadoCivil;
 
 	@OneToMany(mappedBy = "pessoa")
