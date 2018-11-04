@@ -12,6 +12,8 @@ public interface IConsultaBusiness {
 	public Consulta atualizarConsulta(final Consulta consulta);
 
 	public Consulta buscarConsultaPorCodigo(final BigInteger codigoConsulta);
+	
+	public Page<Consulta> buscarConsultaPorNomePaciente(final PageRequest pageable, final String nomePaciente);
 
 	public Consulta criarConsulta(final Consulta consulta);
 

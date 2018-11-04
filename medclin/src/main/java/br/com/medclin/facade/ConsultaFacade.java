@@ -23,6 +23,10 @@ public class ConsultaFacade {
 	public Consulta buscarConsultaPorCodigo(final BigInteger codigoConsulta) {
 		return consultaBusiness.buscarConsultaPorCodigo(codigoConsulta);
 	}
+	
+	public Page<Consulta> buscarConsultaPorNomePaciente(final PageRequest pageable, final String nomePaciente) {
+		return consultaBusiness.buscarConsultaPorNomePaciente(pageable, nomePaciente);
+	}
 
 	public Consulta criarConsulta(final Consulta consulta) {
 		return consultaBusiness.criarConsulta(consulta);

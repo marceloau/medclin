@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class PlanoSaudePaciente implements Serializable {
 
@@ -24,7 +26,8 @@ public class PlanoSaudePaciente implements Serializable {
 
 	private String nomeTitular;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT-03:00")
 	private Date validadeCartao;
 
 	@OneToOne(fetch = FetchType.LAZY)

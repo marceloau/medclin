@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import br.com.medclin.business.interfaces.IConsultaBusiness;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
+import br.com.medclin.dao.ConsultaDAO;
 import br.com.medclin.model.Consulta;
 import br.com.medclin.repository.ConsultaRepository;
 
@@ -21,6 +22,9 @@ public class ConsultaBusiness implements IConsultaBusiness {
 
 	@Autowired
 	private ConsultaRepository consultaRep;
+	
+	@Autowired
+	private ConsultaDAO consultaDAO;
 
 	@Autowired
 	private CloneUtil cloneUtil;
@@ -37,6 +41,11 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	@Override
 	public Consulta buscarConsultaPorCodigo(final BigInteger codigoConsulta) {
 		return cloneUtil.cloneConsulta(consultaRep.buscarConsultaPorCodigo(codigoConsulta));
+	}
+	
+	@Override
+	public Page<Consulta> buscarConsultaPorNomePaciente(final PageRequest pageable, final String nomePaciente) {
+		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsultaPorNomePaciente(pageable, nomePaciente));
 	}
 
 	@Override

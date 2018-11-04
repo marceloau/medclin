@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +41,12 @@ public class ConsultaResource {
 	@GetMapping("/{codigoConsulta}")
 	public Consulta buscarConsultaPorCodigo(@PathVariable final BigInteger codigoConsulta) {
 		return consultaFacade.buscarConsultaPorCodigo(codigoConsulta);
+	}
+	
+	@GetMapping("/buscarConsulta/{page}/{size}")
+	public Page<Consulta> buscarConsulta(@PathVariable final Integer page, @PathVariable final Integer size,
+			@RequestParam(required = false) String nomePaciente) {
+		return consultaFacade.buscarConsultaPorNomePaciente(PageRequest.of(page.intValue(), size.intValue()), nomePaciente);
 	}
 
 	@PostMapping

@@ -84,9 +84,11 @@ public class CloneUtil {
 		if (AssertUtil.isNotNull(enderecoPessoa)) {
 			enderecoPessoaClone = new EnderecoPessoa();
 			enderecoPessoaPKClone = new EnderecoPessoaPK();
-			enderecoPessoaPKClone
-					.setCodigoEnderecoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoEnderecoPessoa());
-			enderecoPessoaPKClone.setCodigoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoPessoa());
+			if(enderecoPessoa.getEnderecoPessoaPK() != null) {
+				enderecoPessoaPKClone
+							.setCodigoEnderecoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoEnderecoPessoa());
+				enderecoPessoaPKClone.setCodigoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoPessoa());
+			}
 			enderecoPessoaClone.setComplemento(enderecoPessoa.getComplemento());
 			enderecoPessoaClone.setDataCriacao(enderecoPessoa.getDataCriacao());
 			enderecoPessoaClone.setDataUltimaAlteracao(enderecoPessoa.getDataUltimaAlteracao());

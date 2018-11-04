@@ -38,10 +38,9 @@ public class Consulta implements Serializable {
 	private String flagConfirmada;
 	private String flagPrimeiraConsulta;
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataAtendimento;
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-F03:00")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataConsulta;
 	private String flagAtivo;
 	private String usuarioUltimaAlteracao;
