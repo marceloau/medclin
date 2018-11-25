@@ -14,8 +14,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@SequenceGenerator(name = "TIPO_CONTATO_SEQ", sequenceName = "TIPO_CONTATO_SEQ", allocationSize = 1)
-public class TipoContato implements Serializable {
+@SequenceGenerator(name = "TIPO_EXAME_SEQ", sequenceName = "TIPO_EXAME_SEQ", allocationSize = 1)
+public class TipoExame implements Serializable {
 
 	/**
 	 * 
@@ -23,14 +23,14 @@ public class TipoContato implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TIPO_CONTATO_SEQ")
-	@Column(name = "codigo_tipo_contato")
-	private Short codigoTipoContato;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TIPO_EXAME_SEQ")
+	@Column(name = "codigo_tipo_exame")
+	private Short codigoTipoExame;
 
 	@NotBlank
-	private String nomeTipoContato;
+	private String nomeTipoExame;
 
-	private String descricaoTipoContato;
+	private String descricaoTipoExame;
 
 	private String flagAtivo;
 
@@ -42,28 +42,28 @@ public class TipoContato implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
 
-	public Short getCodigoTipoContato() {
-		return codigoTipoContato;
+	public Short getCodigoTipoExame() {
+		return codigoTipoExame;
 	}
 
-	public void setCodigoTipoContato(Short codigoTipoContato) {
-		this.codigoTipoContato = codigoTipoContato;
+	public void setCodigoTipoExame(Short codigoTipoExame) {
+		this.codigoTipoExame = codigoTipoExame;
 	}
 
-	public String getNomeTipoContato() {
-		return nomeTipoContato;
+	public String getNomeTipoExame() {
+		return nomeTipoExame;
 	}
 
-	public void setNomeTipoContato(String nomeTipoContato) {
-		this.nomeTipoContato = nomeTipoContato;
+	public void setNomeTipoExame(String nomeTipoExame) {
+		this.nomeTipoExame = nomeTipoExame;
 	}
 
-	public String getDescricaoTipoContato() {
-		return descricaoTipoContato;
+	public String getDescricaoTipoExame() {
+		return descricaoTipoExame;
 	}
 
-	public void setDescricaoTipoContato(String descricaoTipoContato) {
-		this.descricaoTipoContato = descricaoTipoContato;
+	public void setDescricaoTipoExame(String descricaoTipoExame) {
+		this.descricaoTipoExame = descricaoTipoExame;
 	}
 
 	public String getFlagAtivo() {
@@ -102,12 +102,12 @@ public class TipoContato implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigoTipoContato == null) ? 0 : codigoTipoContato.hashCode());
+		result = prime * result + ((codigoTipoExame == null) ? 0 : codigoTipoExame.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
-		result = prime * result + ((descricaoTipoContato == null) ? 0 : descricaoTipoContato.hashCode());
+		result = prime * result + ((descricaoTipoExame == null) ? 0 : descricaoTipoExame.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((nomeTipoContato == null) ? 0 : nomeTipoContato.hashCode());
+		result = prime * result + ((nomeTipoExame == null) ? 0 : nomeTipoExame.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		return result;
 	}
@@ -120,11 +120,11 @@ public class TipoContato implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoContato other = (TipoContato) obj;
-		if (codigoTipoContato == null) {
-			if (other.codigoTipoContato != null)
+		TipoExame other = (TipoExame) obj;
+		if (codigoTipoExame == null) {
+			if (other.codigoTipoExame != null)
 				return false;
-		} else if (!codigoTipoContato.equals(other.codigoTipoContato))
+		} else if (!codigoTipoExame.equals(other.codigoTipoExame))
 			return false;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
@@ -136,20 +136,20 @@ public class TipoContato implements Serializable {
 				return false;
 		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
 			return false;
-		if (descricaoTipoContato == null) {
-			if (other.descricaoTipoContato != null)
+		if (descricaoTipoExame == null) {
+			if (other.descricaoTipoExame != null)
 				return false;
-		} else if (!descricaoTipoContato.equals(other.descricaoTipoContato))
+		} else if (!descricaoTipoExame.equals(other.descricaoTipoExame))
 			return false;
 		if (flagAtivo == null) {
 			if (other.flagAtivo != null)
 				return false;
 		} else if (!flagAtivo.equals(other.flagAtivo))
 			return false;
-		if (nomeTipoContato == null) {
-			if (other.nomeTipoContato != null)
+		if (nomeTipoExame == null) {
+			if (other.nomeTipoExame != null)
 				return false;
-		} else if (!nomeTipoContato.equals(other.nomeTipoContato))
+		} else if (!nomeTipoExame.equals(other.nomeTipoExame))
 			return false;
 		if (usuarioUltimaAlteracao == null) {
 			if (other.usuarioUltimaAlteracao != null)
