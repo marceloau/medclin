@@ -45,8 +45,8 @@ public class ConsultaResource {
 	
 	@GetMapping("/buscarConsulta/{page}/{size}")
 	public Page<Consulta> buscarConsulta(@PathVariable final Integer page, @PathVariable final Integer size,
-			@RequestParam(required = false) String nomePaciente) {
-		return consultaFacade.buscarConsultaPorNomePaciente(PageRequest.of(page.intValue(), size.intValue()), nomePaciente);
+			@RequestParam(required = false) String nomePaciente, @RequestParam(required = false) String dataConsulta, @RequestParam(required = false) String mesConsulta) {
+		return consultaFacade.buscarConsulta(PageRequest.of(page.intValue(), size.intValue()), nomePaciente, dataConsulta, mesConsulta);
 	}
 
 	@PostMapping

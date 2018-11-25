@@ -1,5 +1,7 @@
 package br.com.medclin.dao;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class ConsultaDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public Page<Consulta> buscarConsultaPorNomePaciente(final PageRequest page, final String nomePaciente) {
+	public Page<Consulta> buscarConsulta(final PageRequest page, final String nomePaciente, final Date dataConsulta, final Date mesConsulta) {
 		StringBuilder hql = new StringBuilder(100);
 		StringBuilder select = new StringBuilder(100);
 
@@ -33,10 +35,31 @@ public class ConsultaDAO {
 		
 		// CARREGA PARAMETROS
 		Map<String, Object> parametros = new HashMap<String, Object>();
-
+		
+		if(mesConsulta != null) {
+			Calendar dataCalendar = Calendar.getInstance();
+			dataCalendar.setTime(mesConsulta);    
+			int primeiroDia = dataCalendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+			int ultimodia = dataCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+			dataCalendar.set(Calendar.DAY_OF_MONTH, primeiroDia);
+			final Date dataInicioMesConsulta = dataCalendar.getTime();
+			
+			dataCalendar.set(Calendar.DAY_OF_MONTH, ultimodia);
+			final Date dataFimMesConsulta = dataCalendar.getTime();
+				
+			parametros.put("dataInicioMesConsulta", dataInicioMesConsulta);
+			parametros.put("dataFimMesConsulta", dataFimMesConsulta);
+			hql.append(" AND CAST(consulta.dataConsulta AS date) "
+					+ "  BETWEEN  DATE(:dataInicioMesConsulta) AND DATE(:dataFimMesConsulta) ");
+		}
 		if (AssertUtil.isNotNull(nomePaciente)) {
 			parametros.put("nomePaciente", nomePaciente);
 			hql.append(" AND UPPER(consulta.paciente.nomePessoa) LIKE UPPER(CONCAT('%',:nomePaciente,'%'))");
+		}
+		
+		if (AssertUtil.isNotNull(dataConsulta)) {
+			parametros.put("dataConsulta", dataConsulta);
+			hql.append(" AND CAST(consulta.dataConsulta AS date) = DATE(:dataConsulta)");
 		}
 		
 		hql.append(" ORDER BY consulta.codigoConsulta ASC");

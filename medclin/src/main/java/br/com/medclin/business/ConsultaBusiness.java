@@ -4,6 +4,10 @@
 package br.com.medclin.business;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -44,8 +48,26 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	}
 	
 	@Override
-	public Page<Consulta> buscarConsultaPorNomePaciente(final PageRequest pageable, final String nomePaciente) {
-		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsultaPorNomePaciente(pageable, nomePaciente));
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta) {
+				
+		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataConsultaFormatada = null;
+		if(dataConsulta != null) {
+			try {
+				dataConsultaFormatada = df.parse(dataConsulta);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		Date mesConsultaFormatada = null;
+		if(mesConsulta != null) {
+			try {
+				mesConsultaFormatada = df.parse(mesConsulta);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsulta(pageable, nomePaciente, dataConsultaFormatada, mesConsultaFormatada));
 	}
 
 	@Override

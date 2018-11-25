@@ -13,7 +13,7 @@ public interface IConsultaBusiness {
 
 	public Consulta buscarConsultaPorCodigo(final BigInteger codigoConsulta);
 	
-	public Page<Consulta> buscarConsultaPorNomePaciente(final PageRequest pageable, final String nomePaciente);
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta);
 
 	public Consulta criarConsulta(final Consulta consulta);
 
