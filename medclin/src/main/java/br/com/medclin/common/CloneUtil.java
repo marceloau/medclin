@@ -22,12 +22,14 @@ import br.com.medclin.model.EspecialidadeMedico;
 import br.com.medclin.model.EspecialidadeMedicoPK;
 import br.com.medclin.model.Estado;
 import br.com.medclin.model.EstadoCivil;
+import br.com.medclin.model.Exame;
 import br.com.medclin.model.Medico;
 import br.com.medclin.model.Operadora;
 import br.com.medclin.model.Paciente;
 import br.com.medclin.model.PlanoSaudePaciente;
 import br.com.medclin.model.PlanoSaudePacientePK;
 import br.com.medclin.model.TipoContato;
+import br.com.medclin.model.TipoExame;
 import br.com.medclin.model.TipoLogradouro;
 import br.com.medclin.model.TipoPlanoSaude;
 
@@ -468,6 +470,57 @@ public class CloneUtil {
 		}
 
 		return tipoPlanoSaudeClone;
+	}
+	
+	public TipoExame cloneTipoExame(final TipoExame tipoExame) {
+		TipoExame tipoExameClone = null;
+		if (AssertUtil.isNotNull(tipoExame)) {
+			tipoExameClone = new TipoExame();
+			tipoExameClone.setCodigoTipoExame(tipoExame.getCodigoTipoExame());
+			tipoExameClone.setDataCriacao(tipoExame.getDataCriacao());
+			tipoExameClone.setDataUltimaAlteracao(tipoExame.getDataUltimaAlteracao());
+			tipoExameClone.setDescricaoTipoExame(tipoExame.getDescricaoTipoExame());
+			tipoExameClone.setFlagAtivo(tipoExame.getFlagAtivo());
+			tipoExameClone.setNomeTipoExame(tipoExame.getNomeTipoExame());
+			tipoExameClone.setUsuarioUltimaAlteracao(tipoExame.getUsuarioUltimaAlteracao());
+
+		}
+
+		return tipoExameClone;
+	}
+	
+	public Exame cloneExame(final Exame exame) {
+		Exame exameClone = null;
+		if (AssertUtil.isNotNull(exame)) {
+			exameClone = new Exame();
+			exameClone.setCodigoExame(exame.getCodigoExame());
+			exameClone.setDataCriacao(exame.getDataCriacao());
+			exameClone.setTipoExame(cloneTipoExame(exame.getTipoExame()));
+			exameClone.setDataUltimaAlteracao(exame.getDataUltimaAlteracao());
+			exameClone.setDescricaoExame(exame.getDescricaoExame());
+			exameClone.setFlagAtivo(exame.getFlagAtivo());
+			exameClone.setNomeExame(exame.getNomeExame());
+			exameClone.setUsuarioUltimaAlteracao(exame.getUsuarioUltimaAlteracao());
+
+		}
+
+		return exameClone;
+	}
+	
+	public Page<Exame> cloneListaExame(final Page<Exame> listaExame) {
+		List<Exame> listaExameClone = null;
+		PageImpl<Exame> listaRetorno = null;
+		if (AssertUtil.isNotNull(listaExame) && AssertUtil.isNotEmptyList(listaExame.getContent())) {
+
+			listaExameClone = new ArrayList<>();
+			for (Exame exame : listaExame.getContent()) {
+				listaExameClone.add(cloneExame(exame));
+			}
+			listaRetorno = new PageImpl<>(listaExameClone, listaExame.getPageable(),
+					listaExame.getTotalElements());
+		}
+
+		return listaRetorno;
 	}
 
 }
