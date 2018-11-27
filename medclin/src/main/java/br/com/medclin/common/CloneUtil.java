@@ -23,6 +23,7 @@ import br.com.medclin.model.EspecialidadeMedicoPK;
 import br.com.medclin.model.Estado;
 import br.com.medclin.model.EstadoCivil;
 import br.com.medclin.model.Exame;
+import br.com.medclin.model.Medicamento;
 import br.com.medclin.model.Medico;
 import br.com.medclin.model.Operadora;
 import br.com.medclin.model.Paciente;
@@ -31,6 +32,7 @@ import br.com.medclin.model.PlanoSaudePacientePK;
 import br.com.medclin.model.TipoContato;
 import br.com.medclin.model.TipoExame;
 import br.com.medclin.model.TipoLogradouro;
+import br.com.medclin.model.TipoMedicamento;
 import br.com.medclin.model.TipoPlanoSaude;
 
 @Configuration
@@ -86,9 +88,9 @@ public class CloneUtil {
 		if (AssertUtil.isNotNull(enderecoPessoa)) {
 			enderecoPessoaClone = new EnderecoPessoa();
 			enderecoPessoaPKClone = new EnderecoPessoaPK();
-			if(enderecoPessoa.getEnderecoPessoaPK() != null) {
+			if (enderecoPessoa.getEnderecoPessoaPK() != null) {
 				enderecoPessoaPKClone
-							.setCodigoEnderecoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoEnderecoPessoa());
+						.setCodigoEnderecoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoEnderecoPessoa());
 				enderecoPessoaPKClone.setCodigoPessoa(enderecoPessoa.getEnderecoPessoaPK().getCodigoPessoa());
 			}
 			enderecoPessoaClone.setComplemento(enderecoPessoa.getComplemento());
@@ -269,7 +271,7 @@ public class CloneUtil {
 
 		return listaRetorno;
 	}
-	
+
 	public Page<Consulta> cloneListaConsulta(final Page<Consulta> listaConsulta) {
 		List<Consulta> listaConsultaClone = null;
 		PageImpl<Consulta> listaRetorno = null;
@@ -471,7 +473,7 @@ public class CloneUtil {
 
 		return tipoPlanoSaudeClone;
 	}
-	
+
 	public TipoExame cloneTipoExame(final TipoExame tipoExame) {
 		TipoExame tipoExameClone = null;
 		if (AssertUtil.isNotNull(tipoExame)) {
@@ -488,7 +490,7 @@ public class CloneUtil {
 
 		return tipoExameClone;
 	}
-	
+
 	public Exame cloneExame(final Exame exame) {
 		Exame exameClone = null;
 		if (AssertUtil.isNotNull(exame)) {
@@ -506,7 +508,7 @@ public class CloneUtil {
 
 		return exameClone;
 	}
-	
+
 	public Page<Exame> cloneListaExame(final Page<Exame> listaExame) {
 		List<Exame> listaExameClone = null;
 		PageImpl<Exame> listaRetorno = null;
@@ -516,11 +518,60 @@ public class CloneUtil {
 			for (Exame exame : listaExame.getContent()) {
 				listaExameClone.add(cloneExame(exame));
 			}
-			listaRetorno = new PageImpl<>(listaExameClone, listaExame.getPageable(),
-					listaExame.getTotalElements());
+			listaRetorno = new PageImpl<>(listaExameClone, listaExame.getPageable(), listaExame.getTotalElements());
 		}
 
 		return listaRetorno;
 	}
 
+	public Medicamento cloneMedicamento(final Medicamento medicamento) {
+		Medicamento medicamentoClone = null;
+		if (AssertUtil.isNotNull(medicamento)) {
+			medicamentoClone = new Medicamento();
+			medicamentoClone.setCodigoMedicamento(medicamento.getCodigoMedicamento());
+			medicamentoClone.setDataCriacao(medicamento.getDataCriacao());
+			medicamentoClone.setTipoMedicamento(cloneTipoMedicamento(medicamento.getTipoMedicamento()));
+			medicamentoClone.setDataUltimaAlteracao(medicamento.getDataUltimaAlteracao());
+			medicamentoClone.setDescricaoMedicamento(medicamento.getDescricaoMedicamento());
+			medicamentoClone.setFlagAtivo(medicamento.getFlagAtivo());
+			medicamentoClone.setNomeMedicamento(medicamento.getNomeMedicamento());
+			medicamentoClone.setUsuarioUltimaAlteracao(medicamento.getUsuarioUltimaAlteracao());
+
+		}
+
+		return medicamentoClone;
+	}
+
+	public Page<Medicamento> cloneListaMedicamento(final Page<Medicamento> listaMedicamento) {
+		List<Medicamento> listaMedicamentoClone = null;
+		PageImpl<Medicamento> listaRetorno = null;
+		if (AssertUtil.isNotNull(listaMedicamento) && AssertUtil.isNotEmptyList(listaMedicamento.getContent())) {
+
+			listaMedicamentoClone = new ArrayList<>();
+			for (Medicamento medicamento : listaMedicamento.getContent()) {
+				listaMedicamentoClone.add(cloneMedicamento(medicamento));
+			}
+			listaRetorno = new PageImpl<>(listaMedicamentoClone, listaMedicamento.getPageable(),
+					listaMedicamento.getTotalElements());
+		}
+
+		return listaRetorno;
+	}
+
+	public TipoMedicamento cloneTipoMedicamento(final TipoMedicamento tipoMedicamento) {
+		TipoMedicamento tipoMedicamentoClone = null;
+		if (AssertUtil.isNotNull(tipoMedicamento)) {
+			tipoMedicamentoClone = new TipoMedicamento();
+			tipoMedicamentoClone.setCodigoTipoMedicamento(tipoMedicamento.getCodigoTipoMedicamento());
+			tipoMedicamentoClone.setDataCriacao(tipoMedicamento.getDataCriacao());
+			tipoMedicamentoClone.setDataUltimaAlteracao(tipoMedicamento.getDataUltimaAlteracao());
+			tipoMedicamentoClone.setDescricaoTipoMedicamento(tipoMedicamento.getDescricaoTipoMedicamento());
+			tipoMedicamentoClone.setFlagAtivo(tipoMedicamento.getFlagAtivo());
+			tipoMedicamentoClone.setNomeTipoMedicamento(tipoMedicamento.getNomeTipoMedicamento());
+			tipoMedicamentoClone.setUsuarioUltimaAlteracao(tipoMedicamento.getUsuarioUltimaAlteracao());
+
+		}
+
+		return tipoMedicamentoClone;
+	}
 }
