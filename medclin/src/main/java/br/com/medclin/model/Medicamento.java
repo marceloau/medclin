@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -35,9 +36,17 @@ public class Medicamento implements Serializable {
 
 	private String descricaoMedicamento;
 
+	private String posologia;
+
+	private String composicao;
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_tipo_medicamento")
 	private TipoMedicamento tipoMedicamento;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_uso_medicamento")
+	private UsoMedicamento usoMedicamento;
 
 	private String flagAtivo;
 
@@ -73,12 +82,36 @@ public class Medicamento implements Serializable {
 		this.descricaoMedicamento = descricaoMedicamento;
 	}
 
+	public String getPosologia() {
+		return posologia;
+	}
+
+	public void setPosologia(String posologia) {
+		this.posologia = posologia;
+	}
+
+	public String getComposicao() {
+		return composicao;
+	}
+
+	public void setComposicao(String composicao) {
+		this.composicao = composicao;
+	}
+
 	public TipoMedicamento getTipoMedicamento() {
 		return tipoMedicamento;
 	}
 
 	public void setTipoMedicamento(TipoMedicamento tipoMedicamento) {
 		this.tipoMedicamento = tipoMedicamento;
+	}
+
+	public UsoMedicamento getUsoMedicamento() {
+		return usoMedicamento;
+	}
+
+	public void setUsoMedicamento(UsoMedicamento usoMedicamento) {
+		this.usoMedicamento = usoMedicamento;
 	}
 
 	public String getFlagAtivo() {
@@ -118,12 +151,15 @@ public class Medicamento implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoMedicamento == null) ? 0 : codigoMedicamento.hashCode());
+		result = prime * result + ((composicao == null) ? 0 : composicao.hashCode());
 		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
 		result = prime * result + ((descricaoMedicamento == null) ? 0 : descricaoMedicamento.hashCode());
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
 		result = prime * result + ((nomeMedicamento == null) ? 0 : nomeMedicamento.hashCode());
+		result = prime * result + ((posologia == null) ? 0 : posologia.hashCode());
 		result = prime * result + ((tipoMedicamento == null) ? 0 : tipoMedicamento.hashCode());
+		result = prime * result + ((usoMedicamento == null) ? 0 : usoMedicamento.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		return result;
 	}
@@ -141,6 +177,11 @@ public class Medicamento implements Serializable {
 			if (other.codigoMedicamento != null)
 				return false;
 		} else if (!codigoMedicamento.equals(other.codigoMedicamento))
+			return false;
+		if (composicao == null) {
+			if (other.composicao != null)
+				return false;
+		} else if (!composicao.equals(other.composicao))
 			return false;
 		if (dataCriacao == null) {
 			if (other.dataCriacao != null)
@@ -167,10 +208,20 @@ public class Medicamento implements Serializable {
 				return false;
 		} else if (!nomeMedicamento.equals(other.nomeMedicamento))
 			return false;
+		if (posologia == null) {
+			if (other.posologia != null)
+				return false;
+		} else if (!posologia.equals(other.posologia))
+			return false;
 		if (tipoMedicamento == null) {
 			if (other.tipoMedicamento != null)
 				return false;
 		} else if (!tipoMedicamento.equals(other.tipoMedicamento))
+			return false;
+		if (usoMedicamento == null) {
+			if (other.usoMedicamento != null)
+				return false;
+		} else if (!usoMedicamento.equals(other.usoMedicamento))
 			return false;
 		if (usuarioUltimaAlteracao == null) {
 			if (other.usuarioUltimaAlteracao != null)
@@ -179,5 +230,4 @@ public class Medicamento implements Serializable {
 			return false;
 		return true;
 	}
-
 }

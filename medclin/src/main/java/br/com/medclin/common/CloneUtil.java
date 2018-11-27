@@ -532,10 +532,13 @@ public class CloneUtil {
 			medicamentoClone.setCodigoMedicamento(medicamento.getCodigoMedicamento());
 			medicamentoClone.setDataCriacao(medicamento.getDataCriacao());
 			medicamentoClone.setTipoMedicamento(cloneTipoMedicamento(medicamento.getTipoMedicamento()));
+			medicamentoClone.setUsoMedicamento(cloneUsoMedicamento(medicamento.getUsoMedicamento()));
 			medicamentoClone.setDataUltimaAlteracao(medicamento.getDataUltimaAlteracao());
 			medicamentoClone.setDescricaoMedicamento(medicamento.getDescricaoMedicamento());
 			medicamentoClone.setFlagAtivo(medicamento.getFlagAtivo());
 			medicamentoClone.setNomeMedicamento(medicamento.getNomeMedicamento());
+			medicamentoClone.setComposicao(medicamento.getComposicao());
+			medicamentoClone.setPosologia(medicamento.getPosologia());
 			medicamentoClone.setUsuarioUltimaAlteracao(medicamento.getUsuarioUltimaAlteracao());
 
 		}
