@@ -34,6 +34,7 @@ import br.com.medclin.model.TipoExame;
 import br.com.medclin.model.TipoLogradouro;
 import br.com.medclin.model.TipoMedicamento;
 import br.com.medclin.model.TipoPlanoSaude;
+import br.com.medclin.model.UsoMedicamento;
 
 @Configuration
 public class CloneUtil {
@@ -573,5 +574,21 @@ public class CloneUtil {
 		}
 
 		return tipoMedicamentoClone;
+	}
+
+	public UsoMedicamento cloneUsoMedicamento(final UsoMedicamento usoMedicamento) {
+		UsoMedicamento usoMedicamentoClone = null;
+		if (AssertUtil.isNotNull(usoMedicamento)) {
+			usoMedicamentoClone = new UsoMedicamento();
+			usoMedicamentoClone.setCodigoUsoMedicamento(usoMedicamento.getCodigoUsoMedicamento());
+			usoMedicamentoClone.setDataCriacao(usoMedicamento.getDataCriacao());
+			usoMedicamentoClone.setDataUltimaAlteracao(usoMedicamento.getDataUltimaAlteracao());
+			usoMedicamentoClone.setFlagAtivo(usoMedicamento.getFlagAtivo());
+			usoMedicamentoClone.setNomeUsoMedicamento(usoMedicamento.getNomeUsoMedicamento());
+			usoMedicamentoClone.setDescricaoUsoMedicamento(usoMedicamento.getDescricaoUsoMedicamento());
+			usoMedicamentoClone.setUsuarioUltimaAlteracao(usoMedicamento.getUsuarioUltimaAlteracao());
+
+		}
+		return usoMedicamentoClone;
 	}
 }
