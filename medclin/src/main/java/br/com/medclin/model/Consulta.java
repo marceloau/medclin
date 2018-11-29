@@ -42,6 +42,7 @@ public class Consulta implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataConsulta;
+	private Integer ordemChegada;
 	private String flagAtivo;
 	private String usuarioUltimaAlteracao;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -113,6 +114,14 @@ public class Consulta implements Serializable {
 		this.dataConsulta = dataConsulta;
 	}
 
+	public Integer getOrdemChegada() {
+		return ordemChegada;
+	}
+
+	public void setOrdemChegada(Integer ordemChegada) {
+		this.ordemChegada = ordemChegada;
+	}
+
 	public String getFlagAtivo() {
 		return flagAtivo;
 	}
@@ -159,6 +168,7 @@ public class Consulta implements Serializable {
 		result = prime * result + ((flagConfirmada == null) ? 0 : flagConfirmada.hashCode());
 		result = prime * result + ((flagPrimeiraConsulta == null) ? 0 : flagPrimeiraConsulta.hashCode());
 		result = prime * result + ((medico == null) ? 0 : medico.hashCode());
+		result = prime * result + ((ordemChegada == null) ? 0 : ordemChegada.hashCode());
 		result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
 		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
 		return result;
@@ -223,6 +233,11 @@ public class Consulta implements Serializable {
 				return false;
 		} else if (!medico.equals(other.medico))
 			return false;
+		if (ordemChegada == null) {
+			if (other.ordemChegada != null)
+				return false;
+		} else if (!ordemChegada.equals(other.ordemChegada))
+			return false;
 		if (paciente == null) {
 			if (other.paciente != null)
 				return false;
@@ -235,5 +250,4 @@ public class Consulta implements Serializable {
 			return false;
 		return true;
 	}
-
 }

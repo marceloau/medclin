@@ -143,6 +143,7 @@ public class CloneUtil {
 			consultaClone.setUsuarioUltimaAlteracao(consulta.getUsuarioUltimaAlteracao());
 			consultaClone.setMedico(cloneMedico(consulta.getMedico()));
 			consultaClone.setPaciente(clonePaciente(consulta.getPaciente()));
+			consultaClone.setOrdemChegada(consulta.getOrdemChegada());
 		}
 
 		return consultaClone;
