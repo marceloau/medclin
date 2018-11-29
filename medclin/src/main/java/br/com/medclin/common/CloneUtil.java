@@ -29,6 +29,10 @@ import br.com.medclin.model.Operadora;
 import br.com.medclin.model.Paciente;
 import br.com.medclin.model.PlanoSaudePaciente;
 import br.com.medclin.model.PlanoSaudePacientePK;
+import br.com.medclin.model.SolicitacaoExame;
+import br.com.medclin.model.SolicitacaoExamePK;
+import br.com.medclin.model.SolicitacaoMedicamento;
+import br.com.medclin.model.SolicitacaoMedicamentoPK;
 import br.com.medclin.model.TipoContato;
 import br.com.medclin.model.TipoExame;
 import br.com.medclin.model.TipoLogradouro;
@@ -144,6 +148,10 @@ public class CloneUtil {
 			consultaClone.setMedico(cloneMedico(consulta.getMedico()));
 			consultaClone.setPaciente(clonePaciente(consulta.getPaciente()));
 			consultaClone.setOrdemChegada(consulta.getOrdemChegada());
+			consultaClone.setHistoricoClinico(consulta.getHistoricoClinico());
+			consultaClone.setListaSolicitacaoExame(cloneListaSolicExame(consulta.getListaSolicitacaoExame()));
+			consultaClone.setListaSolicitacaoMedicamento(
+					cloneListaSolicitacaoMedicamento(consulta.getListaSolicitacaoMedicamento()));
 		}
 
 		return consultaClone;
@@ -524,6 +532,40 @@ public class CloneUtil {
 		return listaRetorno;
 	}
 
+	public SolicitacaoExame cloneSolicitacaoExame(final SolicitacaoExame solicitacaoExame) {
+		SolicitacaoExame solicitacaoExameClone = null;
+		if (AssertUtil.isNotNull(solicitacaoExame)) {
+			solicitacaoExameClone = new SolicitacaoExame();
+			SolicitacaoExamePK cloneSolicitacaoExamePK = new SolicitacaoExamePK();
+			cloneSolicitacaoExamePK.setCodigoConsulta(solicitacaoExame.getSolicitacaoExamePK().getCodigoConsulta());
+			cloneSolicitacaoExamePK
+					.setCodigoSolicitacaoExame(solicitacaoExame.getSolicitacaoExamePK().getCodigoSolicitacaoExame());
+			solicitacaoExameClone.setSolicitacaoExamePK(cloneSolicitacaoExamePK);
+			solicitacaoExameClone.setDataCriacao(solicitacaoExame.getDataCriacao());
+			solicitacaoExameClone.setDataSolicitacaoExame(solicitacaoExame.getDataSolicitacaoExame());
+			solicitacaoExameClone.setDataUltimaAlteracao(solicitacaoExame.getDataUltimaAlteracao());
+			solicitacaoExameClone.setFlagAtivo(solicitacaoExame.getFlagAtivo());
+			solicitacaoExameClone.setExame(cloneExame(solicitacaoExame.getExame()));
+			solicitacaoExameClone.setUsuarioUltimaAlteracao(solicitacaoExame.getUsuarioUltimaAlteracao());
+		}
+
+		return solicitacaoExameClone;
+	}
+
+	public List<SolicitacaoExame> cloneListaSolicExame(final List<SolicitacaoExame> listaSolicitacaoExame) {
+		List<SolicitacaoExame> listaSolicitacaoExameClone = null;
+		if (AssertUtil.isNotEmptyList(listaSolicitacaoExame)) {
+			listaNula.add(null);
+			listaSolicitacaoExame.removeAll(listaNula);
+
+			listaSolicitacaoExameClone = new ArrayList<>();
+			for (SolicitacaoExame especialidadeMedico : listaSolicitacaoExame) {
+				listaSolicitacaoExameClone.add(cloneSolicitacaoExame(especialidadeMedico));
+			}
+		}
+		return listaSolicitacaoExameClone;
+	}
+
 	public Medicamento cloneMedicamento(final Medicamento medicamento) {
 		Medicamento medicamentoClone = null;
 		if (AssertUtil.isNotNull(medicamento)) {
@@ -590,5 +632,42 @@ public class CloneUtil {
 
 		}
 		return usoMedicamentoClone;
+	}
+
+	public SolicitacaoMedicamento cloneSolicitacaoMedicamento(final SolicitacaoMedicamento solicitacaoMedicamento) {
+		SolicitacaoMedicamento solicitacaoMedicamentoClone = null;
+		if (AssertUtil.isNotNull(solicitacaoMedicamento)) {
+			solicitacaoMedicamentoClone = new SolicitacaoMedicamento();
+			SolicitacaoMedicamentoPK cloneSolicitacaoMedicamentoPK = new SolicitacaoMedicamentoPK();
+			cloneSolicitacaoMedicamentoPK
+					.setCodigoConsulta(solicitacaoMedicamento.getSolicitacaoMedicamentoPK().getCodigoConsulta());
+			cloneSolicitacaoMedicamentoPK.setCodigoSolicitacaoMedicamento(
+					solicitacaoMedicamento.getSolicitacaoMedicamentoPK().getCodigoSolicitacaoMedicamento());
+			solicitacaoMedicamentoClone.setSolicitacaoMedicamentoPK(cloneSolicitacaoMedicamentoPK);
+			solicitacaoMedicamentoClone.setDataCriacao(solicitacaoMedicamento.getDataCriacao());
+			solicitacaoMedicamentoClone
+					.setDataSolicitacaoMedicamento(solicitacaoMedicamento.getDataSolicitacaoMedicamento());
+			solicitacaoMedicamentoClone.setDataUltimaAlteracao(solicitacaoMedicamento.getDataUltimaAlteracao());
+			solicitacaoMedicamentoClone.setFlagAtivo(solicitacaoMedicamento.getFlagAtivo());
+			solicitacaoMedicamentoClone.setMedicamento(cloneMedicamento(solicitacaoMedicamento.getMedicamento()));
+			solicitacaoMedicamentoClone.setUsuarioUltimaAlteracao(solicitacaoMedicamento.getUsuarioUltimaAlteracao());
+		}
+
+		return solicitacaoMedicamentoClone;
+	}
+
+	public List<SolicitacaoMedicamento> cloneListaSolicitacaoMedicamento(
+			final List<SolicitacaoMedicamento> listaSolicitacaoMedicamento) {
+		List<SolicitacaoMedicamento> listaSolicitacaoMedicamentoClone = null;
+		if (AssertUtil.isNotEmptyList(listaSolicitacaoMedicamento)) {
+			listaNula.add(null);
+			listaSolicitacaoMedicamento.removeAll(listaNula);
+
+			listaSolicitacaoMedicamentoClone = new ArrayList<>();
+			for (SolicitacaoMedicamento especialidadeMedico : listaSolicitacaoMedicamento) {
+				listaSolicitacaoMedicamentoClone.add(cloneSolicitacaoMedicamento(especialidadeMedico));
+			}
+		}
+		return listaSolicitacaoMedicamentoClone;
 	}
 }

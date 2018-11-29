@@ -3,6 +3,7 @@ package br.com.medclin.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,12 +46,19 @@ public class Consulta implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataConsulta;
 	private Integer ordemChegada;
+	private String historicoClinico;
 	private String flagAtivo;
 	private String usuarioUltimaAlteracao;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimaAlteracao;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCriacao;
+	@OneToMany(mappedBy = "consulta")
+	@OrderColumn(name = "codigo_solicitacao_exame", insertable = true, updatable = true)
+	private List<SolicitacaoExame> listaSolicitacaoExame;
+	@OneToMany(mappedBy = "consulta")
+	@OrderColumn(name = "codigo_solicitacao_medicamento", insertable = true, updatable = true)
+	private List<SolicitacaoMedicamento> listaSolicitacaoMedicamento;
 
 	public BigInteger getCodigoConsulta() {
 		return codigoConsulta;
@@ -122,6 +132,30 @@ public class Consulta implements Serializable {
 		this.ordemChegada = ordemChegada;
 	}
 
+	public String getHistoricoClinico() {
+		return historicoClinico;
+	}
+
+	public void setHistoricoClinico(String historicoClinico) {
+		this.historicoClinico = historicoClinico;
+	}
+
+	public List<SolicitacaoExame> getListaSolicitacaoExame() {
+		return listaSolicitacaoExame;
+	}
+
+	public void setListaSolicitacaoExame(List<SolicitacaoExame> listaSolicitacaoExame) {
+		this.listaSolicitacaoExame = listaSolicitacaoExame;
+	}
+
+	public List<SolicitacaoMedicamento> getListaSolicitacaoMedicamento() {
+		return listaSolicitacaoMedicamento;
+	}
+
+	public void setListaSolicitacaoMedicamento(List<SolicitacaoMedicamento> listaSolicitacaoMedicamento) {
+		this.listaSolicitacaoMedicamento = listaSolicitacaoMedicamento;
+	}
+
 	public String getFlagAtivo() {
 		return flagAtivo;
 	}
@@ -167,6 +201,9 @@ public class Consulta implements Serializable {
 		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
 		result = prime * result + ((flagConfirmada == null) ? 0 : flagConfirmada.hashCode());
 		result = prime * result + ((flagPrimeiraConsulta == null) ? 0 : flagPrimeiraConsulta.hashCode());
+		result = prime * result + ((historicoClinico == null) ? 0 : historicoClinico.hashCode());
+		result = prime * result + ((listaSolicitacaoExame == null) ? 0 : listaSolicitacaoExame.hashCode());
+		result = prime * result + ((listaSolicitacaoMedicamento == null) ? 0 : listaSolicitacaoMedicamento.hashCode());
 		result = prime * result + ((medico == null) ? 0 : medico.hashCode());
 		result = prime * result + ((ordemChegada == null) ? 0 : ordemChegada.hashCode());
 		result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
@@ -228,6 +265,21 @@ public class Consulta implements Serializable {
 				return false;
 		} else if (!flagPrimeiraConsulta.equals(other.flagPrimeiraConsulta))
 			return false;
+		if (historicoClinico == null) {
+			if (other.historicoClinico != null)
+				return false;
+		} else if (!historicoClinico.equals(other.historicoClinico))
+			return false;
+		if (listaSolicitacaoExame == null) {
+			if (other.listaSolicitacaoExame != null)
+				return false;
+		} else if (!listaSolicitacaoExame.equals(other.listaSolicitacaoExame))
+			return false;
+		if (listaSolicitacaoMedicamento == null) {
+			if (other.listaSolicitacaoMedicamento != null)
+				return false;
+		} else if (!listaSolicitacaoMedicamento.equals(other.listaSolicitacaoMedicamento))
+			return false;
 		if (medico == null) {
 			if (other.medico != null)
 				return false;
@@ -250,4 +302,5 @@ public class Consulta implements Serializable {
 			return false;
 		return true;
 	}
+
 }
