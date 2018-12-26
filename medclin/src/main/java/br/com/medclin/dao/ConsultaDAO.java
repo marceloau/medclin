@@ -1,5 +1,6 @@
 package br.com.medclin.dao;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class ConsultaDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public Page<Consulta> buscarConsulta(final PageRequest page, final String nomePaciente, final Date dataConsulta, final Date mesConsulta) {
+	public Page<Consulta> buscarConsulta(final PageRequest page, final String nomePaciente, final Date dataConsulta, 
+			final Date mesConsulta, final BigInteger codigoPaciente) {
 		StringBuilder hql = new StringBuilder(100);
 		StringBuilder select = new StringBuilder(100);
 
@@ -57,12 +59,17 @@ public class ConsultaDAO {
 			hql.append(" AND UPPER(consulta.paciente.nomePessoa) LIKE UPPER(CONCAT('%',:nomePaciente,'%'))");
 		}
 		
+		if (AssertUtil.isNotNull(codigoPaciente)) {
+			parametros.put("codigoPaciente", codigoPaciente);
+			hql.append(" AND consulta.paciente.codigoPessoa = :codigoPaciente");
+		}
+		
 		if (AssertUtil.isNotNull(dataConsulta)) {
 			parametros.put("dataConsulta", dataConsulta);
 			hql.append(" AND CAST(consulta.dataConsulta AS date) = DATE(:dataConsulta)");
 		}
 		
-		hql.append(" ORDER BY consulta.codigoConsulta ASC");
+		hql.append(" ORDER BY consulta.dataConsulta DESC");
 
 		select.append(hql);
 		TypedQuery<Consulta> query = entityManager.createQuery(select.toString(), Consulta.class)

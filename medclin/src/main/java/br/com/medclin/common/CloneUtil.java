@@ -531,6 +531,32 @@ public class CloneUtil {
 
 		return listaRetorno;
 	}
+	
+	public Page<SolicitacaoExame> cloneListaSolicitacaoExame(final Page<SolicitacaoExame> listaSolicitacaoExame) {
+		List<SolicitacaoExame> listaSolicitacaoExameClone = null;
+		PageImpl<SolicitacaoExame> listaRetorno = null;
+
+		listaSolicitacaoExameClone = new ArrayList<>();
+		for (SolicitacaoExame solicitacaoExame : listaSolicitacaoExame.getContent()) {
+			listaSolicitacaoExameClone.add(cloneSolicitacaoExame(solicitacaoExame));
+		}
+		listaRetorno = new PageImpl<>(listaSolicitacaoExameClone, listaSolicitacaoExame.getPageable(), listaSolicitacaoExame.getTotalElements());
+
+		return listaRetorno;
+	}
+	
+	public Page<SolicitacaoMedicamento> cloneListaSolicitacaoMedicamento(final Page<SolicitacaoMedicamento> listaSolicitacaoMedicamento) {
+		List<SolicitacaoMedicamento> listaSolicitacaoMedicamentoClone = null;
+		PageImpl<SolicitacaoMedicamento> listaRetorno = null;
+
+		listaSolicitacaoMedicamentoClone = new ArrayList<>();
+		for (SolicitacaoMedicamento solicitacaoMedicamento : listaSolicitacaoMedicamento.getContent()) {
+			listaSolicitacaoMedicamentoClone.add(cloneSolicitacaoMedicamento(solicitacaoMedicamento));
+		}
+		listaRetorno = new PageImpl<>(listaSolicitacaoMedicamentoClone, listaSolicitacaoMedicamento.getPageable(), listaSolicitacaoMedicamento.getTotalElements());
+
+		return listaRetorno;
+	}
 
 	public SolicitacaoExame cloneSolicitacaoExame(final SolicitacaoExame solicitacaoExame) {
 		SolicitacaoExame solicitacaoExameClone = null;

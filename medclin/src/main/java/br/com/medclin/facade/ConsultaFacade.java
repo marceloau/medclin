@@ -24,8 +24,8 @@ public class ConsultaFacade {
 		return consultaBusiness.buscarConsultaPorCodigo(codigoConsulta);
 	}
 	
-	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta) {
-		return consultaBusiness.buscarConsulta(pageable, nomePaciente, dataConsulta, mesConsulta);
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente) {
+		return consultaBusiness.buscarConsulta(pageable, nomePaciente, dataConsulta, mesConsulta, codigoPaciente);
 	}
 
 	public Consulta criarConsulta(final Consulta consulta) {

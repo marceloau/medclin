@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IConsultaBusiness;
+import br.com.medclin.common.AssertUtil;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
 import br.com.medclin.dao.ConsultaDAO;
@@ -48,7 +49,7 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	}
 	
 	@Override
-	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta) {
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente) {
 				
 		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataConsultaFormatada = null;
@@ -67,7 +68,11 @@ public class ConsultaBusiness implements IConsultaBusiness {
 				e.printStackTrace();
 			}
 		}
-		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsulta(pageable, nomePaciente, dataConsultaFormatada, mesConsultaFormatada));
+		BigInteger codPaciente = null;
+		if (AssertUtil.isNotNullAndEmpty(codigoPaciente)) {
+			codPaciente = BigInteger.valueOf(Long.valueOf(codigoPaciente));
+		}
+		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsulta(pageable, nomePaciente, dataConsultaFormatada, mesConsultaFormatada, codPaciente));
 	}
 
 	@Override
