@@ -21,4 +21,15 @@ public interface SolicitacaoMedicamentoRepository
 	@Query(value = "SELECT solicitacaoMedicamento FROM SolicitacaoMedicamento solicitacaoMedicamento WHERE solicitacaoMedicamento.consulta.paciente.codigoPessoa = :codigoPaciente")
 	Page<SolicitacaoMedicamento> listarSolicitacaoMedicamentoCodigoPaciente(@Param("codigoPaciente") final BigInteger codigoPaciente,
 			final Pageable page);
+	
+	@Query(value = "SELECT COUNT (solicitacaoMedicamento) FROM SolicitacaoMedicamento solicitacaoMedicamento WHERE solicitacaoMedicamento.consulta.codigoConsulta = :codigoConsulta")
+	Short buscarMaxSolicitacaoMedicamentoConsulta(@Param("codigoConsulta") final BigInteger codigoConsulta);
+	
+	@Query(value = "SELECT COUNT (solicitacaoMedicamento) FROM SolicitacaoMedicamento solicitacaoMedicamento "
+			+ "WHERE solicitacaoMedicamento.consulta.codigoConsulta = :codigoConsulta AND solicitacaoMedicamento.medicamento.codigoMedicamento = :codigoMedicamento")
+	Integer countSoliciMedPorConsulMed(@Param("codigoConsulta") final BigInteger codigoConsulta, @Param("codigoMedicamento") final Short codigoMedicamento);
+	
+	@Query(value = "SELECT solicitacaoMedicamento FROM SolicitacaoMedicamento solicitacaoMedicamento "
+			+ "WHERE solicitacaoMedicamento.consulta.codigoConsulta = :codigoConsulta AND solicitacaoMedicamento.medicamento.codigoMedicamento = :codigoMedicamento")
+	SolicitacaoMedicamento buscarSoliciMedPorConsulMedicamento(@Param("codigoConsulta") final BigInteger codigoConsulta, @Param("codigoMedicamento") final Short codigoMedicamento);
 }

@@ -12,5 +12,7 @@ public interface ISolicitacaoExameBusiness {
 	public Page<SolicitacaoExame> listarSolicitacaoExameCodigoPaciente(final PageRequest pageable, final BigInteger codigoPaciente);
 
 	public Page<SolicitacaoExame> listarSolicitacaoExame(final PageRequest pageable);
+	
+	public SolicitacaoExame salvar(final SolicitacaoExame solicitacaoExame);
 
 }

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -41,11 +42,13 @@ public class Consulta implements Serializable {
 	private String flagConfirmada;
 	private String flagPrimeiraConsulta;
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataAtendimento;
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataConsulta;
 	private Integer ordemChegada;
+	@Column(length=2147483647) 
 	private String historicoClinico;
 	private String flagAtivo;
 	private String usuarioUltimaAlteracao;

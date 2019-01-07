@@ -21,4 +21,13 @@ public interface SolicitacaoExameRepository
 	@Query(value = "SELECT solicitacaoExame FROM SolicitacaoExame solicitacaoExame WHERE solicitacaoExame.consulta.paciente.codigoPessoa = :codigoPaciente")
 	Page<SolicitacaoExame> listarSolicitacaoExameCodigoPaciente(@Param("codigoPaciente") final BigInteger codigoPaciente,
 			final Pageable page);
+	
+	@Query(value = "SELECT COUNT (solicitacaoExame) FROM SolicitacaoExame solicitacaoExame WHERE solicitacaoExame.consulta.codigoConsulta = :codigoConsulta")
+	Short buscarMaxSolicitacaoExameConsulta(@Param("codigoConsulta") final BigInteger codigoConsulta);
+	
+	@Query(value = "SELECT COUNT (solicitacaoExame) FROM SolicitacaoExame solicitacaoExame WHERE solicitacaoExame.consulta.codigoConsulta = :codigoConsulta AND solicitacaoExame.exame.codigoExame = :codigoExame ")
+	Integer countSoliciExamePorConsulExame(@Param("codigoConsulta") final BigInteger codigoConsulta, @Param("codigoExame") final Short codigoExame);
+	
+	@Query(value = "SELECT solicitacaoExame FROM SolicitacaoExame solicitacaoExame WHERE solicitacaoExame.consulta.codigoConsulta = :codigoConsulta AND solicitacaoExame.exame.codigoExame = :codigoExame ")
+	SolicitacaoExame buscarSoliciExamePorConsulExame(@Param("codigoConsulta") final BigInteger codigoConsulta, @Param("codigoExame") final Short codigoExame);
 }

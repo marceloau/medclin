@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class SolicitacaoMedicamento implements Serializable {
 
@@ -20,6 +22,7 @@ public class SolicitacaoMedicamento implements Serializable {
 	private SolicitacaoMedicamentoPK solicitacaoMedicamentoPK;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
 	private Date dataSolicitacaoMedicamento;
 
 	private String flagAtivo;

@@ -7,7 +7,9 @@ import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +17,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IConsultaBusiness;
+import br.com.medclin.business.interfaces.ISolicitacaoExameBusiness;
+import br.com.medclin.business.interfaces.ISolicitacaoMedicamentoBusiness;
 import br.com.medclin.common.AssertUtil;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
 import br.com.medclin.dao.ConsultaDAO;
 import br.com.medclin.model.Consulta;
+import br.com.medclin.model.SolicitacaoExame;
+import br.com.medclin.model.SolicitacaoMedicamento;
 import br.com.medclin.repository.ConsultaRepository;
 
 @Configuration
@@ -27,6 +33,12 @@ public class ConsultaBusiness implements IConsultaBusiness {
 
 	@Autowired
 	private ConsultaRepository consultaRep;
+	
+	@Autowired
+	private ISolicitacaoExameBusiness solicitacaoExameBusiness;
+	
+	@Autowired
+	private ISolicitacaoMedicamentoBusiness solicitacaoMedicamentoBusiness;
 	
 	@Autowired
 	private ConsultaDAO consultaDAO;
@@ -40,6 +52,24 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	@Override
 	public Consulta atualizarConsulta(final Consulta consulta) {
 		auditoriaUtil.setDadosAuditoriaAtualizacao(consulta, "MOCK_MATRICULA - " + Math.random());
+		
+		// Criando lista de solicitacação de exame.
+		if(AssertUtil.isNotEmptyList(consulta.getListaSolicitacaoExame())) {
+			final List<SolicitacaoExame> listaSolicitacaoExame = new ArrayList<SolicitacaoExame>();
+			for(final SolicitacaoExame solicitacaoExame : consulta.getListaSolicitacaoExame()) {
+				listaSolicitacaoExame.add(solicitacaoExameBusiness.salvar(solicitacaoExame));
+			}
+			consulta.setListaSolicitacaoExame(listaSolicitacaoExame);
+		}
+		
+		// Criando lista de solicitacação de medicamento.
+		if(AssertUtil.isNotEmptyList(consulta.getListaSolicitacaoMedicamento())) {
+			final List<SolicitacaoMedicamento> listaSolicitacaoMedicamento = new ArrayList<SolicitacaoMedicamento>();
+			for(final SolicitacaoMedicamento solicitacaoMedicamento : consulta.getListaSolicitacaoMedicamento()) {
+				listaSolicitacaoMedicamento.add(solicitacaoMedicamentoBusiness.salvar(solicitacaoMedicamento));
+			}
+			consulta.setListaSolicitacaoMedicamento(listaSolicitacaoMedicamento);
+		}
 		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
 	}
 
