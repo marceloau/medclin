@@ -8,8 +8,10 @@ import java.math.BigInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.business.interfaces.IUsuarioBusiness;
+import br.com.medclin.common.CloneUtil;
 import br.com.medclin.model.Usuario;
 import br.com.medclin.repository.UsuarioRepository;
 
@@ -19,35 +21,33 @@ public class UsuarioBusiness implements IUsuarioBusiness {
 	/** The usuario rep. */
 	@Autowired
 	private UsuarioRepository usuarioRep;
+	
+	@Autowired
+	private CloneUtil cloneUtil;
 
 	@Override
-	public Page<Usuario> buscaUsuarioPorNome(Integer page, Integer size, String nomeParametro) {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<Usuario> buscarUsuarioPorNome(final PageRequest pageable, String nomeParametro) {
+		return cloneUtil.cloneListaUsuario(usuarioRep.buscarUsuarioPorNome(nomeParametro, pageable));
 	}
 
 	@Override
-	public Usuario buscaUsuarioPorEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario buscarUsuarioPorEmail(String email) {
+		return cloneUtil.cloneUsuario(usuarioRep.buscarUsuarioPorEmail(email));
 	}
 
 	@Override
-	public Usuario buscaUsuarioPorLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario buscarUsuarioPorLogin(String login) {
+		return cloneUtil.cloneUsuario(usuarioRep.buscarUsuarioPorLogin(login));
 	}
 
 	@Override
-	public Usuario buscaUsuarioPorCodigo(BigInteger codigo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario buscarUsuarioPorCodigo(BigInteger codigo) {
+		return cloneUtil.cloneUsuario(usuarioRep.buscarUsuarioPorCodigoPessoa(codigo));
 	}
 
 	@Override
-	public Page<Usuario> listarUsuario() {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<Usuario> listarUsuario(final PageRequest pageable) {
+		return cloneUtil.cloneListaUsuario(usuarioRep.findAll(pageable));
 	}
 
 }

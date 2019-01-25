@@ -27,6 +27,7 @@ import br.com.medclin.model.Medicamento;
 import br.com.medclin.model.Medico;
 import br.com.medclin.model.Operadora;
 import br.com.medclin.model.Paciente;
+import br.com.medclin.model.Pessoa;
 import br.com.medclin.model.PlanoSaudePaciente;
 import br.com.medclin.model.PlanoSaudePacientePK;
 import br.com.medclin.model.SolicitacaoExame;
@@ -39,6 +40,7 @@ import br.com.medclin.model.TipoLogradouro;
 import br.com.medclin.model.TipoMedicamento;
 import br.com.medclin.model.TipoPlanoSaude;
 import br.com.medclin.model.UsoMedicamento;
+import br.com.medclin.model.Usuario;
 
 @Configuration
 public class CloneUtil {
@@ -359,6 +361,58 @@ public class CloneUtil {
 		}
 
 		return medicoClone;
+	}
+	
+	public Page<Usuario> cloneListaUsuario(final Page<Usuario> listaUsuario) {
+		List<Usuario> listaUsuarioClone = null;
+		PageImpl<Usuario> listaRetorno = null;
+		if (AssertUtil.isNotNull(listaUsuario) && AssertUtil.isNotEmptyList(listaUsuario.getContent())) {
+
+			listaUsuarioClone = new ArrayList<>();
+			for (Usuario usuario : listaUsuario.getContent()) {
+				listaUsuarioClone.add(cloneUsuario(usuario));
+			}
+			listaRetorno = new PageImpl<>(listaUsuarioClone, listaUsuario.getPageable(), listaUsuario.getTotalElements());
+		}
+
+		return listaRetorno;
+	}
+	
+	public Usuario cloneUsuario(final Usuario usuario) {
+		Usuario usuarioClone = null;
+		if (AssertUtil.isNotNull(usuario)) {
+			usuarioClone = new Usuario();
+			final Pessoa pessoaClone = new Pessoa();
+
+			pessoaClone.setCodigoPessoa(usuario.getPessoa().getCodigoPessoa());
+			pessoaClone.setContatos(cloneListaContatoPessoa(usuario.getPessoa().getContatos()));
+			pessoaClone.setDataCriacao(usuario.getPessoa().getDataCriacao());
+			pessoaClone.setDataNascimento(usuario.getPessoa().getDataNascimento());
+			pessoaClone.setDataUltimaAlteracao(usuario.getPessoa().getDataUltimaAlteracao());
+			pessoaClone.setEnderecos(cloneListaEnderecoPessoa(usuario.getPessoa().getEnderecos()));
+			pessoaClone.setEstadoCivil(cloneEstadoCivil(usuario.getPessoa().getEstadoCivil()));
+			pessoaClone.setFlagAtivo(usuario.getPessoa().getFlagAtivo());
+			pessoaClone.setInformacaoAdicional(usuario.getPessoa().getInformacaoAdicional());
+			pessoaClone.setNacionalidade(usuario.getPessoa().getNacionalidade());
+			pessoaClone.setNaturalidade(usuario.getPessoa().getNaturalidade());
+			pessoaClone.setNomePessoa(usuario.getPessoa().getNomePessoa());
+			pessoaClone.setNumeroCpf(usuario.getPessoa().getNumeroCpf());
+			pessoaClone.setNumeroRg(usuario.getPessoa().getNumeroRg());
+			pessoaClone.setOrgamEmissor(usuario.getPessoa().getOrgamEmissor());
+			pessoaClone.setSexo(usuario.getPessoa().getSexo());
+			pessoaClone.setUsuarioUltimaAlteracao(usuario.getPessoa().getUsuarioUltimaAlteracao());
+			usuarioClone.setLogin(usuario.getLogin());
+			usuarioClone.setEmail(usuario.getEmail());
+			usuarioClone.setSenha(usuario.getSenha());
+			usuarioClone.setUsuarioUltimaAlteracao(usuario.getUsuarioUltimaAlteracao());
+			usuarioClone.setDataCriacao(usuario.getDataCriacao());
+			usuarioClone.setDataUltimaAlteracao(usuario.getPessoa().getDataUltimaAlteracao());
+			usuarioClone.setFlagAtivo(usuario.getPessoa().getFlagAtivo());
+			usuarioClone.setPessoa(pessoaClone);
+
+		}
+
+		return usuarioClone;
 	}
 
 	public Operadora cloneOperadora(final Operadora operadora) {

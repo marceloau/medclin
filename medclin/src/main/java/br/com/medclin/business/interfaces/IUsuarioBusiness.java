@@ -6,6 +6,7 @@ package br.com.medclin.business.interfaces;
 import java.math.BigInteger;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import br.com.medclin.model.Usuario;
 
@@ -24,7 +25,7 @@ public interface IUsuarioBusiness {
 	 * @param nomeParametro the nome parametro
 	 * @return the iterable
 	 */
-	public Page<Usuario> buscaUsuarioPorNome(final Integer page, final Integer size,
+	public Page<Usuario> buscarUsuarioPorNome(final PageRequest pageable,
 			final String nomeParametro);
 	
 	/**
@@ -33,7 +34,7 @@ public interface IUsuarioBusiness {
 	 * @param email
 	 * @return Usuario
 	 */
-	public Usuario buscaUsuarioPorEmail(final String email);
+	public Usuario buscarUsuarioPorEmail(final String email);
 	
 	/**
 	 * Busca usuario por login.
@@ -41,7 +42,7 @@ public interface IUsuarioBusiness {
 	 * @param login
 	 * @return Usuario
 	 */
-	public Usuario buscaUsuarioPorLogin(final String login);
+	public Usuario buscarUsuarioPorLogin(final String login);
 	
 	/**
 	 * Busca usuario por Codigo.
@@ -49,13 +50,13 @@ public interface IUsuarioBusiness {
 	 * @param login BigInteger
 	 * @return Usuario Usuario
 	 */
-	public Usuario buscaUsuarioPorCodigo(final BigInteger codigo);
+	public Usuario buscarUsuarioPorCodigo(final BigInteger codigo);
 
 	/**
 	 * Listar usuario.
 	 *
 	 * @return the iterable
 	 */
-	public Page<Usuario> listarUsuario();
+	public Page<Usuario> listarUsuario(final PageRequest pageable);
 
 }

@@ -12,23 +12,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import br.com.medclin.model.Exame;
 import br.com.medclin.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, BigInteger>, PagingAndSortingRepository<Usuario, BigInteger> {
 	
-	@Query(value = "SELECT usuario FROM Usuario usuario WHERE usuario.codigoPessoa = :codigoPessoa")
-	Exame buscarUsuarioPorCodigo(@Param("codigoPessoa") final Short codigoPessoa);
+	@Query(value = "SELECT usuario FROM Usuario usuario WHERE usuario.codigoUsuario = :codigoUsuario")
+	Usuario buscarUsuarioPorCodigoPessoa(@Param("codigoUsuario") final BigInteger codigoUsuario);
 
-	@Query(value = "SELECT usuario FROM Usuario usuario WHERE usuario.nome LIKE %:nome%")
-	Page<Exame> buscarUsuarioPorNome(@Param("nome") final String nome,
+	@Query(value = "SELECT usuario FROM Usuario usuario WHERE usuario.email LIKE %:nome%")
+	Page<Usuario> buscarUsuarioPorNome(@Param("nome") final String nome,
 			final Pageable page);
 	
 	@Query(value = "SELECT usuario FROM Usuario usuario WHERE usuario.email LIKE %:email%")
-	Exame buscarUsuarioPorEmail(@Param("email") final String email,
-			final Pageable page);
+	Usuario buscarUsuarioPorEmail(@Param("email") final String email);
 
 	@Query(value = "SELECT usuario FROM Usuario usuario WHERE usuario.login LIKE :login")
-	Exame buscarUsuarioPorLogin(@Param("login") final String login);
+	Usuario buscarUsuarioPorLogin(@Param("login") final String login);
 	
 }
