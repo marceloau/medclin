@@ -47,4 +47,12 @@ public class ResourceExceptionHandler {
 		}
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
 	}
+	
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<ErrorPadrao> authorization(
+			AuthorizationException onfe, HttpServletRequest request){
+		
+		ErrorPadrao err = new ErrorPadrao(HttpStatus.FORBIDDEN.value(), onfe.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+	}
 }
