@@ -49,5 +49,4 @@ public class UsuarioBusiness implements IUsuarioBusiness {
 	public Page<Usuario> listarUsuario(final PageRequest pageable) {
 		return cloneUtil.cloneListaUsuario(usuarioRep.findAll(pageable));
 	}
-
 }
