@@ -48,7 +48,7 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
-		<!-- DEPENDENCIAS DE SEGURANCA INICIO 
+		<!-- DEPENDENCIAS DE SEGURANCA INICIO  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -58,7 +58,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
-		DEPENDENCIAS DE SEGURANCA FIM -->
+		<!-- DEPENDENCIAS DE SEGURANCA FIM -->
 	</dependencies>
 
 	<build>
