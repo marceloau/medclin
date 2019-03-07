@@ -39,5 +39,19 @@ public enum PerfilEnum {
 		
 		throw new IllegalArgumentException("Perfil do usuário inválido: " + codigo);
 	}
+	
+	public static PerfilEnum toCodigo(final String nome) {
+		if(nome == null) {
+			return null;
+		}
+		
+		for(final PerfilEnum perfil : PerfilEnum.values()) {
+			if(nome.equals(perfil.getDescricao())) {
+				return perfil;
+			}
+		}
+		
+		throw new IllegalArgumentException("Perfil do usuário inválido: " + nome);
+	}
 
 }

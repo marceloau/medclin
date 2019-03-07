@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.medclin.facade.SolicitacaoExameFacade;
 import br.com.medclin.model.SolicitacaoExame;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/medclin/solicitacao-exame")
 public class SolicitacaoExameResource {

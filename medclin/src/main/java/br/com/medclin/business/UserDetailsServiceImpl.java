@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.medclin.model.Usuario;
 import br.com.medclin.repository.UsuarioRepository;
-import br.com.medclin.seguranca.UserSS;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(email);
 		}
 		
-		return new UserSS(usuario.getCodigoUsuario(), usuario.getEmail(), usuario.getSenha(), usuario.getPerfis());
+		return new Usuario(usuario);
 	}
 
 }

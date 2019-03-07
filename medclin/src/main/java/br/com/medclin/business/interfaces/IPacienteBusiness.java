@@ -22,5 +22,7 @@ public interface IPacienteBusiness {
 	public void deletarPaciente(final BigInteger codigoPaciente);
 
 	public Page<Paciente> listarPaciente(final PageRequest pageable);
+	
+	public BigInteger totalPacientes();
 
 }

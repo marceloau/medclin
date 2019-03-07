@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.medclin.facade.TipoMedicamentoFacade;
 import br.com.medclin.model.TipoMedicamento;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/medclin/tipo-medicamento")
 public class TipoMedicamentoResource {

@@ -24,7 +24,13 @@ public enum MensagensException {
 	 * Mensagem cliente com pedidos associados.
 	 */
 	ENDERECO_SEM_CIDADE("error.business.enderecoSemCidade",
-			"Não é possível salvar um endereço sem ter uma cidade informada.");
+			"Não é possível salvar um endereço sem ter uma cidade informada."),
+	
+	/**
+	 * Mensagem da fila de ordem de chegada ocupada..
+	 */
+	ORDEM_CHEGADA_JA_EXISTE("error.business.ordemChegada",
+			"Posição na fila da ordem de chegada, já está sendo ocupada por outra pessoa.");
 	
 	/**
 	 * String for message code.

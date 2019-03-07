@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.medclin.model.Usuario;
 import br.com.medclin.seguranca.JWTUtil;
-import br.com.medclin.seguranca.UserSS;
 import br.com.medclin.seguranca.UserService;
 
 @RestController
@@ -21,8 +21,8 @@ public class SegurancaResource {
 	
 	@RequestMapping(value="/atualizar_token", method=RequestMethod.POST)
 	public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
-	UserSS user = UserService.authenticated();
-	String token = jwtUtil.generateToken(user.getUsername());
+	Usuario user = UserService.authenticated();
+	String token = jwtUtil.generateToken(user);
 	response.addHeader("Authorization", "Bearer " + token);
 	return ResponseEntity.noContent().build();
 	}

@@ -1,7 +1,7 @@
 package br.com.medclin.model;
 
-import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,19 +23,42 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.medclin.common.PerfilEnum;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "USUARIO_SEQ", sequenceName = "USUARIO_SEQ", allocationSize = 1)
-public class Usuario implements Serializable {
+public class Usuario implements UserDetails {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public Usuario() {}
+	
+	public Usuario(BigInteger codigoUsuario, String email, String login, String senha, Pessoa pessoa, Set<PerfilEnum> perfis) {
+		super();
+		this.codigoUsuario = codigoUsuario;
+		this.email = email;
+		this.login = login;
+		this.pessoa = pessoa;
+		this.senha = senha;
+		this.perfis = perfis.stream().map(perfilRetorno -> perfilRetorno.getCodigo()).collect(Collectors.toSet());
+	}
+	
+	public Usuario(Usuario usuario) {
+		this.codigoUsuario = usuario.getCodigoUsuario();
+		this.email = usuario.getEmail();
+		this.login = usuario.getLogin();
+		this.pessoa = usuario.getPessoa();
+		this.senha = usuario.getSenha();
+		this.perfis = usuario.getPerfis().stream().map(perfilRetorno -> perfilRetorno.getCodigo()).collect(Collectors.toSet());
+		this.flagAtivo = usuario.getFlagAtivo();
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQ")
@@ -143,6 +166,45 @@ public class Usuario implements Serializable {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+	
+	public boolean hasRole(PerfilEnum perfil) {
+		return this.perfis.contains(perfil.getCodigo());
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	
 }

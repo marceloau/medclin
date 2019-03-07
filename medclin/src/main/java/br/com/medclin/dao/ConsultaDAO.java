@@ -27,7 +27,7 @@ public class ConsultaDAO {
 	private EntityManager entityManager;
 
 	public Page<Consulta> buscarConsulta(final PageRequest page, final String nomePaciente, final Date dataConsulta, 
-			final Date mesConsulta, final BigInteger codigoPaciente) {
+			final Date mesConsulta, final BigInteger codigoPaciente, final Integer codigoStatusConsulta) {
 		StringBuilder hql = new StringBuilder(100);
 		StringBuilder select = new StringBuilder(100);
 
@@ -57,6 +57,11 @@ public class ConsultaDAO {
 		if (AssertUtil.isNotNull(nomePaciente)) {
 			parametros.put("nomePaciente", nomePaciente);
 			hql.append(" AND UPPER(consulta.paciente.nomePessoa) LIKE UPPER(CONCAT('%',:nomePaciente,'%'))");
+		}
+		
+		if (AssertUtil.isNotNull(codigoStatusConsulta)) {
+			parametros.put("codigoStatusConsulta", codigoStatusConsulta);
+			hql.append(" AND consulta.codigoStatusConsulta = :codigoStatusConsulta");
 		}
 		
 		if (AssertUtil.isNotNull(codigoPaciente)) {
@@ -91,5 +96,83 @@ public class ConsultaDAO {
 
 		PageImpl<Consulta> listaRetorno = new PageImpl<>(query.getResultList(), page, querySize.getSingleResult());
 		return listaRetorno;
+	}
+	
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest page, final Date dataConsulta) {
+		StringBuilder hql = new StringBuilder(100);
+		StringBuilder select = new StringBuilder(100);
+
+		// CONSULTA PRINCIPAL
+		select.append(" SELECT consulta FROM Consulta consulta");
+		hql.append("	WHERE consulta.codigoStatusConsulta in (2,3,4,5) ");
+		
+		// CARREGA PARAMETROS
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		
+		if (AssertUtil.isNotNull(dataConsulta)) {
+			parametros.put("dataConsulta", dataConsulta);
+			hql.append(" AND CAST(consulta.dataConsulta AS date) = DATE(:dataConsulta)");
+		}
+		
+		hql.append(" ORDER BY consulta.ordemChegada ASC");
+
+		select.append(hql);
+		TypedQuery<Consulta> query = entityManager.createQuery(select.toString(), Consulta.class)
+				.setFirstResult(page.getPageNumber()).setMaxResults(page.getPageSize());
+
+		for (Map.Entry<String, Object> pair : parametros.entrySet()) {
+			query.setParameter(pair.getKey(), pair.getValue());
+		}
+
+		// COUNT
+		StringBuilder count = new StringBuilder(100);
+		count.append(" SELECT COUNT(consulta.codigoConsulta) FROM Consulta consulta");
+		count.append(hql);
+		TypedQuery<Long> querySize = entityManager.createQuery(count.toString(), Long.class);
+
+		for (Map.Entry<String, Object> pair : parametros.entrySet()) {
+			querySize.setParameter(pair.getKey(), pair.getValue());
+		}
+
+		PageImpl<Consulta> listaRetorno = new PageImpl<>(query.getResultList(), page, querySize.getSingleResult());
+		return listaRetorno;
+	}
+	
+	public Boolean existeConsultaDataConsultaEOrdemChegada(final Date dataConsulta, final Integer numeroOrdemChegada,
+			final BigInteger codigoConsulta) {
+		
+		StringBuilder hql = new StringBuilder(100);
+		StringBuilder select = new StringBuilder(100);
+		Boolean retorno = Boolean.FALSE;
+
+		select.append(" SELECT COUNT(consulta) FROM Consulta consulta");
+		hql.append("	WHERE 1=1 ");
+		
+		// CARREGA PARAMETROS
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		
+		parametros.put("dataConsulta", dataConsulta);
+		hql.append(" AND CAST(consulta.dataConsulta AS date) = DATE(:dataConsulta)");
+		
+		parametros.put("numeroOrdemChegada", numeroOrdemChegada);
+		hql.append(" AND consulta.ordemChegada = :numeroOrdemChegada");
+		
+		parametros.put("codigoConsulta", codigoConsulta);
+		hql.append(" AND consulta.codigoConsulta <> :codigoConsulta");
+
+		select.append(hql);
+		TypedQuery<Long> queryCount = entityManager.createQuery(select.toString(), Long.class);
+
+		for (Map.Entry<String, Object> pair : parametros.entrySet()) {
+			queryCount.setParameter(pair.getKey(), pair.getValue());
+		}
+
+		final Long resultadoQuery = queryCount.getSingleResult();
+		
+		if(resultadoQuery > 0) {
+			retorno = Boolean.TRUE;
+		}
+
+		return retorno;
 	}
 }

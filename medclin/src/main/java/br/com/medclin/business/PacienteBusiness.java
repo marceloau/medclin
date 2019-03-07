@@ -89,4 +89,9 @@ public class PacienteBusiness implements IPacienteBusiness {
 	public Page<Paciente> listarPaciente(final PageRequest pageable) {
 		return cloneUtil.cloneListaPaciente(pacienteRep.findAll(pageable));
 	}
+	
+	@Override
+	public BigInteger totalPacientes() {
+		return pacienteRep.totalPacientes();
+	}
 }

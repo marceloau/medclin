@@ -42,5 +42,8 @@ public interface PacienteRepository
 
 	@Query(value = "SELECT p.dataCriacao FROM Paciente p WHERE p.codigoPessoa = :codigoPaciente")
 	Date buscarDataCriacaoPorCodigo(@Param("codigoPaciente") final BigInteger codigoPaciente);
+	
+	@Query(value = "SELECT COUNT (p) FROM Paciente p")
+	BigInteger totalPacientes();
 
 }

@@ -19,6 +19,11 @@ public interface ConsultaRepository
 	@Query(value = "SELECT c FROM Consulta c WHERE c.codigoConsulta = :codigoConsulta")
 	Consulta buscarConsultaPorCodigo(@Param("codigoConsulta") final BigInteger codigoConsulta);
 	
+	boolean existsByDataConsultaAndOrdemChegada(final Date dataConsulta, final Integer ordemChegada);
+	
 	@Query(value = "SELECT c.dataCriacao FROM Consulta c WHERE c.codigoConsulta = :codigoConsulta")
 	Date buscarDataCriacaoPorCodigo(@Param("codigoConsulta") final BigInteger codigoConsulta);
+	
+	@Query(value = "SELECT COUNT (c) FROM Consulta c")
+	BigInteger totalConsultas();
 }

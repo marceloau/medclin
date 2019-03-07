@@ -42,5 +42,9 @@ public class PacienteFacade {
 	public Page<Paciente> listarPaciente(final PageRequest pageable) {
 		return pacienteBusiness.listarPaciente(pageable);
 	}
+	
+	public BigInteger totalPacientes() {
+		return pacienteBusiness.totalPacientes();
+	}
 
 }

@@ -22,6 +22,9 @@ import br.com.medclin.business.interfaces.ISolicitacaoMedicamentoBusiness;
 import br.com.medclin.common.AssertUtil;
 import br.com.medclin.common.AuditoriaUtil;
 import br.com.medclin.common.CloneUtil;
+import br.com.medclin.common.StatusConsultaEnum;
+import br.com.medclin.common.exceptions.BusinessException;
+import br.com.medclin.common.exceptions.MensagensException;
 import br.com.medclin.dao.ConsultaDAO;
 import br.com.medclin.model.Consulta;
 import br.com.medclin.model.SolicitacaoExame;
@@ -79,7 +82,32 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	}
 	
 	@Override
-	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente) {
+	public Consulta confirmarConsulta(final BigInteger codigoConsulta) {
+		
+		final Consulta consulta = cloneUtil.cloneConsulta(consultaRep.buscarConsultaPorCodigo(codigoConsulta));
+		consulta.setCodigoStatusConsulta(StatusConsultaEnum.CONFIRMADA.getCodigo());
+		consulta.setFlagConfirmada("S");
+		
+		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
+	}
+	
+	@Override
+	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada) {
+		
+		final boolean existeOrdemChegada = consultaDAO.existeConsultaDataConsultaEOrdemChegada(new Date(), numeroOrdemChegada, codigoConsulta);
+		
+		if(existeOrdemChegada) {
+			throw new BusinessException(MensagensException.ORDEM_CHEGADA_JA_EXISTE.getValue());
+		}
+		
+		final Consulta consulta = cloneUtil.cloneConsulta(consultaRep.buscarConsultaPorCodigo(codigoConsulta));
+		consulta.setOrdemChegada(numeroOrdemChegada);
+		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
+	}
+	
+	@Override
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente,
+			final String dataConsulta, final String mesConsulta, final String codigoPaciente, final Integer codigoStatusConsulta) {
 				
 		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataConsultaFormatada = null;
@@ -102,7 +130,7 @@ public class ConsultaBusiness implements IConsultaBusiness {
 		if (AssertUtil.isNotNullAndEmpty(codigoPaciente)) {
 			codPaciente = BigInteger.valueOf(Long.valueOf(codigoPaciente));
 		}
-		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsulta(pageable, nomePaciente, dataConsultaFormatada, mesConsultaFormatada, codPaciente));
+		return cloneUtil.cloneListaConsulta(consultaDAO.buscarConsulta(pageable, nomePaciente, dataConsultaFormatada, mesConsultaFormatada, codPaciente, codigoStatusConsulta));
 	}
 
 	@Override
@@ -119,6 +147,25 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	@Override
 	public Page<Consulta> listarConsulta(final PageRequest pageable) {
 		return cloneUtil.cloneListaConsulta(consultaRep.findAll(pageable));
+	}
+	
+	@Override
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta) {
+		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date dataConsultaFormatada = null;
+		if(dataConsulta != null) {
+			try {
+				dataConsultaFormatada = df.parse(dataConsulta);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return cloneUtil.cloneListaConsulta(consultaDAO.listarConsultasAtendimento(pageable, dataConsultaFormatada));
+	}
+
+	@Override
+	public BigInteger totalConsultas() {
+		return consultaRep.totalConsultas();
 	}
 
 }

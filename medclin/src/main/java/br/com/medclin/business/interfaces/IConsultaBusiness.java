@@ -13,12 +13,21 @@ public interface IConsultaBusiness {
 
 	public Consulta buscarConsultaPorCodigo(final BigInteger codigoConsulta);
 	
-	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente);
+	public Consulta confirmarConsulta(final BigInteger codigoConsulta);
+	
+	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada);
+	
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente,
+			final Integer codigoStatusConsulta);
 
 	public Consulta criarConsulta(final Consulta consulta);
 
 	public void deletarConsulta(final BigInteger codigoConsulta);
+	
+	public BigInteger totalConsultas();
 
 	public Page<Consulta> listarConsulta(final PageRequest pageable);
+	
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta);
 
 }

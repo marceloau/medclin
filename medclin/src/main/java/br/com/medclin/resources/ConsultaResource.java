@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.medclin.facade.ConsultaFacade;
 import br.com.medclin.model.Consulta;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/medclin/consulta")
 public class ConsultaResource {
@@ -43,12 +41,23 @@ public class ConsultaResource {
 		return consultaFacade.buscarConsultaPorCodigo(codigoConsulta);
 	}
 	
+	@GetMapping("/confirmar/{codigoConsulta}")
+	public Consulta confirmarConsulta(@PathVariable final BigInteger codigoConsulta) {
+		return consultaFacade.confirmarConsulta(codigoConsulta);
+	}
+	
+	@GetMapping("/ordem-chegada/{codigoConsulta}/{numeroOrdemChegada}")
+	public Consulta atualizarOrdemChegada(@PathVariable final BigInteger codigoConsulta, @PathVariable final Integer numeroOrdemChegada) {
+		return consultaFacade.atualizarOrdemChegada(codigoConsulta, numeroOrdemChegada);
+	}
+	
 	@GetMapping("/buscarConsulta/{page}/{size}")
 	public Page<Consulta> buscarConsulta(@PathVariable final Integer page, @PathVariable final Integer size,
 			@RequestParam(required = false) String nomePaciente, @RequestParam(required = false) String dataConsulta, 
 			@RequestParam(required = false) String mesConsulta,
-			@RequestParam(required = false) String codigoPaciente) {
-		return consultaFacade.buscarConsulta(PageRequest.of(page.intValue(), size.intValue()), nomePaciente, dataConsulta, mesConsulta, codigoPaciente);
+			@RequestParam(required = false) String codigoPaciente,
+			@RequestParam(required = false) Integer codigoStatusConsulta) {
+		return consultaFacade.buscarConsulta(PageRequest.of(page.intValue(), size.intValue()), nomePaciente, dataConsulta, mesConsulta, codigoPaciente, codigoStatusConsulta);
 	}
 
 	@PostMapping
@@ -65,5 +74,16 @@ public class ConsultaResource {
 	public @ResponseBody Page<Consulta> listarConsulta(@PathVariable final Integer page,
 			@PathVariable final Integer size) {
 		return consultaFacade.listarConsulta(PageRequest.of(page.intValue(), size.intValue()));
+	}
+	
+	@GetMapping("/listarConsultasAtendimento/{page}/{size}")
+	public Page<Consulta> listarConsultasAtendimento(@PathVariable final Integer page, @PathVariable final Integer size,
+			@RequestParam(required = true) String dataConsulta) {
+		return consultaFacade.listarConsultasAtendimento(PageRequest.of(page.intValue(), size.intValue()), dataConsulta);
+	}
+	
+	@GetMapping("/total-consultas")
+	public BigInteger totalConsultas() {
+		return consultaFacade.totalConsultas();
 	}
 }

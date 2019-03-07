@@ -24,8 +24,17 @@ public class ConsultaFacade {
 		return consultaBusiness.buscarConsultaPorCodigo(codigoConsulta);
 	}
 	
-	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente) {
-		return consultaBusiness.buscarConsulta(pageable, nomePaciente, dataConsulta, mesConsulta, codigoPaciente);
+	public Consulta confirmarConsulta(final BigInteger codigoConsulta) {
+		return consultaBusiness.confirmarConsulta(codigoConsulta);
+	}
+	
+	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada) {
+		return consultaBusiness.atualizarOrdemChegada(codigoConsulta, numeroOrdemChegada);
+	}
+	
+	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta,
+			final String mesConsulta, final String codigoPaciente, final Integer codigoStatusConsulta) {
+		return consultaBusiness.buscarConsulta(pageable, nomePaciente, dataConsulta, mesConsulta, codigoPaciente, codigoStatusConsulta);
 	}
 
 	public Consulta criarConsulta(final Consulta consulta) {
@@ -38,6 +47,14 @@ public class ConsultaFacade {
 
 	public Page<Consulta> listarConsulta(final PageRequest pageable) {
 		return consultaBusiness.listarConsulta(pageable);
+	}
+	
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta) {
+		return consultaBusiness.listarConsultasAtendimento(pageable, dataConsulta);
+	}
+	
+	public BigInteger totalConsultas() {
+		return consultaBusiness.totalConsultas();
 	}
 
 }
