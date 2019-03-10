@@ -30,6 +30,6 @@ public interface IConsultaBusiness {
 
 	public Page<Consulta> listarConsulta(final PageRequest pageable);
 	
-	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta);
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta, final String flagConfirmada);
 
 }

@@ -159,7 +159,7 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	}
 	
 	@Override
-	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta) {
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta, final String flagConfirmada) {
 		final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date dataConsultaFormatada = null;
 		if(dataConsulta != null) {
@@ -169,7 +169,7 @@ public class ConsultaBusiness implements IConsultaBusiness {
 				e.printStackTrace();
 			}
 		}
-		return cloneUtil.cloneListaConsulta(consultaDAO.listarConsultasAtendimento(pageable, dataConsultaFormatada));
+		return cloneUtil.cloneListaConsulta(consultaDAO.listarConsultasAtendimento(pageable, dataConsultaFormatada, flagConfirmada));
 	}
 
 	@Override

@@ -53,8 +53,8 @@ public class ConsultaFacade {
 		return consultaBusiness.listarConsulta(pageable);
 	}
 	
-	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta) {
-		return consultaBusiness.listarConsultasAtendimento(pageable, dataConsulta);
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest pageable, final String dataConsulta, final String flagConfirmada) {
+		return consultaBusiness.listarConsultasAtendimento(pageable, dataConsulta, flagConfirmada);
 	}
 	
 	public BigInteger totalConsultas() {

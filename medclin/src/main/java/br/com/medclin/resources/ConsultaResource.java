@@ -83,8 +83,8 @@ public class ConsultaResource {
 	
 	@GetMapping("/listarConsultasAtendimento/{page}/{size}")
 	public Page<Consulta> listarConsultasAtendimento(@PathVariable final Integer page, @PathVariable final Integer size,
-			@RequestParam(required = true) String dataConsulta) {
-		return consultaFacade.listarConsultasAtendimento(PageRequest.of(page.intValue(), size.intValue()), dataConsulta);
+			@RequestParam(required = true) String dataConsulta, @RequestParam(required = false) String flagConfirmada) {
+		return consultaFacade.listarConsultasAtendimento(PageRequest.of(page.intValue(), size.intValue()), dataConsulta, flagConfirmada);
 	}
 	
 	@GetMapping("/total-consultas")

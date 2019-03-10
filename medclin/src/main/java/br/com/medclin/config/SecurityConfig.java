@@ -39,6 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			"/medclin/especialidade/**"
 	};
 	
+	private static final String[] PUBLIC_MATCHERS_PUT = {
+			"/medclin/especialidade/**"
+	};
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
@@ -51,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
 		.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+		.antMatchers(HttpMethod.PUT, PUBLIC_MATCHERS_PUT).permitAll()
 		.antMatchers(PUBLIC_MATCHERS).permitAll()
 		.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));

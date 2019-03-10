@@ -98,7 +98,7 @@ public class ConsultaDAO {
 		return listaRetorno;
 	}
 	
-	public Page<Consulta> listarConsultasAtendimento(final PageRequest page, final Date dataConsulta) {
+	public Page<Consulta> listarConsultasAtendimento(final PageRequest page, final Date dataConsulta, final String flagConfirmada) {
 		StringBuilder hql = new StringBuilder(100);
 		StringBuilder select = new StringBuilder(100);
 
@@ -112,6 +112,11 @@ public class ConsultaDAO {
 		if (AssertUtil.isNotNull(dataConsulta)) {
 			parametros.put("dataConsulta", dataConsulta);
 			hql.append(" AND CAST(consulta.dataConsulta AS date) = DATE(:dataConsulta)");
+		}
+		
+		if (AssertUtil.isNotNullAndEmpty(flagConfirmada)) {
+			parametros.put("flagConfirmada", flagConfirmada);
+			hql.append(" AND consulta.flagConfirmada = :flagConfirmada");
 		}
 		
 		hql.append(" ORDER BY consulta.ordemChegada ASC");
