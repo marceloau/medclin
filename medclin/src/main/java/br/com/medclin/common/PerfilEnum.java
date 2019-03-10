@@ -2,9 +2,9 @@ package br.com.medclin.common;
 
 public enum PerfilEnum {
 	
-	ADMIN(1,"ROLE_ADM"),
-
-	RECEP(2, "ROLE_RECEP");
+	PRF_ADMIN(1,"PRF_ADMIN"),
+	PRF_RECEP(2, "PRF_RECEP"),
+	PRF_MEDICO(3, "PRF_MEDICO");
 
 	private Integer codigo;
 	private String descricao;

@@ -90,6 +90,15 @@ public class ConsultaBusiness implements IConsultaBusiness {
 		
 		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
 	}
+
+	@Override
+	public Consulta iniciarAtendimento(final BigInteger codigoConsulta) {
+		
+		final Consulta consulta = cloneUtil.cloneConsulta(consultaRep.buscarConsultaPorCodigo(codigoConsulta));
+		consulta.setCodigoStatusConsulta(StatusConsultaEnum.EM_ATENDIMENTO.getCodigo());
+		
+		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
+	}
 	
 	@Override
 	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada) {

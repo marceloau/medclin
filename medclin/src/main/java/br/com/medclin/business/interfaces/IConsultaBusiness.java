@@ -15,6 +15,8 @@ public interface IConsultaBusiness {
 	
 	public Consulta confirmarConsulta(final BigInteger codigoConsulta);
 	
+	public Consulta iniciarAtendimento(final BigInteger codigoConsulta);
+	
 	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada);
 	
 	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente,

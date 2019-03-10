@@ -46,6 +46,11 @@ public class ConsultaResource {
 		return consultaFacade.confirmarConsulta(codigoConsulta);
 	}
 	
+	@GetMapping("/iniciar-atendimento/{codigoConsulta}")
+	public Consulta iniciarAtendimento(@PathVariable final BigInteger codigoConsulta) {
+		return consultaFacade.iniciarAtendimento(codigoConsulta);
+	}
+	
 	@GetMapping("/ordem-chegada/{codigoConsulta}/{numeroOrdemChegada}")
 	public Consulta atualizarOrdemChegada(@PathVariable final BigInteger codigoConsulta, @PathVariable final Integer numeroOrdemChegada) {
 		return consultaFacade.atualizarOrdemChegada(codigoConsulta, numeroOrdemChegada);

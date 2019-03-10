@@ -28,6 +28,10 @@ public class ConsultaFacade {
 		return consultaBusiness.confirmarConsulta(codigoConsulta);
 	}
 	
+	public Consulta iniciarAtendimento(final BigInteger codigoConsulta) {
+		return consultaBusiness.iniciarAtendimento(codigoConsulta);
+	}
+	
 	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada) {
 		return consultaBusiness.atualizarOrdemChegada(codigoConsulta, numeroOrdemChegada);
 	}
