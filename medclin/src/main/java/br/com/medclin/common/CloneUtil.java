@@ -303,15 +303,14 @@ public class CloneUtil {
 	public Page<Paciente> cloneListaPaciente(final Page<Paciente> listaPaciente) {
 		List<Paciente> listaPacienteClone = null;
 		PageImpl<Paciente> listaRetorno = null;
+		listaPacienteClone = new ArrayList<>();
 		if (AssertUtil.isNotNull(listaPaciente) && AssertUtil.isNotEmptyList(listaPaciente.getContent())) {
-
-			listaPacienteClone = new ArrayList<>();
 			for (Paciente paciente : listaPaciente.getContent()) {
 				listaPacienteClone.add(clonePaciente(paciente));
 			}
-			listaRetorno = new PageImpl<>(listaPacienteClone, listaPaciente.getPageable(),
-					listaPaciente.getTotalElements());
 		}
+		listaRetorno = new PageImpl<>(listaPacienteClone, listaPaciente.getPageable(),
+				listaPaciente.getTotalElements());
 
 		return listaRetorno;
 	}
