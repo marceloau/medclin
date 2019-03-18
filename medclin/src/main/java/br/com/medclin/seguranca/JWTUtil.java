@@ -22,6 +22,7 @@ public class JWTUtil {
 	public String generateToken(final Usuario user) {
 		Claims claims = Jwts.claims().setSubject(user.getUsername());
         claims.put("perfis", user.getPerfis());
+        claims.put("email", user.getEmail());
         claims.put("nome", user.getPessoa().getNomePessoa());
 		return Jwts.builder()
 				.setSubject(user.getUsername())

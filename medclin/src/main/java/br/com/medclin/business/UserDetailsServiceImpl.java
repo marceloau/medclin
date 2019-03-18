@@ -17,10 +17,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UsuarioRepository usuarioRep;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		final Usuario usuario = usuarioRep.buscarUsuarioPorEmail(email);
+	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+		final Usuario usuario = usuarioRep.buscarUsuarioPorLogin(login);
 		if(usuario == null) {
-			throw new UsernameNotFoundException(email);
+			throw new UsernameNotFoundException(login);
 		}
 		
 		return new Usuario(usuario);

@@ -40,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			Usuario usuario = new ObjectMapper().readValue(req.getInputStream(), Usuario.class);
 			
 			UsernamePasswordAuthenticationToken authToken = 
-					new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
+					new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha(), new ArrayList<>());
 			
 			Authentication auth = authenticationManager.authenticate(authToken);
 			return auth;
@@ -72,7 +72,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	        return "{\"timestamp\": " + date + ", "
 	            + "\"status\": 401, "
 	            + "\"error\": \"Não autorizado\", "
-	            + "\"message\": \"Email ou senha inválido\", "
+	            + "\"message\": \"Login ou senha inválido\", "
 	            + "\"path\": \"/login\"}";
 	    }
 	}
