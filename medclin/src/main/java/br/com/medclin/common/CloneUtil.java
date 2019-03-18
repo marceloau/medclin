@@ -272,14 +272,13 @@ public class CloneUtil {
 	public Page<Medico> cloneListaMedico(final Page<Medico> listaMedico) {
 		List<Medico> listaMedicoClone = null;
 		PageImpl<Medico> listaRetorno = null;
+		listaMedicoClone = new ArrayList<>();
 		if (AssertUtil.isNotNull(listaMedico) && AssertUtil.isNotEmptyList(listaMedico.getContent())) {
-
-			listaMedicoClone = new ArrayList<>();
 			for (Medico medico : listaMedico.getContent()) {
 				listaMedicoClone.add(cloneMedico(medico));
 			}
-			listaRetorno = new PageImpl<>(listaMedicoClone, listaMedico.getPageable(), listaMedico.getTotalElements());
 		}
+		listaRetorno = new PageImpl<>(listaMedicoClone, listaMedico.getPageable(), listaMedico.getTotalElements());
 
 		return listaRetorno;
 	}
@@ -287,15 +286,14 @@ public class CloneUtil {
 	public Page<Consulta> cloneListaConsulta(final Page<Consulta> listaConsulta) {
 		List<Consulta> listaConsultaClone = null;
 		PageImpl<Consulta> listaRetorno = null;
+		listaConsultaClone = new ArrayList<>();
 		if (AssertUtil.isNotNull(listaConsulta) && AssertUtil.isNotEmptyList(listaConsulta.getContent())) {
-
-			listaConsultaClone = new ArrayList<>();
 			for (Consulta consulta : listaConsulta.getContent()) {
 				listaConsultaClone.add(cloneConsulta(consulta));
 			}
-			listaRetorno = new PageImpl<>(listaConsultaClone, listaConsulta.getPageable(),
-					listaConsulta.getTotalElements());
 		}
+		listaRetorno = new PageImpl<>(listaConsultaClone, listaConsulta.getPageable(),
+				listaConsulta.getTotalElements());
 
 		return listaRetorno;
 	}
