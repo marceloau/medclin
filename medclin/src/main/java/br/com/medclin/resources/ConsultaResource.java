@@ -64,7 +64,7 @@ public class ConsultaResource {
 			@RequestParam(required = false) Integer codigoStatusConsulta) {
 		return consultaFacade.buscarConsulta(PageRequest.of(page.intValue(), size.intValue()), nomePaciente, dataConsulta, mesConsulta, codigoPaciente, codigoStatusConsulta);
 	}
-
+	
 	@PostMapping
 	public Consulta criarConsulta(@RequestBody @Valid final Consulta consulta) {
 		return consultaFacade.criarConsulta(consulta);

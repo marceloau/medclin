@@ -154,6 +154,7 @@ public class CloneUtil {
 			consultaClone.setListaSolicitacaoExame(cloneListaSolicExame(consulta.getListaSolicitacaoExame()));
 			consultaClone.setListaSolicitacaoMedicamento(
 					cloneListaSolicitacaoMedicamento(consulta.getListaSolicitacaoMedicamento()));
+			consultaClone.setDataUltimaConsulta(consulta.getDataUltimaConsulta());
 		}
 
 		return consultaClone;

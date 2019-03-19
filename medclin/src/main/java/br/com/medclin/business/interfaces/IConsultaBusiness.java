@@ -21,7 +21,7 @@ public interface IConsultaBusiness {
 	
 	public Page<Consulta> buscarConsulta(final PageRequest pageable, final String nomePaciente, final String dataConsulta, final String mesConsulta, final String codigoPaciente,
 			final Integer codigoStatusConsulta);
-
+	
 	public Consulta criarConsulta(final Consulta consulta);
 
 	public void deletarConsulta(final BigInteger codigoConsulta);

@@ -18,6 +18,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -61,6 +62,17 @@ public class Consulta implements Serializable {
 	@OneToMany(mappedBy = "consulta")
 	@OrderColumn(name = "codigo_solicitacao_medicamento", insertable = true, updatable = true)
 	private List<SolicitacaoMedicamento> listaSolicitacaoMedicamento;
+	
+	@Transient
+	private transient Date dataUltimaConsulta;
+
+	public Date getDataUltimaConsulta() {
+		return dataUltimaConsulta;
+	}
+
+	public void setDataUltimaConsulta(Date dataUltimaConsulta) {
+		this.dataUltimaConsulta = dataUltimaConsulta;
+	}
 
 	public BigInteger getCodigoConsulta() {
 		return codigoConsulta;

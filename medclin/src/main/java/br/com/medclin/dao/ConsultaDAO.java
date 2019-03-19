@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -83,6 +84,12 @@ public class ConsultaDAO {
 		for (Map.Entry<String, Object> pair : parametros.entrySet()) {
 			query.setParameter(pair.getKey(), pair.getValue());
 		}
+		
+		final List<Consulta> listaConsultas = query.getResultList();
+		
+		for(final Consulta consulta : listaConsultas) {
+			consulta.setDataUltimaConsulta(buscarDataUltimaConsulta(consulta.getPaciente().getCodigoPessoa(), consulta.getCodigoConsulta()));
+		}
 
 		// COUNT
 		StringBuilder count = new StringBuilder(100);
@@ -94,8 +101,39 @@ public class ConsultaDAO {
 			querySize.setParameter(pair.getKey(), pair.getValue());
 		}
 
-		PageImpl<Consulta> listaRetorno = new PageImpl<>(query.getResultList(), page, querySize.getSingleResult());
+		PageImpl<Consulta> listaRetorno = new PageImpl<>(listaConsultas, page, querySize.getSingleResult());
 		return listaRetorno;
+	}
+	
+	public Date buscarDataUltimaConsulta(final BigInteger codigoPaciente, final BigInteger codigoConsulta) {
+		StringBuilder hql = new StringBuilder(100);
+		StringBuilder select = new StringBuilder(100);
+
+		// CONSULTA
+		select.append(" SELECT consulta.dataConsulta FROM Consulta consulta");
+		hql.append(" WHERE consulta.paciente.codigoPessoa = :codigoPaciente ");
+		hql.append(" AND consulta.codigoConsulta <> :codigoConsulta");
+		hql.append(" ORDER BY consulta.dataConsulta DESC");
+		
+		
+		// CARREGA PARAMETROS
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("codigoPaciente", codigoPaciente);
+		parametros.put("codigoConsulta", codigoConsulta);
+
+		select.append(hql);
+		TypedQuery<Date> queryCount = entityManager.createQuery(select.toString(), Date.class);
+
+		for (Map.Entry<String, Object> pair : parametros.entrySet()) {
+			queryCount.setParameter(pair.getKey(), pair.getValue());
+		}
+
+		Date retorno = null;
+		if(AssertUtil.isNotEmptyList(queryCount.getResultList())) {
+			retorno = queryCount.getResultList().get(0);
+		}
+
+		return retorno;
 	}
 	
 	public Page<Consulta> listarConsultasAtendimento(final PageRequest page, final Date dataConsulta, final String flagConfirmada) {

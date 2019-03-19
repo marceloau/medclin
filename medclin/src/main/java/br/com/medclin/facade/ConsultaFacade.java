@@ -40,7 +40,7 @@ public class ConsultaFacade {
 			final String mesConsulta, final String codigoPaciente, final Integer codigoStatusConsulta) {
 		return consultaBusiness.buscarConsulta(pageable, nomePaciente, dataConsulta, mesConsulta, codigoPaciente, codigoStatusConsulta);
 	}
-
+	
 	public Consulta criarConsulta(final Consulta consulta) {
 		return consultaBusiness.criarConsulta(consulta);
 	}
