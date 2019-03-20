@@ -48,6 +48,8 @@ public class Medicamento implements Serializable {
 	@JoinColumn(name = "codigo_uso_medicamento")
 	private UsoMedicamento usoMedicamento;
 
+	private String flagEspecial;
+	
 	private String flagAtivo;
 
 	private String usuarioUltimaAlteracao;
@@ -120,6 +122,14 @@ public class Medicamento implements Serializable {
 
 	public void setFlagAtivo(String flagAtivo) {
 		this.flagAtivo = flagAtivo;
+	}
+	
+	public String getFlagEspecial() {
+		return flagEspecial;
+	}
+
+	public void setFlagEspecial(String flagEspecial) {
+		this.flagEspecial = flagEspecial;
 	}
 
 	public String getUsuarioUltimaAlteracao() {

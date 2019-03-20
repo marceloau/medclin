@@ -655,6 +655,7 @@ public class CloneUtil {
 			medicamentoClone.setDataUltimaAlteracao(medicamento.getDataUltimaAlteracao());
 			medicamentoClone.setDescricaoMedicamento(medicamento.getDescricaoMedicamento());
 			medicamentoClone.setFlagAtivo(medicamento.getFlagAtivo());
+			medicamentoClone.setFlagEspecial(medicamento.getFlagEspecial());
 			medicamentoClone.setNomeMedicamento(medicamento.getNomeMedicamento());
 			medicamentoClone.setComposicao(medicamento.getComposicao());
 			medicamentoClone.setPosologia(medicamento.getPosologia());
