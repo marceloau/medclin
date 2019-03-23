@@ -59,6 +59,11 @@
 			<version>0.7.0</version>
 		</dependency>
 		<!-- DEPENDENCIAS DE SEGURANCA FIM -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>1.11.379</version>
+		</dependency>
 	</dependencies>
 
 	<build>
