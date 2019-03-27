@@ -35,30 +35,11 @@ import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 
-//import com.porto.security.cryptography.Cryptography;
-//import com.porto.security.cryptography.CryptographyException;
 @SuppressWarnings("deprecation")
 public class ReportGenerate {
 
     private final String REPORTSERVICE_PROPERTIES_FILE;
-    /*
-	public Properties getProp() throws IOException {
-
-		Properties props = new Properties();
-
-		props.setProperty("arquitetura.report.service.domainAD", "PORTOSEGURO");
-		props.setProperty("arquitetura.report.service.userAD", "f0117245");
-		try {
-			props.setProperty("arquitetura.report.service.passwordAD", Cryptography.encrypt("seguro10"));
-		} catch (CryptographyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return props;
-
-	}
-     */
+    
     private static Logger LOGGER = LogManager.getLogger(ReportGenerate.class);
 
     public ReportGenerate() {

@@ -4,27 +4,22 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.thoughtworks.xstream.XStream;
-
-import br.com.medclin.model.ebo.ImpressaoEBO;
-
 public final class UtilFileXML {
 
-	public static String criarArquivoXMLImpressao(final String localArmazenamento, final String nomeArquivo, final Object ebo) {
+	public static String criarArquivoXMLImpressao(final String metadados, final String localArmazenamento, final String nomeArquivo) {
 		
-		XStream xStream = new XStream();
-        xStream.alias("impressao", ImpressaoEBO.class);
- 
-        File arquivo = new File("C://porto//arquivo.xml");
+        final String caminhoArquivoXML = localArmazenamento + nomeArquivo +".xml";
+        
+        File arquivo = new File(caminhoArquivoXML);
         FileOutputStream gravar;
         try {
             gravar = new FileOutputStream(arquivo);
-            gravar.write(xStream.toXML(ebo).getBytes());
+            gravar.write(metadados.getBytes());
             gravar.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }  
 		
-		return "C://porto//arquivo.xml";
-	}	
+		return caminhoArquivoXML;
+	}
 }

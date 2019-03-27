@@ -123,7 +123,7 @@ public class ImpressaoBusiness implements IImpressaoBusiness {
 		metadados = Util.inserirParametrosFormulario(metadados);
 		
 		final File out = geradorImpressaoBusiness
-				.gerarArquivo(nomeArquivo, formularioImpressao.getCaminhoFormulario(), metadados, "pdf", documento);
+				.gerarArquivo(nomeArquivo, formularioImpressao.getCaminhoFormulario(), metadados, "pdf");
 	    
 		s3Business.uploadImpressao(out);
 		return out.getName();

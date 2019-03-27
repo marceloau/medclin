@@ -21,7 +21,7 @@ public class GeradorImpressaoBusiness {
         return encoding.decode(ByteBuffer.wrap(encoded)).toString();
     }
 	
-	public File gerarArquivo(final String nomeArquivo, final String caminhoJasper, final String metadados, final String tipoArquivo, final Object objetoImpressao) {
+	public File gerarArquivo(final String nomeArquivo, final String caminhoJasper, final String metadados, final String tipoArquivo) {
 		
         String content = metadados;
         
@@ -37,7 +37,7 @@ public class GeradorImpressaoBusiness {
         StringBuilder sb = new StringBuilder();
         sb.append(content);
         report.setXmlDataSource(sb.toString());
-        final String caminhoXML = UtilFileXML.criarArquivoXMLImpressao("C://porto//", nomeArquivo, objetoImpressao);
+        final String caminhoXML = UtilFileXML.criarArquivoXMLImpressao(metadados, "C://porto//", nomeArquivo);
         //final String caminhoXML = UtilFileXML.criarArquivoXMLImpressao(metadados, "C://porto//", nomeArquivo, objetoImpressao);
         ReportGenerate reportGenerate = new ReportGenerate();
         try {

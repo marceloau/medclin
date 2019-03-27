@@ -5,12 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 import br.com.medclin.model.Consulta;
 
 @XmlRootElement(name = "impressao")
-@XStreamAlias("impressao")
 public class ImpressaoEBO implements Serializable {
 
 	private static final long serialVersionUID = -1019666536682955167L;
