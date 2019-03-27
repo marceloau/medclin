@@ -3,9 +3,14 @@
  */
 package br.com.medclin.common;
 
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 public final class AssertUtil {
 
@@ -116,4 +121,5 @@ public final class AssertUtil {
 	private AssertUtil() {
 		super();
 	}
+	
 }

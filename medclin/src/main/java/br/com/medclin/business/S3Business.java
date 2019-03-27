@@ -1,6 +1,8 @@
 package br.com.medclin.business;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -75,6 +77,29 @@ public class S3Business implements IS3Business {
 			ObjectMetadata metadata = new ObjectMetadata();
 			metadata.setContentLength(file.getSize());
 			s3client.putObject(bucketName, keyName, file.getInputStream(), metadata);
+		} catch (IOException ioe) {
+			logger.error("IOException: " + ioe.getMessage());
+		} catch (AmazonServiceException ase) {
+			logger.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
+			logger.info("Error Message:    " + ase.getMessage());
+			logger.info("HTTP Status Code: " + ase.getStatusCode());
+			logger.info("AWS Error Code:   " + ase.getErrorCode());
+			logger.info("Error Type:       " + ase.getErrorType());
+			logger.info("Request ID:       " + ase.getRequestId());
+			throw ase;
+		} catch (AmazonClientException ace) {
+			logger.info("Caught an AmazonClientException: ");
+			logger.info("Error Message: " + ace.getMessage());
+			throw ace;
+		}
+	}
+	
+	public void uploadImpressao(final File arquivo) {
+		try {
+			ObjectMetadata metadata = new ObjectMetadata();
+			final FileInputStream arquivoUpload = new FileInputStream(arquivo.getPath());
+			metadata.setContentLength(arquivo.length());
+			s3client.putObject(bucketName, arquivo.getName(), arquivoUpload, metadata);
 		} catch (IOException ioe) {
 			logger.error("IOException: " + ioe.getMessage());
 		} catch (AmazonServiceException ase) {

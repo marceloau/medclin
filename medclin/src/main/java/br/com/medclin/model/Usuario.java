@@ -71,6 +71,10 @@ public class Usuario implements UserDetails {
 	@Column(unique=true, nullable = false)
 	private String login;
 	
+	/**
+	 * Bcrypt encode 10 Rounds
+	 * encode: https://www.browserling.com/tools/bcrypt
+	 */
 	@Column(nullable = false)
 	private String senha;
 	
