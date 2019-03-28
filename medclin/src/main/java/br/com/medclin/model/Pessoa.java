@@ -29,13 +29,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @SequenceGenerator(name = "PESSOA_SEQ", sequenceName = "PESSOA_SEQ", allocationSize = 1)
 public class Pessoa implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQ")
 	@Column(name = "codigo_pessoa", nullable = false, updatable = false, precision = 22, scale = 0)
 	private BigInteger codigoPessoa;
 
+	@NotNull(message = "Nome não informado!")
 	private String nomePessoa;
 
 	private String numeroCpf;
@@ -52,13 +56,13 @@ public class Pessoa implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss zzzz", timezone = "GMT-03:00")
+	@NotNull(message = "Data de nascimento não informada!")
 	private Date dataNascimento;
 
 	private String informacaoAdicional;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_estado_civil")
-	@NotNull(message = "O estado civil é obrigatório.")
 	private EstadoCivil estadoCivil;
 
 	@OneToMany(mappedBy = "pessoa")

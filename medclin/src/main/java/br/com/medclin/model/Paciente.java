@@ -6,10 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "codigo_pessoa")
 public class Paciente extends Pessoa {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String numeroCartaoSUS;
 
@@ -17,6 +23,7 @@ public class Paciente extends Pessoa {
 
 	private String nomePai;
 
+	@NotNull(message = "Nome da mãe não informada!")
 	private String nomeMae;
 
 	@OneToMany(mappedBy = "paciente")

@@ -73,6 +73,9 @@ public class ConsultaBusiness implements IConsultaBusiness {
 			}
 			consulta.setListaSolicitacaoMedicamento(listaSolicitacaoMedicamento);
 		}
+		if(AssertUtil.isNull(consulta.getCodigoStatusConsulta())) {
+			consulta.setCodigoStatusConsulta(StatusConsultaEnum.ABERTA.getCodigo());
+		}
 		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
 	}
 

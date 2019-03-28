@@ -30,14 +30,14 @@ public class GeradorImpressaoBusiness {
         ReportVO report = new ReportVO();
         //report.setJasperFileSystem("C://Users//danilo.da.silva//JaspersoftWorkspace//MyReports//Emissao-Transportes//Impressao//Porto//Proposta//IMP-110//IMP-110.jasper");
         report.setJasperFileSystem(caminhoJasper);
-        report.setOutbox("C:\\porto\\");
+        report.setOutbox("C://Servidor//Aplicações//Medclin//impressoes//pdf//");
         report.setOutFileName(nomeArquivo);
         report.setOutFileType(tipoArquivo);
         report.setRecordPath("//impressao");
         StringBuilder sb = new StringBuilder();
         sb.append(content);
         report.setXmlDataSource(sb.toString());
-        final String caminhoXML = UtilFileXML.criarArquivoXMLImpressao(metadados, "C://porto//", nomeArquivo);
+        final String caminhoXML = UtilFileXML.criarArquivoXMLImpressao(metadados, "C://Servidor//Aplicações//Medclin//impressoes//xml//", nomeArquivo);
         //final String caminhoXML = UtilFileXML.criarArquivoXMLImpressao(metadados, "C://porto//", nomeArquivo, objetoImpressao);
         ReportGenerate reportGenerate = new ReportGenerate();
         try {
