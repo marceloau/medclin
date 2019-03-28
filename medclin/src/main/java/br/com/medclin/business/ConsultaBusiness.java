@@ -110,12 +110,6 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	@Override
 	public Consulta atualizarOrdemChegada(final BigInteger codigoConsulta, final Integer numeroOrdemChegada) {
 		
-		final boolean existeOrdemChegada = consultaDAO.existeConsultaDataConsultaEOrdemChegada(new Date(), numeroOrdemChegada, codigoConsulta);
-		
-		if(existeOrdemChegada) {
-			throw new BusinessException(MensagensException.ORDEM_CHEGADA_JA_EXISTE.getValue());
-		}
-		
 		final Consulta consulta = cloneUtil.cloneConsulta(consultaRep.buscarConsultaPorCodigo(codigoConsulta));
 		consulta.setOrdemChegada(numeroOrdemChegada);
 		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
