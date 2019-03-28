@@ -95,7 +95,11 @@ public class ConsultaBusiness implements IConsultaBusiness {
 	public Consulta iniciarAtendimento(final BigInteger codigoConsulta) {
 		
 		final Consulta consulta = cloneUtil.cloneConsulta(consultaRep.buscarConsultaPorCodigo(codigoConsulta));
-		consulta.setCodigoStatusConsulta(StatusConsultaEnum.EM_ATENDIMENTO.getCodigo());
+		
+		if(!consulta.getCodigoStatusConsulta().equals(StatusConsultaEnum.FINALIZADA.getCodigo())
+			&& !consulta.getCodigoStatusConsulta().equals(StatusConsultaEnum.CANCELADA.getCodigo())) {
+			consulta.setCodigoStatusConsulta(StatusConsultaEnum.EM_ATENDIMENTO.getCodigo());
+		}
 		
 		return cloneUtil.cloneConsulta(consultaRep.saveAndFlush(consulta));
 	}
