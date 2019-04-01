@@ -72,6 +72,7 @@ public class ReportGenerate {
             LOGGER.debug("Chamada da classe FileContent");
             LOGGER.debug("Preparando o relatorio com o DataSource e o arquivo .jasper");
 
+            LOGGER.info("Caminho do arquivo xml: " + caminhoXML);
             JRXmlDataSource xml = new JRXmlDataSource(caminhoXML, "//impressao");
 
             Map parameters = new HashMap();

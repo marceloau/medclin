@@ -97,6 +97,7 @@ public class S3Business implements IS3Business {
 	public void uploadImpressao(final File arquivo) {
 		try {
 			ObjectMetadata metadata = new ObjectMetadata();
+			logger.info("Info - UploadImpressao - Caminho do PDF: " + arquivo.getPath());
 			final FileInputStream arquivoUpload = new FileInputStream(arquivo.getPath());
 			metadata.setContentLength(arquivo.length());
 			s3client.putObject(bucketName, arquivo.getName(), arquivoUpload, metadata);
