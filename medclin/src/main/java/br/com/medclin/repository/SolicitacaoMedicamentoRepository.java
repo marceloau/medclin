@@ -4,6 +4,7 @@
 package br.com.medclin.repository;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,4 +33,8 @@ public interface SolicitacaoMedicamentoRepository
 	@Query(value = "SELECT solicitacaoMedicamento FROM SolicitacaoMedicamento solicitacaoMedicamento "
 			+ "WHERE solicitacaoMedicamento.consulta.codigoConsulta = :codigoConsulta AND solicitacaoMedicamento.medicamento.codigoMedicamento = :codigoMedicamento")
 	SolicitacaoMedicamento buscarSoliciMedPorConsulMedicamento(@Param("codigoConsulta") final BigInteger codigoConsulta, @Param("codigoMedicamento") final Short codigoMedicamento);
+	
+	@Query(value = "SELECT solicitacaoMedicamento FROM SolicitacaoMedicamento solicitacaoMedicamento "
+			+ "WHERE solicitacaoMedicamento.consulta.paciente.codigoPessoa = :codigoPessoa ")
+	List<SolicitacaoMedicamento> buscarSoliciMedPorCodigoPaciente(@Param("codigoPessoa") final BigInteger codigoPessoa);
 }

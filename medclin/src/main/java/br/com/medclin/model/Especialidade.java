@@ -17,7 +17,10 @@ import javax.validation.constraints.NotBlank;
 @SequenceGenerator(name = "ESPECIALIDADE_SEQ", sequenceName = "ESPECIALIDADE_SEQ", allocationSize = 1)
 public class Especialidade implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ESPECIALIDADE_SEQ")

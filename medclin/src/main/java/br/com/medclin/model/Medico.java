@@ -1,5 +1,6 @@
 package br.com.medclin.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,7 +10,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "codigo_pessoa")
-public class Medico extends Pessoa {
+public class Medico extends Pessoa  implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String numeroCRM;
 
@@ -43,43 +49,6 @@ public class Medico extends Pessoa {
 
 	public void setListaAgendaMedico(List<AgendaMedico> listaAgendaMedico) {
 		this.listaAgendaMedico = listaAgendaMedico;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((listaAgendaMedico == null) ? 0 : listaAgendaMedico.hashCode());
-		result = prime * result + ((listaEspecialidadeMedico == null) ? 0 : listaEspecialidadeMedico.hashCode());
-		result = prime * result + ((numeroCRM == null) ? 0 : numeroCRM.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Medico other = (Medico) obj;
-		if (listaAgendaMedico == null) {
-			if (other.listaAgendaMedico != null)
-				return false;
-		} else if (!listaAgendaMedico.equals(other.listaAgendaMedico))
-			return false;
-		if (listaEspecialidadeMedico == null) {
-			if (other.listaEspecialidadeMedico != null)
-				return false;
-		} else if (!listaEspecialidadeMedico.equals(other.listaEspecialidadeMedico))
-			return false;
-		if (numeroCRM == null) {
-			if (other.numeroCRM != null)
-				return false;
-		} else if (!numeroCRM.equals(other.numeroCRM))
-			return false;
-		return true;
 	}
 
 }

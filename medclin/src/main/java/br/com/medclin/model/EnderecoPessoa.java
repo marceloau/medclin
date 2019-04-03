@@ -10,11 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class EnderecoPessoa implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private EnderecoPessoaPK enderecoPessoaPK;
@@ -109,6 +113,7 @@ public class EnderecoPessoa implements Serializable {
 		this.complemento = complemento;
 	}
 
+	@XmlTransient
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

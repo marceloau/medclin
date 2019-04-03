@@ -1,6 +1,5 @@
 package br.com.medclin.facade;
 
-import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +15,9 @@ public class ImpressaoFacade {
 
 	public String medicamento(final String listaMedicamento, final BigInteger codigoConsulta) {
 		return impressaoBusiness.medicamento(listaMedicamento, codigoConsulta);
+	}
+	
+	public String historicoClinico(final BigInteger codigoPaciente) {
+		return impressaoBusiness.historicoClinico(codigoPaciente);
 	}
 }

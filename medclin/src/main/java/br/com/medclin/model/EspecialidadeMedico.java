@@ -10,11 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class EspecialidadeMedico implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private EspecialidadeMedicoPK especialidadeMedicoPK;
@@ -96,6 +100,7 @@ public class EspecialidadeMedico implements Serializable {
 		this.especialidade = especialidade;
 	}
 
+	@XmlTransient
 	public Medico getMedico() {
 		return medico;
 	}

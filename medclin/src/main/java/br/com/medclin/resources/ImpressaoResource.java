@@ -1,12 +1,8 @@
 package br.com.medclin.resources;
 
-import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +36,17 @@ public class ImpressaoResource {
 		
 		final ImpressaoResponse retorno = new ImpressaoResponse();
 		retorno.setNomeArquivo(impressaoFacade.medicamento(listaMedicamento, codigoConsulta));
+		
+		return retorno;
+	}
+	
+	@GetMapping("/historico-clinico")
+	public ImpressaoResponse historicoClinico(@RequestParam("codigoPaciente") BigInteger codigoPaciente) {
+		
+		//final ByteArrayOutputStream retorno = impressaoFacade.medicamento(listaMedicamento, codigoConsulta);
+		
+		final ImpressaoResponse retorno = new ImpressaoResponse();
+		retorno.setNomeArquivo(impressaoFacade.historicoClinico(codigoPaciente));
 		
 		return retorno;
 	}

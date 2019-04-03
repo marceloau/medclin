@@ -11,13 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class PlanoSaudePaciente implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private PlanoSaudePacientePK planoSaudePacientePK;
@@ -99,7 +103,8 @@ public class PlanoSaudePaciente implements Serializable {
 	public void setTipoPlanoSaude(TipoPlanoSaude tipoPlanoSaude) {
 		this.tipoPlanoSaude = tipoPlanoSaude;
 	}
-
+	
+	@XmlTransient
 	public Paciente getPaciente() {
 		return paciente;
 	}
@@ -138,91 +143,6 @@ public class PlanoSaudePaciente implements Serializable {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
-		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
-		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((nomeTitular == null) ? 0 : nomeTitular.hashCode());
-		result = prime * result + ((numeroCartao == null) ? 0 : numeroCartao.hashCode());
-		result = prime * result + ((operadora == null) ? 0 : operadora.hashCode());
-		result = prime * result + ((paciente == null) ? 0 : paciente.hashCode());
-		result = prime * result + ((planoSaudePacientePK == null) ? 0 : planoSaudePacientePK.hashCode());
-		result = prime * result + ((tipoPlanoSaude == null) ? 0 : tipoPlanoSaude.hashCode());
-		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
-		result = prime * result + ((validadeCartao == null) ? 0 : validadeCartao.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PlanoSaudePaciente other = (PlanoSaudePaciente) obj;
-		if (dataCriacao == null) {
-			if (other.dataCriacao != null)
-				return false;
-		} else if (!dataCriacao.equals(other.dataCriacao))
-			return false;
-		if (dataUltimaAlteracao == null) {
-			if (other.dataUltimaAlteracao != null)
-				return false;
-		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
-			return false;
-		if (flagAtivo == null) {
-			if (other.flagAtivo != null)
-				return false;
-		} else if (!flagAtivo.equals(other.flagAtivo))
-			return false;
-		if (nomeTitular == null) {
-			if (other.nomeTitular != null)
-				return false;
-		} else if (!nomeTitular.equals(other.nomeTitular))
-			return false;
-		if (numeroCartao == null) {
-			if (other.numeroCartao != null)
-				return false;
-		} else if (!numeroCartao.equals(other.numeroCartao))
-			return false;
-		if (operadora == null) {
-			if (other.operadora != null)
-				return false;
-		} else if (!operadora.equals(other.operadora))
-			return false;
-		if (paciente == null) {
-			if (other.paciente != null)
-				return false;
-		} else if (!paciente.equals(other.paciente))
-			return false;
-		if (planoSaudePacientePK == null) {
-			if (other.planoSaudePacientePK != null)
-				return false;
-		} else if (!planoSaudePacientePK.equals(other.planoSaudePacientePK))
-			return false;
-		if (tipoPlanoSaude == null) {
-			if (other.tipoPlanoSaude != null)
-				return false;
-		} else if (!tipoPlanoSaude.equals(other.tipoPlanoSaude))
-			return false;
-		if (usuarioUltimaAlteracao == null) {
-			if (other.usuarioUltimaAlteracao != null)
-				return false;
-		} else if (!usuarioUltimaAlteracao.equals(other.usuarioUltimaAlteracao))
-			return false;
-		if (validadeCartao == null) {
-			if (other.validadeCartao != null)
-				return false;
-		} else if (!validadeCartao.equals(other.validadeCartao))
-			return false;
-		return true;
 	}
 
 }

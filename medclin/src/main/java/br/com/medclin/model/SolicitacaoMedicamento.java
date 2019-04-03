@@ -10,13 +10,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class SolicitacaoMedicamento implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private SolicitacaoMedicamentoPK solicitacaoMedicamentoPK;
@@ -95,6 +99,7 @@ public class SolicitacaoMedicamento implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 
+	@XmlTransient
 	public Consulta getConsulta() {
 		return consulta;
 	}
@@ -109,10 +114,6 @@ public class SolicitacaoMedicamento implements Serializable {
 
 	public void setMedicamento(Medicamento medicamento) {
 		this.medicamento = medicamento;
-	}
-
-	public static long getSerialversionuid() {
-		return SerialVersionUID;
 	}
 
 	@Override

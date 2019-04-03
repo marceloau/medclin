@@ -9,7 +9,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EspecialidadeMedicoPK implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "codigo_pessoa", nullable = false, updatable = false, precision = 22, scale = 0)
 	private BigInteger codigoPessoa;

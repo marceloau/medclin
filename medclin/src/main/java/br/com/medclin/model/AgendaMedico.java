@@ -9,15 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class AgendaMedico implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private AgendaMedicoPK agendaMedicoPK;
@@ -120,91 +122,13 @@ public class AgendaMedico implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 
+	@XmlTransient
 	public Medico getMedico() {
 		return medico;
 	}
 
 	public void setMedico(Medico medico) {
 		this.medico = medico;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((agendaMedicoPK == null) ? 0 : agendaMedicoPK.hashCode());
-		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
-		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
-		result = prime * result + ((diaSemana == null) ? 0 : diaSemana.hashCode());
-		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((horaFinalAtendimento == null) ? 0 : horaFinalAtendimento.hashCode());
-		result = prime * result + ((horaInicioAtendimento == null) ? 0 : horaInicioAtendimento.hashCode());
-		result = prime * result + ((medico == null) ? 0 : medico.hashCode());
-		result = prime * result + ((observacao == null) ? 0 : observacao.hashCode());
-		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AgendaMedico other = (AgendaMedico) obj;
-		if (agendaMedicoPK == null) {
-			if (other.agendaMedicoPK != null)
-				return false;
-		} else if (!agendaMedicoPK.equals(other.agendaMedicoPK))
-			return false;
-		if (dataCriacao == null) {
-			if (other.dataCriacao != null)
-				return false;
-		} else if (!dataCriacao.equals(other.dataCriacao))
-			return false;
-		if (dataUltimaAlteracao == null) {
-			if (other.dataUltimaAlteracao != null)
-				return false;
-		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
-			return false;
-		if (diaSemana == null) {
-			if (other.diaSemana != null)
-				return false;
-		} else if (!diaSemana.equals(other.diaSemana))
-			return false;
-		if (flagAtivo == null) {
-			if (other.flagAtivo != null)
-				return false;
-		} else if (!flagAtivo.equals(other.flagAtivo))
-			return false;
-		if (horaFinalAtendimento == null) {
-			if (other.horaFinalAtendimento != null)
-				return false;
-		} else if (!horaFinalAtendimento.equals(other.horaFinalAtendimento))
-			return false;
-		if (horaInicioAtendimento == null) {
-			if (other.horaInicioAtendimento != null)
-				return false;
-		} else if (!horaInicioAtendimento.equals(other.horaInicioAtendimento))
-			return false;
-		if (medico == null) {
-			if (other.medico != null)
-				return false;
-		} else if (!medico.equals(other.medico))
-			return false;
-		if (observacao == null) {
-			if (other.observacao != null)
-				return false;
-		} else if (!observacao.equals(other.observacao))
-			return false;
-		if (usuarioUltimaAlteracao == null) {
-			if (other.usuarioUltimaAlteracao != null)
-				return false;
-		} else if (!usuarioUltimaAlteracao.equals(other.usuarioUltimaAlteracao))
-			return false;
-		return true;
 	}
 
 }

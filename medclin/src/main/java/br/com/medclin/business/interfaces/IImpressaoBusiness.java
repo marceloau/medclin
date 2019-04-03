@@ -9,4 +9,6 @@ public interface IImpressaoBusiness {
 	
 	public String medicamento(final String listaMedicamento, final BigInteger codigoConsulta);
 	
+	public String historicoClinico(final BigInteger codigoPaciente);
+	
 }

@@ -11,11 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class ContatoPessoa implements Serializable {
 
-	private static final long SerialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private ContatoPessoaPK contatoPessoaPK;
@@ -65,6 +69,7 @@ public class ContatoPessoa implements Serializable {
 		this.tipoContato = tipoContato;
 	}
 
+	@XmlTransient
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -103,73 +108,6 @@ public class ContatoPessoa implements Serializable {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((contatoPessoaPK == null) ? 0 : contatoPessoaPK.hashCode());
-		result = prime * result + ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
-		result = prime * result + ((dataUltimaAlteracao == null) ? 0 : dataUltimaAlteracao.hashCode());
-		result = prime * result + ((flagAtivo == null) ? 0 : flagAtivo.hashCode());
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-		result = prime * result + ((textoContato == null) ? 0 : textoContato.hashCode());
-		result = prime * result + ((tipoContato == null) ? 0 : tipoContato.hashCode());
-		result = prime * result + ((usuarioUltimaAlteracao == null) ? 0 : usuarioUltimaAlteracao.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContatoPessoa other = (ContatoPessoa) obj;
-		if (contatoPessoaPK == null) {
-			if (other.contatoPessoaPK != null)
-				return false;
-		} else if (!contatoPessoaPK.equals(other.contatoPessoaPK))
-			return false;
-		if (dataCriacao == null) {
-			if (other.dataCriacao != null)
-				return false;
-		} else if (!dataCriacao.equals(other.dataCriacao))
-			return false;
-		if (dataUltimaAlteracao == null) {
-			if (other.dataUltimaAlteracao != null)
-				return false;
-		} else if (!dataUltimaAlteracao.equals(other.dataUltimaAlteracao))
-			return false;
-		if (flagAtivo == null) {
-			if (other.flagAtivo != null)
-				return false;
-		} else if (!flagAtivo.equals(other.flagAtivo))
-			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
-			return false;
-		if (textoContato == null) {
-			if (other.textoContato != null)
-				return false;
-		} else if (!textoContato.equals(other.textoContato))
-			return false;
-		if (tipoContato == null) {
-			if (other.tipoContato != null)
-				return false;
-		} else if (!tipoContato.equals(other.tipoContato))
-			return false;
-		if (usuarioUltimaAlteracao == null) {
-			if (other.usuarioUltimaAlteracao != null)
-				return false;
-		} else if (!usuarioUltimaAlteracao.equals(other.usuarioUltimaAlteracao))
-			return false;
-		return true;
 	}
 
 }
